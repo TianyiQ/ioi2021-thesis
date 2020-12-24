@@ -23,3 +23,82 @@
         \item [\textbf{第五节}]{\emph{待完成后更新。}}
         \item [\textbf{第六节}]{\emph{待完成后更新。}}
     \end{asparaenum}
+
+\section{建立模型}
+
+    \subsection{赛程和赛制}
+
+        在引入数学模型前，先对信息学竞赛的竞赛流程和比赛形式作简要介绍\footnote{赛程和赛制在近几年有小幅变化，本节中会尽量兼顾新旧两套机制}。
+
+        信息学竞赛是一系列比赛的统称。这些比赛整体上呈现“逐级递进”的关系，即下一层比赛的优胜者晋级上一层比赛。这些比赛按照级别从低到高，大致排列为：
+
+        \begin{asparaenum}[a.]
+            \item 全国联赛(NOIP/CSP)\ ---\ 初赛 
+            \item 全国联赛(NOIP/CSP)\ ---\ 复赛
+            \item 省队选拔赛
+            \item 清华/北大学科营(THUWC/PKUWC/THUSC/PKUSC)
+            \item 亚太地区竞赛(APIO)
+            \item 国家队选拔赛(CTSC/CTS)\ ---\ 非正式选手
+            \item 全国冬令营(NOIWC)\ ---\ 非正式选手
+            \item 全国决赛(NOI)
+            \item 清华/北大集训(CTT)
+            \item 全国冬令营(NOIWC)\ ---\ 正式选手
+            \item 国家队选拔赛(CTSC/CTS)\ ---\ 正式选手
+            \item 国际奥林匹克竞赛(IOI)
+        \end{asparaenum}
+        
+        以下将用字母编号来代替对应的比赛。
+
+        \begin{figure}[hb]
+            \centering
+            \begin{tikzcd}[column sep=large]
+                {} \arrow[r, ">100000"] & a \arrow[d, "20000"]                                     &     \\
+                                        & b \arrow[ld, "500"'] \arrow[d, "1000"] \arrow[rd, "500"] &     \\
+                d                       & c \arrow[d, "300"] \arrow[l, "300"]                      & efg \\
+                                        & h \arrow[d, "50"]                                        &     \\
+                                        & ijk \arrow[d, "4"]                                       &     \\
+                                        & l                                                        &                 
+            \end{tikzcd}
+            \caption{信息学比赛间的关系}
+            \label{fig:contests}
+        \end{figure}
+
+        图\ref{fig:contests}展示了这些比赛间的关系。箭头从低级别比赛指向高级别比赛，表示该低级别比赛的优胜者可以晋级对应的高级别比赛，箭头上标记的数值表示大致晋级人数。
+
+        赛制即比赛的进行方式和比赛规则。信息学竞赛中采用笔试、COI赛制（机试）、IOI赛制（机试）这三种不同的赛制，表\ref{tab:formats}给出了每种赛制的特点和先前提到的比赛所分别采用的赛制。
+
+        \begin{table}[hb]\small
+            \centering
+            \begin{tabular}{@{}llllll@{}}
+                \toprule
+                    & 时长                  & 题数                 & 题目类型       & 反馈机制       & 对应比赛   \\ \midrule
+                笔试  & 1\textasciitilde 2h & 数十                 & 选择题、填空题     & 无反馈        & a      \\
+                COI赛制 & 3\textasciitilde 5h & 3\textasciitilde 4 & 编程题，有多档部分分 & 无反馈        & bcfghk \\
+                IOI赛制 & 3\textasciitilde 5h & 3\textasciitilde 4 & 编程题，有多档部分分 & 多次提交、有反馈 & deijl  \\ \bottomrule
+            \end{tabular}
+            \caption{信息学比赛采用的赛制}
+            \label{tab:formats}
+        \end{table}
+
+    \subsection{数学模型}
+
+        本节将建立用于描述一场信息学比赛的数学模型。为了更清晰地界定数学模型在现实中的适用范围，需要先明确：现实中怎样的对象能被称为一场“比赛”。
+
+        \begin{definition}[现实比赛]
+            一场\textbf{现实比赛}，即特定的人群在同样的规则下测试同一套题目的过程。
+            一场现实比赛被\emph{参赛人群}、\emph{规则}和\emph{题目}这三个要素所确定。
+        \end{definition}
+
+        在这一定义下，每年中的 $a\sim l$ 这12个信息学比赛，自然都是现实比赛。需要注意的是，上述定义中提到的“人群”，不必包括全体参赛选手；例如若忽略NOIP初赛中所有参赛的男生，则剩下的女生依然能构成现实比赛。这一点对于后文中跨越不同比赛的分析大有帮助。
+        
+        接下来定义从现实比赛抽象而来的数学模型。
+
+        \begin{definition}[理想比赛]
+            \textbf{理想比赛} $A$ 由二元函数 $p_A:[0,1]\times\mathbb{R}\to\mathbb{R}_{\geq 0}$ 确定\footnote{ $\mathbb{R}_{\geq 0}$ 表示非负实数集合}，其中 $p_A$ 连续且满足
+            
+            $$
+            \int\limits_0^1\left(\int\limits_{-\infty}^\infty p_A(x,\delta)\mathrm{d}\delta\right)\mathrm{d}x=1
+            $$
+
+            此时我们把 $p_A$ 称为 $A$ 的\textbf{联合分布函数}。
+        \end{definition}
