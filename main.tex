@@ -277,14 +277,21 @@
 
     \subsection{几个关键的假设}
 
-        为了使得后续分析成为可能，我们还需要对真实情况作一些近似处理。近似处理的具体方式由本小节的两个假设给出。
+        为了使得后续分析成为可能，我们还需要对真实情况作一些近似处理。近似处理的具体方式由本小节的几个假设给出。
 
         \begin{assumption}
             对任何一个现实比赛，如果它的\emph{规则}基于COI或IOI赛制，则它对应的理想比赛是简单的。
+
             \label{ass:simplicityOfCodingContests}
         \end{assumption}
 
-        在给出第二个假设之前，还需要定义一个概念。
+        \begin{assumption}
+            考虑所有基于COI或IOI赛制的现实比赛，考察它们对应的理想比赛的偏移量分布，这些分布应该是\emph{相似}的，即它们应该有相同的形式，即使其中的参数可能有不同的取值。
+
+            \label{ass:similarityOfDeltaDistributions}
+        \end{assumption}
+
+        在给出下一个假设之前，还需要定义一个概念。
 
         \begin{definition}[缩放等价]
             对简单理想比赛 $A_1,A_2$ ，当存在线性映射 $f(x)=\alpha x+\beta\quad(\alpha\in\mathbb{R}_{> 0},\beta\in\mathbb{R})$ 同时满足以下条件时，称 $A_1,A_2$ \textbf{缩放等价}，称 $f$ 为 $A_1,A_2$ 间的\textbf{等价映射}：
@@ -338,5 +345,13 @@
             \item \label{step:argumentForAssumptionStep1} 如果假设所有比赛在考查角度上没有差异（因为我们只关心普遍的统计特征，所以这种假设是合理的），那么一名选手的解题能力（即，能够在比赛中解出多大难度的题目）就一定是固定的。
             \item \label{step:argumentForAssumptionStep2} 当组题人为一场比赛选择题目、出题人为命制的题目设置部分分时，他们会有意识地给较难的任务设置较高的分值、给较简单的任务设置较低的分值，而具体多高、多低，则取决于他们心中作的判断。虽然不同的人可能作出不一样的判断，但这些判断应该大体上是“成比例”的。例如：张三认为算法2应当获得三倍于算法1的得分、李四认为算法2应当获得2.5倍于算法1的得分，这两种判断在比例上是大致相符的。
             \item 综合\ref{step:argumentForAssumptionStep1}和\ref{step:argumentForAssumptionStep2}，我们知道了：每个选手的能力可以看作是不变的；选手比赛中完成的任务难度与所获分数间的关系，这一关系在不同比赛之间应该是“成比例”的。所以只要选手集合不变，不同比赛的“选手期望得分构成的分布”也应该是“成比例”的。这就为假设\ref{ass:equivalenceBetweenCodingContests}关于期望值分布的部分提供了依据。
-            \item 根据经验，一名选手考场发挥的稳定与否与水平高低等因素没有明显的相关性；所以虽然不同选手的稳定性存在差异，但是在样本很大时，这种差异不会给统计结果带来较大的系统性的偏差，因此我们近似地认为所有选手水平发挥的稳定性高低是相同的。又因为得分与实际表现出的能力是“成比例”的，所以所有选手比赛得分的稳定性高低也是相同的。这为假设\ref{ass:simplicityOfCodingContests}和假设\ref{ass:equivalenceBetweenCodingContests}关于偏移量分布的部分提供了依据。
+            \item 根据经验，一名选手考场发挥的稳定与否与水平高低等因素没有明显的相关性；所以虽然不同选手的稳定性存在差异，但是在样本很大时，这种差异不会给统计结果带来较大的系统性的偏差，因此我们近似地认为所有选手水平发挥的稳定性是相同的。又因为得分与实际表现出的能力是“成比例”的，所以所有选手比赛得分的稳定性也是相同的。这为假设\ref{ass:simplicityOfCodingContests}、假设\ref{ass:similarityOfDeltaDistributions}和假设\ref{ass:equivalenceBetweenCodingContests}关于偏移量分布的部分提供了依据。
         \end{asparaenum}
+
+\section{偏移量分布的测量}
+
+    由假设\ref{ass:similarityOfDeltaDistributions}，COI/IOI赛制下偏移量分布有一定的形式。本节中，将利用过往比赛的分数数据得到这一形式。
+
+    \subsection{数据的获取}
+
+    \subsection{数据的处理}
