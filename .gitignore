@@ -1,0 +1,8 @@
+*.aux
+*.log
+*.out
+*.gz
+article.pdf
+thesis.pdf
+*.tmp
+*synctex*

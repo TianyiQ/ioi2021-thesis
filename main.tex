@@ -34,7 +34,7 @@
 
         在引入模型前，先对信息学竞赛的竞赛流程和比赛形式作简要介绍\footnote{赛程和赛制在近几年有小幅变化，本小节中会尽量兼顾新旧两套机制}。
 
-        信息学竞赛是一系列比赛的统称。这些比赛整体上呈现“逐级递进”的关系，即下一层比赛的优胜者晋级上一层比赛。这些比赛按照级别从低到高，大致排列为\footnote{后文将用下表中的字母编号来代指对应的比赛}：
+        信息学竞赛是一系列比赛的统称。这些比赛整体上呈现“逐级递进”的关系，即下一层比赛的优胜者晋级上一层比赛。这些比赛按照级别从低到高，大致排列为\footnote{后文将用下表中的字母标号来代指对应的比赛}：
 
         \begin{samepage}
             \begin{asparaenum}[a.]
@@ -70,7 +70,7 @@
                 {} \arrow[r, ">100000"] & a \arrow[d, "20000"]                                     &     \\
                                         & b \arrow[ld, "500"'] \arrow[d, "1000"] \arrow[rd, "500"] &     \\
                 d                       & c \arrow[d, "300"] \arrow[l, "300"]                      & efg \\
-                                        & h \arrow[d, "50"]                                        &     \\
+                                        & h \arrow[d, "70"]                                        &     \\
                                         & ijk \arrow[d, "4"]                                       &     \\
                                         & l                                                        &                 
             \end{tikzcd}
@@ -111,7 +111,7 @@
                 \label{def:realContest}
             \end{definition}
 
-            在这一定义下，每年中的 $a\sim l$ 这12个比赛，自然都是现实比赛。
+            在这一定义下，每年中的 $a\sim l$ 这12个比赛，自然都是现实比赛。而且，不仅是包含两天考试的一场完整的比赛算作现实比赛，单独拿出其中一天也算现实比赛。
             
             \vspace{1.5ex}
 
@@ -128,10 +128,15 @@
 
             \begin{definition}[理想比赛]
                 \textbf{理想比赛} $A$ 由二元函数 $\bm{H}_A:\left[0,1\right]\times\mathbb{R}\to\mathbb{R}_{\geq 0}$ 确定，其中 $\bm{H}_A$ 连续且满足
-                $$
-                \int\limits_0^1\int\limits_{-\infty}^{+\infty} \bm{H}_A(x,\delta)\mathrm{d}\delta\mathrm{d}x=1
-                $$
-
+                \begin{equation}
+                    \int\limits_0^1\int\limits_{-\infty}^{+\infty} \bm{H}_A(x,\delta)\mathrm{d}\delta\mathrm{d}x=1
+                    \label{formula:totalEqual1}
+                \end{equation}
+                和
+                \begin{equation}
+                    \int\limits_{-\infty}^{+\infty} \delta\cdot\bm{H}_A(x_0,\delta)\mathrm{d}\delta=0,\quad\forall x_0\in\left[0,1\right]
+                    \label{formula:expectationEqual0}
+                \end{equation}
                 此时我们把 $\bm{H}_A$ 称为 $A$ 的\textbf{综合分布函数}。
                 \label{def:idealContest}
             \end{definition}
@@ -152,21 +157,27 @@
 
                 \begin{asparaenum}[\bfseries{步骤} 1.]
                     \item 记 $B$ 的参赛选手集合为有限集 $S_B$ ，并在 $B$ 的参赛人群（包括人群内部的具体构成）不变的情况下，假想参赛人数 $\left|S_B\right|$ 趋于无穷。我们之所以能够任意钦定 $\left|S_B\right|$ ，是因为——如先前所述——$B$的定义并未指明具体的选手集合。
-                    \item 每一名参赛选手 $p$ 在比赛 $B$ 中的实际得分 $\textit{score}_p$ 是一个随机变量，它被各种偶然因素（如临场发挥）所支配，但是它的分布可以由选手 $p$ 和现实比赛 $B$ 的三个要素完全确定。假想对每一名选手 $p$ 计算其期望得分 $\textit{exscore}_p=\mathrm{E}\left[\textit{score}_p\right]$ ，并取所有选手期望得分的最大值，记作 $M_B$ 。由于参赛人数趋于无穷，每一个个人的特征可以忽略，故 $M_B=\max_{p\in S_B} \textit{exscore}_p$ 仅由 $B$ 确定。
-                    \item 从 $S_B$ 中等概率随机选取一名选手 $p$ ，并：
+                    \item \label{step:realToIdealStep2} 每一名参赛选手 $p$ 在比赛 $B$ 中的实际得分 $\textit{score}_p$ 是一个随机变量，它被各种偶然因素（如临场发挥）所支配，但是它的分布可以由选手 $p$ 和现实比赛 $B$ 的三个要素完全确定。假想对每一名选手 $p$ 计算其期望得分 $\textit{exscore}_p=\mathrm{E}\left[\textit{score}_p\right]$ ，并取所有选手期望得分的最大值，记作 $M_B$ 。由于参赛人数趋于无穷，每一个个人的特征可以忽略，故 $M_B=\max\limits_{p\in S_B} \textit{exscore}_p$ 仅由 $B$ 确定。
+                    \item \label{step:realToIdealStep3} 从 $S_B$ 中等概率随机选取一名选手 $p$ ，并：
                     \begin{itemize}[leftmargin=4em]
-                        \item 定义 $[0,1]$ 上的随机变量 $X_B=\dfrac{\textit{exscore}_p}{M_B}$ 。\footnote{“将每名选手的分数除以最高分数”这一操作，类似于信息学比赛中计算标准分的方式。另外注意到 $\dfrac{score_p}{M_B}$ 可以大于 $1$ }易见随机变量 $X_B$ 的实际取值与考场上的偶然因素无关，而是由选取 $p$ 的方式确定。
-                        \item 定义 $\mathbb{R}$ 上的随机变量 $\Delta_B=\dfrac{\textit{score}_p-\textit{exscore}_p}{M_B}$ 。易见随机变量 $\Delta_B$ 的实际取值由选取 $p$ 的方式和考场上的偶然因素（如选手临场发挥）共同确定。
+                        \item 定义 $[0,1]$ 上的随机变量 $X_B=\frac{\textit{exscore}_p}{M_B}$ 。\footnote{“将每名选手的分数除以最高分数”这一操作，类似于信息学比赛中计算标准分的方式。另外注意到：虽然 $\frac{\textit{exscore}_p}{M_B}\leq 1$ ，但 $\frac{\textit{score}_p}{M_B}$ 可以大于 $1$ }易见随机变量 $X_B$ 的实际取值与考场上的偶然因素无关，而是由选取 $p$ 的方式确定。
+                        \item 定义 $\mathbb{R}$ 上的随机变量 $\Delta_B=\frac{\textit{score}_p-\textit{exscore}_p}{M_B}$ 。易见随机变量 $\Delta_B$ 的实际取值由选取 $p$ 的方式和考场上的偶然因素（如选手临场发挥）共同确定。
                         \item [◦] 请注意，$X_B$ 和 $\Delta_B$ 的定义中所用的 $p$ 是\emph{同一名}随机选择的选手，而不是独立的两次选择。
                     \end{itemize}
                     \item 取 $A$ 的综合分布函数 $\bm{H}_A$ 为 $X_B$ 与 $\Delta_B$ 的联合概率密度函数，从而确定 $A$ 。换句话说，对所有 $x_0\in[0,1],\delta_0\in\mathbb{R}$ ，需要满足\footnote{也可以直观地理解为$\bm{H}_A(x_0,\delta_0)=\mathrm{Pr}\left[\left(X_B\approx x_0\right)\land\left(\Delta_B\approx\delta_0\right)\right]$，不写作 $X_B=x_0$ 是因为取等概率为 $0$ }
-                    $$
-                    \int\limits_0^{x_0}\int\limits_{-\infty}^{\delta_0} \bm{H}_A(x,\delta)\mathrm{d}\delta\mathrm{d}x=\mathrm{Pr}\left[\left(X_B\leq x_0\right)\land\left(\Delta_B\leq\delta_0\right)\right]
-                    $$
+                    \begin{equation}
+                        \int\limits_0^{x_0}\int\limits_{-\infty}^{\delta_0} \bm{H}_A(x,\delta)\mathrm{d}\delta\mathrm{d}x=\mathrm{Pr}\left[\left(X_B\leq x_0\right)\land\left(\Delta_B\leq\delta_0\right)\right]
+                        \label{formula:definitionOfJointDensityFunction}
+                    \end{equation}
 
                 \end{asparaenum}
 
+                由\eqref{formula:definitionOfJointDensityFunction}知定义\ref{def:idealContest}的等式\eqref{formula:totalEqual1}满足；由 $\mathrm{E}\left[\Delta_B\right]=0$ 知等式\eqref{formula:expectationEqual0}满足。从而只要联合概率密度函数 $\bm{H}_A$ 存在且连续， $A$ 就符合理想比赛的定义。
+
                 对于按上述方式得到的 $A$ ，我们称 $A$ 与 $B$ \textbf{互相对应}。
+                
+                （如果按上述过程得到的 $\bm{H}_A$ 不连续或根本不存在，则认为不存在与 $B$ 对应的 $A$ ）
+                
                 \label{def:realIdealCorrespondence}
             \end{definition}
 
@@ -184,9 +195,9 @@
             \end{definition}
 
             \begin{proposition}[分数分布函数的实际含义]
-                对现实比赛 $B$ 和与之对应的理想比赛 $A$ ，假想比赛 $B$ 的参赛人数 $|S_B|$ 趋于无穷，等概率随机选取选手 $p\in S_B$ ，则\footnote{和先前类似，这里也可以直观理解为 $\bm{C}_A(r)=\mathrm{Pr}\left[\dfrac{\textit{score}_p}{M_B}\approx r\right]$ }：
+                对现实比赛 $B$ 和与之对应的理想比赛 $A$ ，假想比赛 $B$ 的参赛人数 $|S_B|$ 趋于无穷，等概率随机选取选手 $p\in S_B$ ，则\footnote{和先前类似，这里也可以直观理解为 $\bm{C}_A(r)=\mathrm{Pr}\left[\frac{\textit{score}_p}{M_B}\approx r\right]$ }：
                 $$
-                \mathrm{Pr}\left[\dfrac{\textit{score}_p}{M_B}\leq r\right]=\int\limits_{-\infty}^r \bm{C}_A(s)\mathrm{d}s,\quad\forall r\in\mathbb{R}
+                \mathrm{Pr}\left[\frac{\textit{score}_p}{M_B}\leq r\right]=\int\limits_{-\infty}^r \bm{C}_A(s)\mathrm{d}s,\quad\forall r\in\mathbb{R}
                 $$
 
                 \label{prop:scoreDistributionMeaning}
@@ -194,7 +205,7 @@
 
             \begin{proof}
                 \begin{align*}
-                    \mathrm{Pr}\left[\dfrac{\textit{score}_p}{M_B}\leq r\right]
+                    \mathrm{Pr}\left[\frac{\textit{score}_p}{M_B}\leq r\right]
                     &=\mathrm{Pr}\left[X_B+\Delta_B\leq r\right] \\
                     &=\iint\limits_{\left\{(x,\delta):x\in\left[0,1\right],\delta\in\mathbb{R},x+\delta\leq r\right\}}\bm{H}_A(x,\delta)\mathrm{d}(x,\delta) \\
                     &=\iint\limits_{\left\{(x,s):x\in\left[0,1\right],s\in\left(-\infty,r\right]\right\}}\bm{H}_A(x,s-x)\mathrm{d}(x,s) \\
@@ -207,16 +218,15 @@
 
         \subsubsection{特殊情况下的模型}
 
-            在一场现实比赛 $B$ 中，每一个选手 $p\in S_B$ 的实际得分相比真实水平的“得分偏移量” $\dfrac{\textit{score}_p-\textit{exscore}_p}{M_B}$ 都是一个随机变量。如果所有选手的“得分偏移量”独立同分布，对我们的模型意味着什么？
+            在一场现实比赛 $B$ 中，每一个选手 $p\in S_B$ 的实际得分相比真实水平的“得分偏移量” $\frac{\textit{score}_p-\textit{exscore}_p}{M_B}$ 都是一个随机变量。如果所有选手的“得分偏移量”独立同分布，对我们的模型意味着什么？
 
-            容易想到，此时随机变量 $\Delta_B$ 的概率分布就和任何一个选手的“得分偏移量”的概率分布完全相同。换句话说，在定义\ref{def:realIdealCorrespondence}的步骤3中，不论我们钦定选取哪一个 $p$ ， $\Delta_B$ 取任何一个值的概率都是固定的，且恰好等于在不固定 $p$ 的情况下 $\Delta_B$ 取这个值的概率。再换句话说\footnote{和之前类似，这里之所以不写 $\Delta_B=\delta$ ，是因为取等概率为 $0$ }：$$\mathrm{Pr}\left[(\Delta_B\leq\delta)|(X_B=x)\right]=\mathrm{Pr}\left[\Delta_B\leq\delta\right],\quad\forall \delta\in\mathbb{R},x\in\left[0,1\right]$$即随机变量 $X_B,\Delta_B$ 独立。在进一步研究这件事之前，我们需要一对新的定义。
+            容易想到，此时随机变量 $\Delta_B$ 的概率分布就和任何一个选手的“得分偏移量”的概率分布完全相同。换句话说，在定义\ref{def:realIdealCorrespondence}的步骤\ref{step:realToIdealStep3}中，不论我们钦定选取哪一个 $p$ ， $\Delta_B$ 取任何一个值的概率都是固定的，且恰好等于在不固定 $p$ 的情况下 $\Delta_B$ 取这个值的概率。再换句话说\footnote{和之前类似，这里之所以不写 $\Delta_B=\delta$ ，是因为取等概率为 $0$ }：$$\mathrm{Pr}\left[(\Delta_B\leq\delta)|(X_B=x)\right]=\mathrm{Pr}\left[\Delta_B\leq\delta\right],\ \forall \left(\delta\in\mathbb{R},x\in\left[0,1\right],\mathrm{Pr}\left[X_B=x\right]>0\right)$$即随机变量 $X_B,\Delta_B$ 独立。在研究这件事之前，我们需要一对新的定义。
 
             \begin{definition}[期望值分布函数和偏移量分布函数]
                 对任意的理想比赛 $A$ ：
                 \begin{asparaitem}
                     \item 定义其\textbf{期望值分布函数} $\bm{X}_A:[0,1]\to\mathbb{R}_{\geq 0}$ 满足 $$\bm{X}_A(x_0)=\int\limits_{-\infty}^{+\infty}\bm{H}_A(x_0,\delta)\mathrm{d}\delta,\quad\forall x_0\in[0,1]$$
                     \item 定义其\textbf{偏移量分布函数} $\bm{\Delta}_A:\mathbb{R}\to\mathbb{R}_{\geq 0}$ 满足 $$\bm{\Delta}_A(\delta_0)=\int\limits_0^1\bm{H}_A(x,\delta_0)\mathrm{d}x,\quad\forall\delta_0\in\mathbb{R}$$
-                    \item [◦] 易证 $\bm{X}_A$ 和 $\bm{\Delta}_A$ 均为连续函数。
                 \end{asparaitem}
                 \label{def:marginalDistributions}
             \end{definition}
@@ -246,14 +256,13 @@
 
             \begin{proof}
                 \begin{align*}
-                    &\phantom{\Leftrightarrow\ }\mathrm{Pr}\left[(\Delta_B\leq\delta_0)|(X_B=x_0)\right]=\mathrm{Pr}\left[\Delta_B\leq\delta_0\right],\quad\forall \delta_0\in\mathbb{R},x_0\in\left[0,1\right] \\
-                    &\Leftrightarrow \left(\displaystyle\int\limits_{-\infty}^{\delta_0} \bm{H}_A(x_0,\delta)\mathrm{d}\delta\right)\Big/{\bm{X}_A(x_0)}=\int\limits_{-\infty}^{\delta_0} \bm{\Delta}_A(\delta)\mathrm{d}\delta,\quad\forall \delta_0\in\mathbb{R},x_0\in\left[0,1\right] \\
-                    &\Leftrightarrow \dfrac{\bm{H}_A(x_0,\delta_0)}{\bm{X}_A(x_0)}=\bm{\Delta}_A(\delta_0),\quad\forall \delta_0\in\mathbb{R},x_0\in\left[0,1\right] \\
+                    &\phantom{\Leftrightarrow\ }\mathrm{Pr}\left[(\Delta_B\leq\delta_0)|(X_B=x_0)\right]=\mathrm{Pr}\left[\Delta_B\leq\delta_0\right],\ \forall \left(\delta_0\in\mathbb{R},\mathrm{Pr}\left[X_B=x_0\right]>0\right) \\
+                    &\Leftrightarrow \left(\displaystyle\int\limits_{-\infty}^{\delta_0} \bm{H}_A(x_0,\delta)\mathrm{d}\delta\right)\Big/{\bm{X}_A(x_0)}=\int\limits_{-\infty}^{\delta_0} \bm{\Delta}_A(\delta)\mathrm{d}\delta,\ \forall \left(\delta_0\in\mathbb{R},\bm{X}_A(x_0)>0\right)\\
+                    &\Leftrightarrow \frac{\bm{H}_A(x_0,\delta_0)}{\bm{X}_A(x_0)}=\bm{\Delta}_A(\delta_0),\ \forall \left(\delta_0\in\mathbb{R},\bm{X}_A(x_0)>0\right)\\
                     &\Leftrightarrow \eqref{formula:insideImplicationOfIndependence}
                 \end{align*}
-
-                注意到上述推导中假设了 $\bm{X}_A(x_0)>0$ 。对于 $\bm{X}_A(x_0)=0$ 的情况，容易手动验证结论的正确性。
-
+                
+                最后一步中还需要特别考虑 $\bm{X}_A(x_0)=0$ 的情况，不难自行补全。
             \end{proof}
 
             \begin{definition}[简单理想比赛]
@@ -280,6 +289,12 @@
         为了使得后续分析成为可能，我们还需要对真实情况作一些近似处理。近似处理的具体方式由本小节的几个假设给出。
 
         \begin{assumption}
+            对任何一个信息学（现实）比赛 $B$ ，都存在符合定义\ref{def:idealContest}的理想比赛 $A$ 与其对应。
+
+            \label{ass:existenceOfIdealContest}
+        \end{assumption}
+
+        \begin{assumption}
             对任何一个现实比赛，如果它的\emph{规则}基于COI或IOI赛制，则它对应的理想比赛是简单的。
 
             \label{ass:simplicityOfCodingContests}
@@ -296,6 +311,7 @@
         \begin{definition}[缩放等价]
             对简单理想比赛 $A_1,A_2$ ，当存在线性映射 $f(x)=\alpha x+\beta\quad(\alpha\in\mathbb{R}_{> 0},\beta\in\mathbb{R})$ 同时满足以下条件时，称 $A_1,A_2$ \textbf{缩放等价}，称 $f$ 为 $A_1,A_2$ 间的\textbf{等价映射}：
             \begin{asparaenum}
+                \item $f(1)=1$
                 \item $\bm{\Delta}_{A_2}(\alpha\delta)=\bm{\Delta}_{A_1}(\delta)\cdot \alpha^{-1},\quad\forall \delta\in\mathbb{R}$
                 \item $\widebar{\bm{X}}_{A_2}(f(x))=\widebar{\bm{X}}_{A_1}(x)\cdot \alpha^{-1},\quad\forall x\in\mathbb{R}$ ，其中
                     $$
@@ -321,8 +337,7 @@
         \end{proposition}
 
         \begin{proof}
-            先来看关于 $\bm{\Delta}_{A_1},\bm{\Delta}_{A_2}$ 的部分。
-
+            先来看关于 $\bm{\Delta}_{A_1},\bm{\Delta}_{A_2}$ 的部分：
             \begin{align*}
                 \int\limits_{-\infty}^{\delta_0} \bm{\Delta}_{A_1}(\delta)\mathrm{d}\delta 
                 &=\int\limits_{-\infty}^{\delta_0} \bm{\Delta}_{A_2}(\alpha\delta)\alpha\mathrm{d}\delta \\
@@ -331,7 +346,6 @@
             \end{align*}
 
             对于 $\widebar{\bm{X}}_{A_1},\widebar{\bm{X}}_{A_2}$ 同理，这里不再重复。
-
         \end{proof}
 
         \begin{assumption}
@@ -344,14 +358,154 @@
         \begin{asparaenum}
             \item \label{step:argumentForAssumptionStep1} 如果假设所有比赛在考查角度上没有差异（因为我们只关心普遍的统计特征，所以这种假设是合理的），那么一名选手的解题能力（即，能够在比赛中解出多大难度的题目）就一定是固定的。
             \item \label{step:argumentForAssumptionStep2} 当组题人为一场比赛选择题目、出题人为命制的题目设置部分分时，他们会有意识地给较难的任务设置较高的分值、给较简单的任务设置较低的分值，而具体多高、多低，则取决于他们心中作的判断。虽然不同的人可能作出不一样的判断，但这些判断应该大体上是“成比例”的。例如：张三认为算法2应当获得三倍于算法1的得分、李四认为算法2应当获得2.5倍于算法1的得分，这两种判断在比例上是大致相符的。
-            \item 综合\ref{step:argumentForAssumptionStep1}和\ref{step:argumentForAssumptionStep2}，我们知道了：每个选手的能力可以看作是不变的；选手比赛中完成的任务难度与所获分数间的关系，这一关系在不同比赛之间应该是“成比例”的。所以只要选手集合不变，不同比赛的“选手期望得分构成的分布”也应该是“成比例”的。这就为假设\ref{ass:equivalenceBetweenCodingContests}关于期望值分布的部分提供了依据。
-            \item 根据经验，一名选手考场发挥的稳定与否与水平高低等因素没有明显的相关性；所以虽然不同选手的稳定性存在差异，但是在样本很大时，这种差异不会给统计结果带来较大的系统性的偏差，因此我们近似地认为所有选手水平发挥的稳定性是相同的。又因为得分与实际表现出的能力是“成比例”的，所以所有选手比赛得分的稳定性也是相同的。这为假设\ref{ass:simplicityOfCodingContests}、假设\ref{ass:similarityOfDeltaDistributions}和假设\ref{ass:equivalenceBetweenCodingContests}关于偏移量分布的部分提供了依据。
+            \item 综合\ref{step:argumentForAssumptionStep1}和\ref{step:argumentForAssumptionStep2}，我们知道了：每个选手的能力可以看作是不变的；选手比赛中完成的任务难度与所获分数间的关系，这一关系在不同比赛之间应该是“成比例”的。所以只要选手集合不变，不同比赛的“选手期望得分构成的分布”也应该是“成比例”的（特别地，这两个分布的最大值也应该是相对应的，所以在定义\ref{def:equivalenceAfterScaling}中要求$f(1)=1$）。这就为假设\ref{ass:equivalenceBetweenCodingContests}关于期望值分布的部分和对 $f(1)=1$ 的要求提供了依据。
+            \item 根据经验，一名选手考场发挥的稳定与否与水平高低等因素没有明显的相关性；所以虽然不同选手的稳定性存在差异，但是在样本很大时，这种差异不会给统计结果带来较大的系统性的偏差，因此我们近似地认为所有选手\emph{水平发挥}的稳定性是相同的。又因为得分与实际表现出的能力是“成比例”的，所以所有选手\emph{比赛得分}的稳定性也是相同的。这为假设\ref{ass:simplicityOfCodingContests}、假设\ref{ass:similarityOfDeltaDistributions}和假设\ref{ass:equivalenceBetweenCodingContests}关于偏移量分布的部分提供了依据。
+            \item[·] 真实的比赛中“离散”的特性——比如选择题三分一道——可以在理想化的模型中忽略。这样在人数趋于无穷时，我们很容易想到：其各种统计数据会是“连续”的。因此\ref{ass:existenceOfIdealContest}是一个很自然的假设。
         \end{asparaenum}
 
 \section{偏移量分布的测量}
 
-    由假设\ref{ass:similarityOfDeltaDistributions}，COI/IOI赛制下偏移量分布有一定的形式。本节中，将利用过往比赛的分数数据得到这一形式。
+    由假设\ref{ass:similarityOfDeltaDistributions}，COI/IOI赛制下偏移量分布有一定的形式。本节中，将利用过往比赛的分数数据得到偏移量分布的形式。
 
     \subsection{数据的获取}
 
-    \subsection{数据的处理}
+        数据来自以下三场比赛：
+        \begin{asparaitem}
+            \item 2018年北大集训（字母标号i）
+            \item 2019年北大集训（字母标号i）
+            \item 2020年北大集训（字母标号i）
+        \end{asparaitem}
+
+        选用它们的原因是，北大集训包含连续进行的四场考试，更多的考试场数使得我们能够更精确地估计每一名选手的期望分数。
+
+        这些比赛的参赛情况见表\ref{tab:ctt18to20}。
+
+        \begin{table}\footnotesize
+            \centering
+            \begin{tabular}{@{}lcccc@{}}
+            \toprule
+             & \multicolumn{1}{l}{参赛总人数} & \multicolumn{1}{l}{正式选手人数} & \multicolumn{1}{l}{非正式选手人数} & \multicolumn{1}{l}{选拔人数} \\ \midrule
+            北大集训2018 & 约60 & 50 & 约10 & 15 \\
+            北大集训2019 & 约70 & 50 & 约20 & 15 \\
+            北大集训2020 & 约90 & 50 & 约40 & 30 \\ \bottomrule
+            \end{tabular}
+            \caption{三场比赛的参赛情况}
+            \label{tab:ctt18to20}
+        \end{table}
+
+        根据经验判断，这三场比赛中并非所有选手都全情投入。因此为了保证数据可靠性，对每场比赛只取总排名\footnote{总排名中按每天标准分总和降序排列}中最靠前的 $1.5K\sim 2K$ 名选手的数据，其中 $K$ 表示当场比赛的选拔人数。具体地说：北大集训2018取前30名、北大集训2019取前30名、北大集训2020取前50名。另外为保证比赛之间的统一性，后文中在计算考试分数标准差时，每场比赛只取前30名的分数。
+
+    \subsection{数据的加工处理}
+
+        三场比赛的参赛选手共计110人次，我们将他们视为110名不同的选手。三场比赛共计12场考试，我们将它们视为12个不同的现实比赛。参加这些现实比赛的共计440人次。
+        
+        虽然这12个现实比赛的参赛人群是相同的（国家集训队选手和精英培训选手），但它们在题目难度等方面并不相同，如果直接将它们的数据汇总起来的话，会使得数据失去意义。为解决这一问题，我们需对比赛得分进行变换。
+
+        \begin{proposition}
+            对缩放等价的理想比赛 $A_1,A_2$ 及其等价映射 $f(x)=\alpha x+\beta$\nobreak，有
+            $$
+            \alpha=\frac{\mathrm{Stddev}\left[\bm{C}_{A_2}\right]}{\mathrm{Stddev}\left[\bm{C}_{A_1}\right]}
+            $$
+            其中 $\mathrm{Stddev}\left[F\right]$ 表示以 $F$ 为概率密度函数的随机变量\footnote{换句话说，这样的随机变量 $Y$ 满足 $\mathrm{Pr}\left[Y\leq t\right]=\int\limits_{-\infty}^t F(s)\mathrm{d}s,\quad\forall t\in\mathbb{R}$}的标准差。
+
+            另外注意到由 $f(1)=1$ 可得 $f(x)=1-\alpha(1-x)$ ，所以不必再考虑 $\beta$ 的取值。
+            \label{prop:alphaAsQuotientOfStddev}
+        \end{proposition}
+
+        \begin{proof}
+            \begin{align*}
+                \bm{C}_{A_1}(s)
+                &=\int\limits_0^1 \bm{X}_{A_1}(x)\bm{\Delta}_{A_1}(s-x) \mathrm{d}x \\
+                &=\int\limits_{-\infty}^{+\infty} \bm{X}_{A_1}(x)\bm{\Delta}_{A_1}(s-x) \mathrm{d}x \\
+                &=\int\limits_{-\infty}^{+\infty} \left(\widebar{\bm{X}}_{A_2}(\alpha x+\beta)\cdot\alpha\right)\left(\bm{\Delta}_{A_2}(\alpha(s-x))\cdot\alpha\right) \mathrm{d}x\\
+                &=\int\limits_{-\infty}^{+\infty} \alpha^2\widebar{\bm{X}}_{A_2}\left(\alpha x+\beta\right)\bm{\Delta}_{A_2}\left(\alpha s+\beta-\left(\alpha x+\beta\right)\right) \mathrm{d}(\alpha x+\beta)\cdot\alpha^{-1}\\
+                &=\alpha\int\limits_{-\infty}^{+\infty} \widebar{\bm{X}}_{A_2}(t)\bm{\Delta}_{A_2}((\alpha s+\beta)-t)\mathrm{d} t\\
+                &=\alpha\bm{C}_{A_2}(\alpha s+\beta),\quad\forall s\in\mathbb{R}
+            \end{align*}
+
+            设连续型随机变量 $Y_1$ 满足其概率密度函数为 $\bm{C}_{A_1}$ ，$Y_2$ 满足其概率密度函数为 $\bm{C}_{A_1}$ ，则 $\alpha Y_1+\beta$ 与 $Y_2$ 同分布。从而\footnote{这里 $\mathrm{Var}\left[Y\right]$ 表示随机变量 $Y$ 的方差} $\mathrm{Var}\left[Y_2\right]=\mathrm{Var}\left[\alpha Y_1\right]=\alpha^2\cdot\mathrm{Var}\left[Y_1\right]$ ，于是 $\mathrm{Stddev}\left[Y_2\right]=\alpha\cdot\mathrm{Stddev}\left[Y_1\right]$ 。
+        \end{proof}
+
+        结合等价映射的实际含义和命题\ref{prop:alphaAsQuotientOfStddev}，可以得到对前述12个现实比赛 $B_{1\cdots 12}$ 的分数做变换的方法：
+        \begin{asparaenum}[\bfseries{步骤} 1.]
+            \item 记 $B_{1\cdots 12}$ 对应的理想比赛为 $A_{1\cdots 12}$ 。
+            \item 构造 $A^{\prime}_{1\cdots 12}$ 满足 $A_i$ 与 $A^{\prime}_i$ 缩放等价，且等价映射为 $f_i(x)=1-\frac{1-x}{c\cdot\mathrm{Stddev}\left[\bm{C}_{A_i}\right]}$ 。这里 $c=4$ 为根据实际数据所选取的固定常数，用来避免产生负分数。
+            \item 则 $A^{\prime}_{1\cdots 12}$ 这12个理想比赛完全相同（即它们的综合分布函数相同），且与 $A_{1\cdots 12}$ 中的每一个缩放等价。
+        \end{asparaenum}
+
+        \vspace{1.5ex}
+
+        另外须注意，根据定义\ref{def:realIdealCorrespondence}的步骤\ref{step:realToIdealStep2}，我们需要对每个现实比赛 $B_i$ 确定选手期望分数的最大值 $M_{B_i}$ 。这里可以用实际分数的最大值来近似地代替期望分数的最大值。
+        
+        因为 $A^{\prime}_{1\cdots 12}$ 与 $A_{1\cdots 12}$ 中的每一个缩放等价，所以我们只需测量 $A^{\prime}_{1\cdots 12}$ 的偏移量分布，即可得到结论。现在开始目标将转为测量 $A^{\prime}_{1\cdots 12}$ 的偏移量分布；为便于表述，记 $B^{\prime}_{1\cdots 12}$ 表示 $A^{\prime}_{1\cdots 12}$ 对应的现实比赛。
+
+        现在我们得到了12个完全相同的理想比赛 $A^{\prime}_{1\cdots 12}$ ，和每个理想比赛对应的现实比赛的分数数据；而因为 $A^{\prime}_{1\cdots 12}$ 完全相同，所以所有这些分数数据可以直接合并。现在我们有了一个理想比赛（记为$A^{\prime}$，对应现实比赛 $B^{\prime}$）和对应的440名选手的分数数据。原先的110名选手，每人对应着 $B^{\prime}$ 中的4名选手。
+
+        对于110名选手中的每一位，为了能够对比他在 $B^{\prime}$ 中的期望分数和他的四个“分身”的实际分数，我们还需要估算前者的值。这里可以用该名选手在他所参加的4场现实比赛 $B^{\prime}_i$ 中的平均分，来近似地代替在 $B^{\prime}$ 中的期望分数。
+
+        \vspace{1.5ex}
+
+        综上所述，我们会按如下的流程来加工分数数据：
+        \begin{asparaenum}[\bfseries{步骤} 1.]
+            \item \label{step:cttDataRefinementStep1} 对12场考试中的每一场，将其中每一名选手的分数除以该场考试的最高分\footnote{即信息学比赛中计算标准分的过程}，并以此代替原始分数。
+            \item 对12场考试中的每一场，计算总排名前30的选手的分数标准差 $\sigma$ （这里的分数是指步骤\ref{step:cttDataRefinementStep1}中得到的商），然后将其中每个选手的分数 $x$ 施以变换\footnote{除以标准差这一步的作用也可简单理解为，消除题目区分度不同所带来的影响} $x\mapsto 1-\frac{1-x}{4\sigma}$ ，并以此代替原始分数。
+            \item 对110名选手中的每一位，计算他在4场考试中的平均分，然后计算他在每场考试中的得分与这一平均分的差。
+        \end{asparaenum}
+
+        \vspace{1.5ex}
+
+        这样可以对每名选手计算出4个差值，共计440个值，每个值都表示一名选手在一场比赛中实际得分与期望得分的差距。这440个值即对应着随机变量 $\Delta_{B^{\prime}}$ 的取值，它们将会是下一小节的分析对象。
+
+    \subsection{拟合的方法和结果}
+
+        观察上一小节中获得的440个数值的分布情况，发现：
+        \begin{asparaitem}
+            \item 整个分布大体上对称，且以$0$为对称中心。
+            \item 数值的分布中间稠密、两边稀疏，所有数值的绝对值都小于1。
+            \item 分布的形状类似钟形曲线。
+        \end{asparaitem}
+        
+        \vspace{1.5ex}
+
+        受此启发，尝试用正态分布曲线来拟合这些数值。具体方法如下：
+        \begin{enumerate}[leftmargin=6em]
+            \item [\textbf{步骤 1.}] 对于 $t=-1.0,-0.9,\cdots,0.9,1.0$ ，计算落在 $\left[t-0.05,t+0.05\right)$ 中的数值个数 $c(t)$ 。
+            \item [\textbf{步骤 2.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
+            \item [\textbf{步骤 3.}] 选取合适的参数 $\sigma>0$ ，以使得函数 $$ f(t)=\displaystyle\int_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x$$ 的图像与这些 $t-c(t)$ 数据点尽可能贴近。
+        \end{enumerate}
+
+        这里 $P_{\sigma^2}$ 表示期望值为0、方差为 $\sigma^2$ 的正态分布（用 $N(0,\sigma^2)$ 表示）的概率密度函数，满足 $$P_{\sigma^2}(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{x^2}{2\sigma^2}\right)}$$
+
+        我们记 $$R_{\sigma^2}(t)=\int\limits_{-\infty}^t P_{\sigma^2}(x)\mathrm{d}x$$ 为正态分布 $N(0,\sigma^2)$ 的累积分布函数，则有\footnote{误差函数 $\mathrm{erf}$ 没有闭合形式，这个式子可以视为$\mathrm{erf}$函数的定义式} $R_{\sigma^2}(t)=\left(1+\mathrm{erf}\left(\frac x{\sqrt{2}\sigma}\right)\right)/2$\nobreak，其中 $\mathrm{erf}$ 表示误差函数。
+
+        最后注意到 $$\int_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x=R_{\sigma^2}(t+0.05)-R_{\sigma^2}(t-0.05)$$ 于是在进行拟合的过程中我们可以方便地计算这一定积分。
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{fig/fittingOffsets.pdf}
+            \caption{散点图和拟合结果}
+            \label{fig:fittingOffsetsByNormalDistribution}
+        \end{figure}
+
+        \vspace{1.5ex}
+
+        图\ref{fig:fittingOffsetsByNormalDistribution}展示了拟合的结果。可以看到，除了$2\sim 3$个数据点以外，其余数据点均与曲线贴合紧密。为了验证这些数据是否确实服从正态分布，还需绘制Q-Q图来进行检验。
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{fig/QQPlot.pdf}
+            \caption{Q-Q图，关于比赛分数差值数据和正态分布绘制}
+            \label{fig:QQPlot}
+        \end{figure}
+
+        \vspace{1.5ex}
+
+        图\ref{fig:QQPlot}展示了所绘制的Q-Q图。注意，该图的坐标轴经过缩放，故坐标轴上标注的数值仅能代表相对大小关系。
+        
+        图\ref{fig:QQPlot}中有440个蓝色叉号，所有叉号的横坐标、纵坐标非严格递增。其中第 $k$ 个叉号对应着440个数值中的第 $k$ 小值 $\textit{val}_k$ ，叉号的横坐标 $x_k$ 等于对应的数值 $\textit{val}_k$ ，叉号的纵坐标 $y_k$ 等于正态分布 $N(0,\sigma^2)$ 下排在 $\frac k{440}$ 位置的值——换句话说， $y_k$ 满足\footnote{这里的 $k-0.5$ 只是为简单起见而如此设置。真正精确的值应该在 $(k-1,k]$ 中} $R_{\sigma^2}(y_k)=\frac {k-0.5}{440}$ 。这里的 $\sigma$ 是待定的参数。
+
+        如果这440个数值服从 $N(0,\sigma^2)$ 的话，容易想到应该有 $x_k\approx y_k$ ，也就是说所有叉号落在直线 $y=x$ 附近。我们通过选取合适的 $\sigma>0$ 来让叉号尽可能贴近 $y=x$ ，最终的结果就是图\ref{fig:QQPlot}。可以看到，叉号与直线紧密贴合，所以这些数据确实服从正态分布。（注意到，缩放坐标轴和改变 $\sigma$ 的取值，这两种操作对图像的改变其实是完全相同的，所以缩放坐标轴不会影响结论的可靠性）
+
+        \begin{theorem}[偏移量分布的形式]
+            对任何基于COI或IOI赛制的现实比赛，其对应的理想比赛的偏移量分布是期望值为$0$的正态分布。
+        \end{theorem}
