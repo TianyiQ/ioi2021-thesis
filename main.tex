@@ -14,7 +14,7 @@
         \item {选手不了解对手的水平和发挥情况，导致选择了错误的考场策略。}
     \end{asparaitem}
 
-    本文将利用数学工具，基于过往比赛的选手分数数据来分析信息学竞赛的现状，以为上述问题的解决提供助力。
+    本文将利用数学工具，基于过往比赛的选手分数数据\footnote{本文中用到的所有数据可以在以下网址下载：\\ \url{https://files.cnblogs.com/files/turboboost/qty-thesis-statdata.zip}}来分析信息学竞赛的现状，以为上述问题的解决提供助力。
 
     \vspace{1.5ex}
 
@@ -36,33 +36,28 @@
 
         信息学竞赛是一系列比赛的统称。这些比赛整体上呈现“逐级递进”的关系，即下一层比赛的优胜者晋级上一层比赛。这些比赛按照级别从低到高，大致排列为\footnote{后文将用下表中的字母标号来代指对应的比赛}：
 
-        \begin{samepage}
-            \begin{asparaenum}[a.]
-                \item 全国联赛(NOIP/CSP)\ ---\ 初赛 
-                \nopagebreak
-                \item 全国联赛(NOIP/CSP)\ ---\ 复赛
-                \nopagebreak
-                \item 省队选拔赛
-                \nopagebreak
-                \item 清华/北大学科营(THUWC/PKUWC/THUSC/PKUSC)
-                \nopagebreak
-                \item 亚太地区竞赛(APIO)
-                \nopagebreak
-                \item 国家队选拔赛(CTSC/CTS)\ ---\ 非正式选手
-                \nopagebreak
-                \item 全国冬令营(NOIWC)\ ---\ 非正式选手
-                \nopagebreak
-                \item 全国决赛(NOI)
-                \nopagebreak
-                \item 清华/北大集训(CTT)
-                \nopagebreak
-                \item 全国冬令营(NOIWC)\ ---\ 正式选手
-                \nopagebreak
-                \item 国家队选拔赛(CTSC/CTS)\ ---\ 正式选手
-                \nopagebreak
-                \item 国际奥林匹克竞赛(IOI)
-            \end{asparaenum}
-        \end{samepage}
+        \begin{asparaenum}[a.]
+            \begin{samepage}
+            \item 全国联赛(NOIP/CSP)\ ---\ 初赛
+            \nobreak
+            \item 全国联赛(NOIP/CSP)\ ---\ 复赛
+            \nobreak
+            \item 省队选拔赛
+            \end{samepage}
+            \item 清华/北大学科营(THUWC/PKUWC/THUSC/PKUSC)
+            \item 亚太地区竞赛(APIO)
+            \item 国家队选拔赛(CTSC/CTS)\ ---\ 非正式选手
+            \item 全国冬令营(NOIWC)\ ---\ 非正式选手
+            \item 全国决赛(NOI)
+            \item 清华/北大集训(CTT)
+            \begin{samepage}
+            \item 全国冬令营(NOIWC)\ ---\ 正式选手
+            \nobreak
+            \item 国家队选拔赛(CTSC/CTS)\ ---\ 正式选手
+            \nobreak
+            \item 国际奥林匹克竞赛(IOI)
+            \end{samepage}
+        \end{asparaenum}
 
         \begin{figure}
             \centering
@@ -174,9 +169,7 @@
 
                 由\eqref{formula:definitionOfJointDensityFunction}知定义\ref{def:idealContest}的等式\eqref{formula:totalEqual1}满足；由 $\mathrm{E}\left[\Delta_B\right]=0$ 知等式\eqref{formula:expectationEqual0}满足。从而只要联合概率密度函数 $\bm{H}_A$ 存在且连续， $A$ 就符合理想比赛的定义。
 
-                对于按上述方式得到的 $A$ ，我们称 $A$ 与 $B$ \textbf{互相对应}。
-                
-                （如果按上述过程得到的 $\bm{H}_A$ 不连续或根本不存在，则认为不存在与 $B$ 对应的 $A$ ）
+                对于按上述方式得到的 $A$ ，我们称 $A$ 与 $B$ \textbf{互相对应}。如果按上述过程得到的 $\bm{H}_A$ 不连续或根本不存在，则认为不存在与 $B$ 对应的 $A$ 。
                 
                 \label{def:realIdealCorrespondence}
             \end{definition}
@@ -360,7 +353,8 @@
             \item \label{step:argumentForAssumptionStep2} 当组题人为一场比赛选择题目、出题人为命制的题目设置部分分时，他们会有意识地给较难的任务设置较高的分值、给较简单的任务设置较低的分值，而具体多高、多低，则取决于他们心中作的判断。虽然不同的人可能作出不一样的判断，但这些判断应该大体上是“成比例”的。例如：张三认为算法2应当获得三倍于算法1的得分、李四认为算法2应当获得2.5倍于算法1的得分，这两种判断在比例上是大致相符的。
             \item 综合\ref{step:argumentForAssumptionStep1}和\ref{step:argumentForAssumptionStep2}，我们知道了：每个选手的能力可以看作是不变的；选手比赛中完成的任务难度与所获分数间的关系，这一关系在不同比赛之间应该是“成比例”的。所以只要选手集合不变，不同比赛的“选手期望得分构成的分布”也应该是“成比例”的（特别地，这两个分布的最大值也应该是相对应的，所以在定义\ref{def:equivalenceAfterScaling}中要求$f(1)=1$）。这就为假设\ref{ass:equivalenceBetweenCodingContests}关于期望值分布的部分和对 $f(1)=1$ 的要求提供了依据。
             \item 根据经验，一名选手考场发挥的稳定与否与水平高低等因素没有明显的相关性；所以虽然不同选手的稳定性存在差异，但是在样本很大时，这种差异不会给统计结果带来较大的系统性的偏差，因此我们近似地认为所有选手\emph{水平发挥}的稳定性是相同的。又因为得分与实际表现出的能力是“成比例”的，所以所有选手\emph{比赛得分}的稳定性也是相同的。这为假设\ref{ass:simplicityOfCodingContests}、假设\ref{ass:similarityOfDeltaDistributions}和假设\ref{ass:equivalenceBetweenCodingContests}关于偏移量分布的部分提供了依据。
-            \item[·] 真实的比赛中“离散”的特性——比如选择题三分一道——可以在理想化的模型中忽略。这样在人数趋于无穷时，我们很容易想到：其各种统计数据会是“连续”的。因此\ref{ass:existenceOfIdealContest}是一个很自然的假设。
+            \item 真实的比赛中“离散”的特性——比如选择题三分一道——可以在理想化的模型中忽略。这样在人数趋于无穷时，我们很容易想到：其各种统计数据会是“连续”的。因此\ref{ass:existenceOfIdealContest}是一个很自然的假设。
+            \item 根据经验，在COI赛制中表现好的选手，在IOI赛制往往表现也很好；反之亦然。因此COI/IOI赛制间的差异至多会对选手期望得分的分布起到缩放的作用，而不会带来本质的改变。类似地，选手在COI/IOI赛制中发挥稳定性的差异，也只有量的差别而无质的差别。所以，认为COI/IOI赛制的比赛有着本质相同（即在缩放后完全相同）的期望值分布、偏移量分布，是合理的。
         \end{asparaenum}
 
 \section{偏移量分布的测量}
@@ -393,7 +387,7 @@
             \label{tab:ctt18to20}
         \end{table}
 
-        根据经验判断，这三场比赛中并非所有选手都全情投入。因此为了保证数据可靠性，对每场比赛只取总排名\footnote{总排名中按每天标准分总和降序排列}中最靠前的 $1.5K\sim 2K$ 名选手的数据，其中 $K$ 表示当场比赛的选拔人数。具体地说：北大集训2018取前30名、北大集训2019取前30名、北大集训2020取前50名。另外为保证比赛之间的统一性，后文中在计算考试分数标准差时，每场比赛只取前30名的分数。
+        根据经验判断，这三场比赛中并非所有选手都全情投入。因此为了保证数据可靠性，对每场比赛只取总排名\footnote{总排名中按每天标准分总和降序排列}中最靠前的 $1.5K\sim 2K$ 名选手的数据，其中 $K$ 表示当场比赛的选拔人数。具体地说：北大集训2018取前30名、北大集训2019取前30名、北大集训2020取前50名。另外为保证比赛之间的统一性，后文中在计算考试分数标准差时，每场比赛只取总排名中前30名的分数。
 
     \subsection{数据的加工处理}
 
@@ -471,14 +465,14 @@
         \begin{enumerate}[leftmargin=6em]
             \item [\textbf{步骤 1.}] 对于 $t=-1.0,-0.9,\cdots,0.9,1.0$ ，计算落在 $\left[t-0.05,t+0.05\right)$ 中的数值个数 $c(t)$ 。
             \item [\textbf{步骤 2.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
-            \item [\textbf{步骤 3.}] 选取合适的参数 $\sigma>0$ ，以使得函数 $$ f(t)=\displaystyle\int_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x$$ 的图像与这些 $t-c(t)$ 数据点尽可能贴近。
+            \item [\textbf{步骤 3.}] 选取合适的参数 $\sigma>0$ ，以使得函数 $$ f(t)=\displaystyle\int\limits_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x$$ 的图像与这些 $t-c(t)$ 数据点尽可能贴近。
         \end{enumerate}
 
         这里 $P_{\sigma^2}$ 表示期望值为0、方差为 $\sigma^2$ 的正态分布（用 $N(0,\sigma^2)$ 表示）的概率密度函数，满足 $$P_{\sigma^2}(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{x^2}{2\sigma^2}\right)}$$
 
-        我们记 $$R_{\sigma^2}(t)=\int\limits_{-\infty}^t P_{\sigma^2}(x)\mathrm{d}x$$ 为正态分布 $N(0,\sigma^2)$ 的累积分布函数，则有\footnote{误差函数 $\mathrm{erf}$ 没有闭合形式，这个式子可以视为$\mathrm{erf}$函数的定义式} $R_{\sigma^2}(t)=\left(1+\mathrm{erf}\left(\frac x{\sqrt{2}\sigma}\right)\right)/2$\nobreak，其中 $\mathrm{erf}$ 表示误差函数。
+        再记 $$R_{\sigma^2}(t)=\int\limits_{-\infty}^t P_{\sigma^2}(x)\mathrm{d}x$$ 为正态分布 $N(0,\sigma^2)$ 的累积分布函数，则有\footnote{误差函数 $\mathrm{erf}$ 没有闭合形式，这个式子可以视为$\mathrm{erf}$函数的定义式} $R_{\sigma^2}(t)=\left(1+\mathrm{erf}\left(\frac x{\sqrt{2}\sigma}\right)\right)/2$\nobreak，其中 $\mathrm{erf}$ 表示误差函数。
 
-        最后注意到 $$\int_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x=R_{\sigma^2}(t+0.05)-R_{\sigma^2}(t-0.05)$$ 于是在进行拟合的过程中我们可以方便地计算这一定积分。
+        最后注意到 $$\int\limits_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x=R_{\sigma^2}(t+0.05)-R_{\sigma^2}(t-0.05)$$ 于是在进行拟合的过程中我们可以方便地计算这一定积分。
 
         \begin{figure}
             \centering
@@ -489,7 +483,7 @@
 
         \vspace{1.5ex}
 
-        图\ref{fig:fittingOffsetsByNormalDistribution}展示了拟合的结果。可以看到，除了$2\sim 3$个数据点以外，其余数据点均与曲线贴合紧密。为了验证这些数据是否确实服从正态分布，还需绘制Q-Q图来进行检验。
+        图\ref{fig:fittingOffsetsByNormalDistribution}展示了拟合的结果。可以看到，除了约$3$个数据点以外，其余数据点均与曲线贴合紧密。为了验证这些数据是否确实服从正态分布，还需绘制Q-Q图来进行检验。
 
         \begin{figure}
             \centering
@@ -500,12 +494,13 @@
 
         \vspace{1.5ex}
 
-        图\ref{fig:QQPlot}展示了所绘制的Q-Q图。注意，该图的坐标轴经过缩放，故坐标轴上标注的数值仅能代表相对大小关系。
+        图\ref{fig:QQPlot}展示了所绘制的Q-Q图。注意，该图的坐标轴经过缩放，故坐标轴上标注的数值仅能代表相对的比例关系。
         
-        图\ref{fig:QQPlot}中有440个蓝色叉号，所有叉号的横坐标、纵坐标非严格递增。其中第 $k$ 个叉号对应着440个数值中的第 $k$ 小值 $\textit{val}_k$ ，叉号的横坐标 $x_k$ 等于对应的数值 $\textit{val}_k$ ，叉号的纵坐标 $y_k$ 等于正态分布 $N(0,\sigma^2)$ 下排在 $\frac k{440}$ 位置的值——换句话说， $y_k$ 满足\footnote{这里的 $k-0.5$ 只是为简单起见而如此设置。真正精确的值应该在 $(k-1,k]$ 中} $R_{\sigma^2}(y_k)=\frac {k-0.5}{440}$ 。这里的 $\sigma$ 是待定的参数。
+        图\ref{fig:QQPlot}中有440个蓝色叉号，所有叉号的横坐标、纵坐标非严格递增。其中第 $k$ 个叉号($1\leq k\leq 440$)对应着440个数值中的第 $k$ 小值 $\textit{val}_k$ ，叉号的横坐标 $x_k$ 等于对应的数值 $\textit{val}_k$ ，而叉号的纵坐标 $y_k$ 等于：440个服从正态分布 $N(0,\sigma^2)$ 的数值中，第 $k$ 小值的期望；其中的 $\sigma$ 是待定的参数。可以证明 $y_k$ 满足 $R_{\sigma^2}(y_k)=\frac {k}{440+1}$ ，于是由这一关系可以求出 $y_k$ 。
 
-        如果这440个数值服从 $N(0,\sigma^2)$ 的话，容易想到应该有 $x_k\approx y_k$ ，也就是说所有叉号落在直线 $y=x$ 附近。我们通过选取合适的 $\sigma>0$ 来让叉号尽可能贴近 $y=x$ ，最终的结果就是图\ref{fig:QQPlot}。可以看到，叉号与直线紧密贴合，所以这些数据确实服从正态分布。（注意到，缩放坐标轴和改变 $\sigma$ 的取值，这两种操作对图像的改变其实是完全相同的，所以缩放坐标轴不会影响结论的可靠性）
+        如果这440个数值服从 $N(0,\sigma^2)$ 的话，容易想到应该有 $x_k\approx y_k$ ，也就是说所有叉号落在直线 $y=x$ 附近。我们通过选取合适的 $\sigma>0$ 来让叉号尽可能贴近 $y=x$ ，最终的结果就是图\ref{fig:QQPlot}。可以看到，叉号与直线紧密贴合，所以这些数据确实服从正态分布\footnote{注意到，缩放坐标轴和改变 $\sigma$ 的取值，这两种操作对图像的改变其实是完全相同的，所以缩放坐标轴不会影响结论的可靠性}。又由假设\ref{ass:similarityOfDeltaDistributions}，这一规律对任何COI/IOI赛制的比赛都成立。
 
         \begin{theorem}[偏移量分布的形式]
             对任何基于COI或IOI赛制的现实比赛，其对应的理想比赛的偏移量分布是期望值为$0$的正态分布。
+            \label{thm:normalityOfOffsetsDistribution}
         \end{theorem}

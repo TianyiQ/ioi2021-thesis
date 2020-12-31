@@ -4,7 +4,7 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
 plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
-probplot = sm.ProbPlot(a,fit=True)
+probplot = sm.ProbPlot(a,fit_floc=1e-320,fit_fscale=None,fit=True)
 probplot.qqplot(line='45',xlabel="实际数据的数值",ylabel="正态分布的数值",marker='x',color="blue",line_color="orange",line_width=2,line_style='--')
 plt.grid()
 plt.savefig(fname="QQPlot.pdf",format="pdf")
