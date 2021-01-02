@@ -475,7 +475,7 @@
 
         受此启发，尝试用正态分布曲线来拟合这些数值。具体方法如下：
         \begin{enumerate}[leftmargin=6em]
-            \item [\textbf{步骤 1.}] 对于 $t=-1.0,-0.9,\cdots,0.9,1.0$ ，计算落在 $\left[t-0.05,t+0.05\right)$ 中的数值个数 $c(t)$ 。
+            \item [\textbf{步骤 1.}] 对于 $t=-1.0,-0.9,\cdots,1.0$ ，计算：落在 $\left[t-0.05,t+0.05\right)$ 中的数值个数与总个数440的比值。这个比值记作 $c(t)$ 。
             \item [\textbf{步骤 2.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
             \item [\textbf{步骤 3.}] 选取合适的参数 $\sigma>0$ ，以使得函数 $$ f(t)=\displaystyle\int\limits_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x$$ 的图像与这些 $t-c(t)$ 数据点尽可能贴近。
         \end{enumerate}
@@ -510,7 +510,7 @@
         
         图\ref{fig:QQPlot}中有440个蓝色叉号，所有叉号的横坐标、纵坐标非严格递增。其中第 $k$ 个叉号($1\leq k\leq 440$)对应着440个数值中的第 $k$ 小值 $\textit{val}_k$ ，叉号的横坐标 $x_k$ 等于对应的数值 $\textit{val}_k$ ，而叉号的纵坐标 $y_k$ 等于：440个服从正态分布 $N(0,\sigma^2)$ 的数值中，第 $k$ 小值的期望；其中的 $\sigma$ 是待定的参数。可以证明 $y_k$ 满足 $R_{\sigma^2}(y_k)=\frac {k}{440+1}$ ，于是由这一关系可以求出 $y_k$ 。
 
-        如果这440个数值服从 $N(0,\sigma^2)$ 的话，容易想到应该有 $x_k\approx y_k$ ，也就是说所有叉号落在直线 $y=x$ 附近。我们通过选取合适的 $\sigma>0$ 来让叉号尽可能贴近 $y=x$ ，最终的结果就是图\ref{fig:QQPlot}。可以看到，叉号与直线紧密贴合，所以这些数据确实服从正态分布\footnote{注意到，缩放坐标轴和改变 $\sigma$ 的取值，这两种操作对图像的改变其实是完全相同的，所以缩放坐标轴不会影响结论的可靠性}。又由假设\ref{ass:similarityOfDeltaDistributions}，这一规律对任何COI/IOI赛制的比赛都成立。
+        如果这440个数值服从 $N(0,\sigma^2)$ 的话，容易想到应该有 $x_k\approx y_k$ ，也就是说所有叉号落在直线 $y=x$ 附近。我们通过选取合适的 $\sigma>0$ 来让叉号尽可能贴近直线 $y=x$ ，最终的结果就是图\ref{fig:QQPlot}。可以看到，叉号与直线紧密贴合，所以这些数据确实服从正态分布\footnote{注意到，缩放坐标轴和改变 $\sigma$ 的取值，这两种操作对图像的改变其实是完全相同的，所以缩放坐标轴不会影响结论的可靠性}。又由假设\ref{ass:similarityOfDeltaDistributions}，这一规律对任何COI/IOI赛制的比赛都成立。
 
         \begin{theorem}[偏移量分布的形式]
             对任何基于COI或IOI赛制的现实比赛，其对应的理想比赛的偏移量分布是期望值为$0$的正态分布。
@@ -577,18 +577,47 @@
             \begin{asparaenum}[\bfseries{步骤} 1.]
                 \item 将所有比赛中所有选手的分数除以当场比赛的最高分（也就是计算标准分；注意到最高分等于满分），用以代替原始分数。
                 \item \label{step:noipDataRefinementStep2} 去除所有$<0.2$的分数。这是因为在这6场比赛中，获奖分数线与最高分的商的最大值为$0.2$；这意味着分数低于$0.2$的选手中有一部分未能获奖，于是这些选手中其余部分的数据也失去意义，因此一并剔除。
-                \item 对每场比赛计算分数标准差 $\sigma$ ，然后对分数作变换 $x\mapsto 1-\frac{1-x}{5.52\sigma}$ ，并用变换结果代替原分数。系数$5.52$的作用稍后说明。
-                \item 对每场比赛计算最低分，取所得的6个最低分的最大值$T$，并剔除所有$<T$的分数。这一步的理由与步骤\ref{step:noipDataRefinementStep2}中的类似：分数低于$T$的部分选手未能获奖，故将这些选手连同已获奖的那些一并剔除。计算发现 $T\approx 0.2$ ，与步骤\ref{step:noipDataRefinementStep2}中的阈值保持一致；这是系数$5.52$的主要作用。
+                \item 对每场比赛计算分数标准差 $\sigma$ ，然后对分数作变换 $x\mapsto 1-\frac{1-x}{5.52\sigma}$ ，并用变换结果代替原分数。使用系数$5.52$的理由稍后说明。
+                \item 对每场比赛计算最低分，取所得的6个最低分的最大值$T$，并剔除所有$<T$的分数。这一步的理由与步骤\ref{step:noipDataRefinementStep2}中的类似：分数低于$T$的部分选手未能获奖，故将这些选手连同已获奖的那些一并剔除。计算可得 $T\approx 0.200$ ，与步骤\ref{step:noipDataRefinementStep2}中的阈值保持一致；这正是系数$5.52$的主要作用。
                 \item 现在所有这些分数数据属于同一理想比赛 $A$ （满足 $A$ 与原先6个现实比赛所对应的理想比赛缩放等价），将它们汇集起来即可。注意到我们所取得的并非完整的分数数据，而只是$\geq 0.2$的那一部分分数。
             \end{asparaenum}
 
             \vspace{1.5ex}
 
+            本节中我们约定使用理想比赛 $A$ 作为衡量选手水平的标尺，即我们将用一名选手在 $A$ 中的期望分数，来代表该名选手的水平。
+
+            \vspace{1.5ex}
+
             经过上述加工后，我们得到了26907个落在$[0.2,1]$之中的分数数据。由命题\ref{prop:scoreDistributionMeaning}，这些数据应当服从 $\bm{C}_A$ 所描述的概率分布。
             
-            观察这些数据，可以发现数值的分布左侧（即靠近$0.2$一侧）稠密、右侧（即靠近$1$一侧）稀疏，于是尝试用递降的多项式函数、对数函数等常见函数，以及指数分布、截尾正态分布等“向右倾斜”的常见概率分布来拟合之。
+            受数据限制，我们暂时只关心 $[0.2,1]$ 这一分数区间上的分布情况。即我们要确定函数 $F:\left[0.2,1\right]\to\mathbb{R}_{\geq 0}$ ，满足在任何一个区间 $\left[a,b\right]$ 上，$F$ 的定积分在数值上约等于：落在$\left[a,b\right]$中的分数数值个数，与数值总个数26907的比值。注意到在$F$和$\bm{C}_A$之间有这一关系：$$F(t)=\bm{C}_A(t)\Big/{\displaystyle\int\limits_{0.2}^1 \bm{C}_A(x)\mathrm{d}x},\quad\forall t\in[0.2,1]$$
 
-            
+            观察这些数据，可以发现数值的分布左侧（即靠近$0.2$一侧）稠密、右侧（即靠近$1$一侧）稀疏，于是尝试用递降的多项式函数、对数函数等常见函数，以及指数分布、截尾正态分布等“向左倾斜”的常见概率分布来拟合之。实验发现使用对数函数的拟合效果大幅好于其他方式，以下将描述对数函数的拟合过程和结果。
+
+            \begin{enumerate}[leftmargin=6em]
+                \item [\textbf{步骤 1.}] 对于 $t=0.25,0.30,\cdots,0.95$ ，计算：落在 $\left[t-0.05,t+0.05\right]$ 中的数值个数与总个数26907的比值。这个比值记为 $c(t)$ 。
+                \item [\textbf{步骤 2.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
+                \item [\textbf{步骤 3.}] 选取参数 $\alpha$ 并令 $F(x)=\alpha\log(x)$ 。注意到函数 $F$ 在 $[0.2,1]$ 上的定积分必须等于$1$，由此可唯一确定 $\alpha$ 的取值；计算得到 $\alpha\approx-2.09156$ 。
+                \item [\textbf{步骤 4.}] 检查函数 $$G(t)=\int\limits_{t-0.05}^{t+0.05}F(x)\mathrm{d}x$$ 的图像是否与 $t-c(t)$ 散点图吻合。
+            \end{enumerate}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{fig/fittingNoipScores.pdf}
+                \caption{散点图和拟合结果}
+                \label{fig:fittingNoipScoresByLogCurve}
+            \end{figure}
+
+            图\ref{fig:fittingNoipScoresByLogCurve}展示了拟合的结果。可以看到全部数据点与曲线贴合紧密，且算得残差平方和约为$3.3\cdot 10^{-4}$，显示出了较好的拟合效果。基于此，我们确定取 $F(x)=\alpha\log(x)$ ，其中 $\alpha\approx-2.09156$ 。
+
+            我们推测在区间 $\left[0,0.2\right)$ 上，分数的分布依旧近似地符合对数曲线的形态。假定如此，则分数区间 $[0.2,1]$ 上的人数占总人数的比例应该等于 $$\dfrac{\displaystyle\int\limits_{0.2}^1 \log(x)\mathrm{d}x}{\displaystyle\int\limits_0^1 \log(x)\mathrm{d}x}\approx 0.478$$ 进而根据分数区间 $[0.2,1]$ 上的总人数为26907，可推算出（前述6场比赛的）参赛总人数约为56300。该值与真实值61100接近，于是我们的假设得到验证。
+
+            由此可知 $A$ 的分数分布函数的表达式同样形如 $\bm{C}_A(x)=\beta\log(x)$ ，其中系数 $\beta$ 可由等式 $$\int\limits_0^1 \bm{C}_A(x)\mathrm{d}x=1$$ 唯一确定；计算得 $\beta=-1$ 。
+
+            \begin{proposition}
+                $\bm{C}_A(x)=-\log(x)$ ，其中 $A$ 是根据\ref{sec:dataPreprocessingOfNOIP}小节中描述的过程所确定的理想比赛。
+                \label{prop:scoreDistributionOfStandardizedNoip}
+            \end{proposition}
             
         \subsubsection{从分数分布计算期望值分布}\label{sec:calculatingXfromC}
 

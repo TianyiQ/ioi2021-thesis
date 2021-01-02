@@ -23,7 +23,7 @@ coe,tmp=curve_fit(func,X,Y)
 a=coe[0]
 print(coe)
 yvals=func(X,a)
-plot1 = plt.plot(x, y, 's',label='邻近区间内人数占比')
+plot1 = plt.plot(x, y, 's',label='邻近区间内人数占比',color='blue')
 nx=np.arange(-0.7,0.7,0.01)
 ny=func(nx,a)
 plot2 = plt.plot(nx,ny, 'r',label='邻近区间内正态分布曲线线下面积',color='orange')
