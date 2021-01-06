@@ -284,7 +284,7 @@
                 \bm{C}_A(s)=\int\limits_{0}^1 \bm{X}_A(x)\bm{\Delta}_A(s-x) \mathrm{d}x,\quad\forall s\in\mathbb{R}
                 $$
 
-                \label{def:scoreDistributionInSimpleContest}
+                \label{prop:scoreDistributionInSimpleContest}
             \end{proposition}
 
             证明显然，这里略去。
@@ -367,6 +367,7 @@
             \item 根据经验，一名选手考场发挥的稳定与否与水平高低等因素没有明显的相关性；所以虽然不同选手的稳定性存在差异，但是在样本很大时，这种差异不会给统计结果带来较大的系统性的偏差，因此我们近似地认为所有选手\emph{水平发挥}的稳定性是相同的。又因为得分与实际表现出的能力是“成比例”的，所以所有选手\emph{比赛得分}的稳定性也是相同的。这为假设\ref{ass:simplicityOfCodingContests}、假设\ref{ass:similarityOfDeltaDistributions}和假设\ref{ass:equivalenceBetweenCodingContests}关于偏移量分布的部分提供了依据。
             \item 真实的比赛中“离散”的特性——比如选择题三分一道——可以在理想化的模型中忽略。这样在人数趋于无穷时，我们很容易想到：其各种统计数据会是“连续”的。因此\ref{ass:existenceOfIdealContest}是一个很自然的假设。
             \item 根据经验，在COI赛制中表现好的选手，在IOI赛制往往表现也很好；反之亦然。因此COI/IOI赛制间的差异至多会对选手期望得分的分布起到缩放的作用，而不会带来本质的改变。类似地，选手在COI/IOI赛制中发挥稳定性的差异，也只有量的差别而无质的差别。所以，认为COI/IOI赛制的比赛有着本质相同（即在缩放后完全相同）的期望值分布、偏移量分布，是合理的。
+            \item 假设\ref{ass:simplicityOfCodingContests}会带来一个问题：如果一名选手的期望得分十分接近0，但他的分数波动的幅度仍被认为与其他选手相同，就会使他可能考出“负分数”，并使得分数分布函数在负数处的点值非零。由于本文只研究近似的结果，且考虑到该现象并不会十分显著（因为一场比赛中只会有很少的选手期望得分接近0），所以可以容忍这一不合理的现象。
         \end{asparaenum}
 
 \section{偏移量分布的测量}
@@ -521,104 +522,133 @@
 
     本节将借助联赛初赛（字母标号a）和联赛复赛（字母标号b）的分数数据，来估计全国信息学竞赛选手整体水平的分布情况。
 
-    \subsection{对复赛分数的分析}
+    选手的“水平”是一个模糊的概念；为了将其量化，我们将用一名选手在联赛复赛中的期望分数来衡量这名选手的水平。
 
-        选手的“水平”是一个模糊的概念；为了将其量化，我们将用一名选手在联赛复赛中的期望分数来衡量这名选手的水平。
+    虽然由假设\ref{ass:equivalenceBetweenCodingContests}，不同年份的联赛复赛（所对应的理想比赛）是缩放等价的；但它们毕竟不相同，因此“在联赛复赛中的期望分数”这一概念需要澄清。\ref{sec:dataPreprocessingOfNOIP}小节将处理这一问题，并完成对复赛分数数据的初步分析。接着，\ref{sec:calculatingXfromC}小节将从这些数据中得到联赛复赛（所对应的理想比赛）的期望值分布的表达式。
 
-        虽然由假设\ref{ass:equivalenceBetweenCodingContests}，不同年份的联赛复赛（所对应的理想比赛）是缩放等价的；但它们毕竟不相同，因此“在联赛复赛中的期望分数”这一概念需要澄清。\ref{sec:dataPreprocessingOfNOIP}小节将处理这一问题，并完成对复赛分数数据的初步分析。接着，\ref{sec:calculatingXfromC}小节将从这些数据中得到联赛复赛（所对应的理想比赛）的期望值分布的表达式。
+    由此得到的期望值分布仍不是真实的结果，因为联赛初赛在此之前已经筛选掉了一部分选手。对这一影响的处理是\ref{sec:analysisOnPreliminaryRound}小节的任务。
 
-        由此得到的期望值分布仍不是真实的结果，因为联赛初赛在此之前已经筛选掉了一部分选手。对这一影响的处理是\ref{sec:analysisOnPreliminaryRound}小节的任务。
+    \subsection{对复赛分数数据的获取、加工和拟合}\label{sec:dataPreprocessingOfNOIP}
 
-        \subsubsection{数据的获取、加工和拟合}\label{sec:dataPreprocessingOfNOIP}
+        数据来自以下6场比赛：
+        \begin{asparaitem}
+            \item NOIP2016\ ---\ 复赛（字母标号b）
+            \item NOIP2017\ ---\ 复赛（字母标号b）
+            \item NOIP2018\ ---\ 复赛（字母标号b）
+            \item CSP2019\ ---\ 复赛（字母标号b）
+            \item CSP2020\ ---\ 复赛（字母标号b）
+            \item NOIP2020\ ---\ 复赛（字母标号b）\footnote{2020年情况较为特殊，NOIP与CSP同时存在，且NOIP初赛与CSP初赛合并为同一场比赛}
+        \end{asparaitem}
 
-            数据来自以下6场比赛：
-            \begin{asparaitem}
-                \item NOIP2016\ ---\ 复赛（字母标号b）
-                \item NOIP2017\ ---\ 复赛（字母标号b）
-                \item NOIP2018\ ---\ 复赛（字母标号b）
-                \item CSP2019\ ---\ 复赛（字母标号b）
-                \item CSP2020\ ---\ 复赛（字母标号b）
-                \item NOIP2020\ ---\ 复赛（字母标号b）\footnote{2020年情况较为特殊，NOIP与CSP同时存在，且NOIP初赛与CSP初赛合并为同一场比赛}
-            \end{asparaitem}
+        \vspace{1.5ex}
 
-            \vspace{1.5ex}
+        之所以只采用2016年及以后的比赛，是出于两个原因：
+        \begin{asparaitem}
+            \item 年代过于久远的比赛对当今的参考意义有限。
+            \item 仅有的数据来源为NOI官网上的获奖名单公示，故只能取得\emph{获奖选手}的分数信息。而自2016年起CCF更改了获奖规则，增加了获奖人数，使得可以获取的数据量大了许多。
+        \end{asparaitem}
 
-            之所以只采用2016年及以后的比赛，是出于两个原因：
-            \begin{asparaitem}
-                \item 年代过于久远的比赛对当今的参考意义有限。
-                \item 仅有的数据来源为NOI官网上的获奖名单公示，故只能取得\emph{获奖选手}的分数信息。而自2016年起CCF更改了获奖规则，增加了获奖人数，使得可以获取的数据量大了许多。
-            \end{asparaitem}
+        \vspace{1.5ex}
 
-            \vspace{1.5ex}
+        \begin{table}\footnotesize
+            \centering
+            \begin{tabular}{@{}lccccc@{}}
+                \toprule
+                    & \multicolumn{1}{l}{参赛人数} & \multicolumn{1}{l}{获奖人数} & \multicolumn{1}{l}{满分} & \multicolumn{1}{l}{最高分} & \multicolumn{1}{l}{获奖分数线} \\ \midrule
+                NOIP2016复赛 & 约8300  & 约5900 & 600 & 600 & 100 \\
+                NOIP2017复赛 & 约10300 & 约6600 & 600 & 600 & 80  \\
+                NOIP2018复赛 & 约12900 & 约8000 & 600 & 600 & 120 \\
+                CSP2019复赛  & 约13900 & 约8800 & 600 & 600 & 80  \\
+                CSP2020复赛  & 约11000 & 约6700 & 400 & 400 & 30  \\
+                NOIP2020复赛 & 约4700  & 约3600 & 400 & 400 & 60  \\ \bottomrule
+            \end{tabular}
+            \caption{6场比赛的相关数据}
+            \label{tab:noip16to20}
+        \end{table}
 
-            \begin{table}\footnotesize
-                \centering
-                \begin{tabular}{@{}lccccc@{}}
-                    \toprule
-                     & \multicolumn{1}{l}{参赛人数} & \multicolumn{1}{l}{获奖人数} & \multicolumn{1}{l}{满分} & \multicolumn{1}{l}{最高分} & \multicolumn{1}{l}{获奖分数线} \\ \midrule
-                    NOIP2016复赛 & 约8300  & 约5900 & 600 & 600 & 100 \\
-                    NOIP2017复赛 & 约10300 & 约6600 & 600 & 600 & 80  \\
-                    NOIP2018复赛 & 约12900 & 约8000 & 600 & 600 & 120 \\
-                    CSP2019复赛  & 约13900 & 约8800 & 600 & 600 & 80  \\
-                    CSP2020复赛  & 约11000 & 约6700 & 400 & 400 & 30  \\
-                    NOIP2020复赛 & 约4700  & 约3600 & 400 & 400 & 60  \\ \bottomrule
-                \end{tabular}
-                \caption{6场比赛的相关数据}
-                \label{tab:noip16to20}
-            \end{table}
+        表\ref{tab:noip16to20}展示了关于这6场比赛的几项统计数据。
 
-            表\ref{tab:noip16to20}展示了关于这6场比赛的几项统计数据。
+        \vspace{1.5ex}
 
-            \vspace{1.5ex}
+        由假设\ref{ass:equivalenceBetweenCodingContests}，这6场现实比赛（所对应的理想比赛）是缩放等价的。进而由命题\ref{prop:alphaAsQuotientOfStddev}，这6场现实比赛所对应的理想比赛，在对分数作变换（变换方式见\ref{sec:dataPreprocessingOfCTT}小节）后，将成为完全相同的理想比赛。
 
-            由假设\ref{ass:equivalenceBetweenCodingContests}，这6场现实比赛（所对应的理想比赛）是缩放等价的。进而由命题\ref{prop:alphaAsQuotientOfStddev}，这6场现实比赛所对应的理想比赛，在对分数作变换（变换方式见\ref{sec:dataPreprocessingOfCTT}小节）后，将成为完全相同的理想比赛。
+        于是，与\ref{sec:dataPreprocessingOfCTT}小节类似，数据加工将按以下步骤进行：
+        \begin{asparaenum}[\bfseries{步骤} 1.]
+            \item 将所有比赛中所有选手的分数除以当场比赛的最高分（也就是计算标准分；注意到最高分等于满分），用以代替原始分数。
+            \item \label{step:noipDataRefinementStep2} 去除所有$<0.2$的分数。这是因为在这6场比赛中，获奖分数线与最高分的商的最大值为$0.2$；这意味着分数低于$0.2$的选手中有一部分未能获奖，于是这些选手中其余部分的数据也失去意义，因此一并剔除。
+            \item 对每场比赛计算分数标准差 $\sigma$ ，然后对分数作变换 $x\mapsto 1-\frac{1-x}{5.52\sigma}$ ，并用变换结果代替原分数。使用系数$5.52$的理由稍后说明。
+            \item 对每场比赛计算最低分，取所得的6个最低分的最大值$T$，并剔除所有$<T$的分数。这一步的理由与步骤\ref{step:noipDataRefinementStep2}中的类似：分数低于$T$的部分选手未能获奖，故将这些选手连同已获奖的那些一并剔除。计算可得 $T\approx 0.200$ ，与步骤\ref{step:noipDataRefinementStep2}中的阈值保持一致；这正是系数$5.52$的主要作用。
+            \item 现在所有这些分数数据属于同一理想比赛 $A$ （满足 $A$ 与原先6个现实比赛所对应的理想比赛缩放等价），将它们汇集起来即可。注意到我们所取得的并非完整的分数数据，而只是$\geq 0.2$的那一部分分数。
+        \end{asparaenum}
 
-            于是，与\ref{sec:dataPreprocessingOfCTT}小节类似，数据加工将按以下步骤进行：
-            \begin{asparaenum}[\bfseries{步骤} 1.]
-                \item 将所有比赛中所有选手的分数除以当场比赛的最高分（也就是计算标准分；注意到最高分等于满分），用以代替原始分数。
-                \item \label{step:noipDataRefinementStep2} 去除所有$<0.2$的分数。这是因为在这6场比赛中，获奖分数线与最高分的商的最大值为$0.2$；这意味着分数低于$0.2$的选手中有一部分未能获奖，于是这些选手中其余部分的数据也失去意义，因此一并剔除。
-                \item 对每场比赛计算分数标准差 $\sigma$ ，然后对分数作变换 $x\mapsto 1-\frac{1-x}{5.52\sigma}$ ，并用变换结果代替原分数。使用系数$5.52$的理由稍后说明。
-                \item 对每场比赛计算最低分，取所得的6个最低分的最大值$T$，并剔除所有$<T$的分数。这一步的理由与步骤\ref{step:noipDataRefinementStep2}中的类似：分数低于$T$的部分选手未能获奖，故将这些选手连同已获奖的那些一并剔除。计算可得 $T\approx 0.200$ ，与步骤\ref{step:noipDataRefinementStep2}中的阈值保持一致；这正是系数$5.52$的主要作用。
-                \item 现在所有这些分数数据属于同一理想比赛 $A$ （满足 $A$ 与原先6个现实比赛所对应的理想比赛缩放等价），将它们汇集起来即可。注意到我们所取得的并非完整的分数数据，而只是$\geq 0.2$的那一部分分数。
-            \end{asparaenum}
+        \vspace{1.5ex}
 
-            \vspace{1.5ex}
+        本节中我们约定使用理想比赛 $A$ 作为衡量选手水平的标尺，也就是说我们将用一名选手在 $A$ 中的期望分数，来代表该名选手的水平。
 
-            本节中我们约定使用理想比赛 $A$ 作为衡量选手水平的标尺，即我们将用一名选手在 $A$ 中的期望分数，来代表该名选手的水平。
+        \vspace{1.5ex}
 
-            \vspace{1.5ex}
+        经过上述加工后，我们得到了26907个落在$[0.2,1]$之中的分数数据。由命题\ref{prop:scoreDistributionMeaning}，这些数据应当服从 $\bm{C}_A$ 所描述的概率分布。
+        
+        受数据限制，我们暂时只关心 $[0.2,1]$ 这一分数区间上的分布情况。即我们要确定函数 $F:\left[0.2,1\right]\to\mathbb{R}_{\geq 0}$ ，满足在任何一个区间 $\left[a,b\right]$ 上，$F$ 的定积分在数值上约等于：落在$\left[a,b\right]$中的分数数值个数，与数值总个数26907的比值。注意到在$F$和$\bm{C}_A$之间有这一关系：$$F(t)=\bm{C}_A(t)\Big/{\displaystyle\int\limits_{0.2}^1 \bm{C}_A(x)\mathrm{d}x},\quad\forall t\in[0.2,1]$$
 
-            经过上述加工后，我们得到了26907个落在$[0.2,1]$之中的分数数据。由命题\ref{prop:scoreDistributionMeaning}，这些数据应当服从 $\bm{C}_A$ 所描述的概率分布。
+        观察这些数据，可以发现数值的分布左侧（即靠近$0.2$一侧）稠密、右侧（即靠近$1$一侧）稀疏，于是尝试用递降的多项式函数、对数函数等常见函数，以及指数分布、截尾正态分布等“向左倾斜”的常见概率分布来拟合之。实验发现使用对数函数的拟合效果大幅好于其他方式，以下将描述对数函数的拟合过程和结果。
+
+        \begin{enumerate}[leftmargin=6em]
+            \begin{samepage}
+            \item [\textbf{步骤 1.}] 对于 $t=0.25,0.30,\cdots,0.95$ ，计算：落在 $\left[t-0.05,t+0.05\right]$ 中的数值个数与总个数26907的比值。这个比值记为 $c(t)$ 。
+            \end{samepage}
+            \item [\textbf{步骤 2.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
+            \item [\textbf{步骤 3.}] 选取参数 $\alpha$ 并令 $F(x)=\alpha\log(x)$ 。注意到函数 $F$ 在 $[0.2,1]$ 上的定积分必须等于$1$，由此可唯一确定 $\alpha$ 的取值；计算得到 $\alpha\approx-2.09156$ 。
+            \item [\textbf{步骤 4.}] 检查函数 $$G(t)=\int\limits_{t-0.05}^{t+0.05}F(x)\mathrm{d}x$$ 的图像是否与 $t-c(t)$ 散点图吻合。
+        \end{enumerate}
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{fig/fittingNoipScores.pdf}
+            \caption{散点图和拟合结果}
+            \label{fig:fittingNoipScoresByLogCurve}
+        \end{figure}
+
+        图\ref{fig:fittingNoipScoresByLogCurve}展示了拟合的结果。可以看到全部数据点与曲线贴合紧密，且算得残差平方和约为$3.3\cdot 10^{-4}$，显示出了较好的拟合效果。基于此，我们确定取 $F(x)=\alpha\log(x)$ ，其中 $\alpha\approx-2.09156$ 。
+
+        我们推测在区间 $\left[0,0.2\right)$ 上，分数的分布依旧近似地符合对数曲线的形态。假定如此，则分数区间 $[0.2,1]$ 上的人数占总人数的比例应该等于 $$\dfrac{\displaystyle\int\limits_{0.2}^1 \log(x)\mathrm{d}x}{\displaystyle\int\limits_0^1 \log(x)\mathrm{d}x}\approx 0.478$$ 进而根据分数区间 $[0.2,1]$ 上的总人数为26907，可推算出（前述6场比赛的）参赛总人数约为56300。该值与真实值61100接近，于是我们的假设得到验证。
+
+        由此可知 $A$ 的分数分布函数的表达式同样形如 $\bm{C}_A(x)=\beta\log(x)$ ，其中系数 $\beta$ 可由等式 $$\int\limits_0^1 \bm{C}_A(x)\mathrm{d}x=1$$ 唯一确定；计算得 $\beta=-1$ 。
+
+        \begin{proposition}
+            $\bm{C}_A(x)=-\log(x)$ ，其中 $x\in(0,1]$ ；$A$ 是根据\ref{sec:dataPreprocessingOfNOIP}小节中描述的过程所确定的理想比赛。
+            \label{prop:scoreDistributionOfStandardizedNoip}
+        \end{proposition}
             
-            受数据限制，我们暂时只关心 $[0.2,1]$ 这一分数区间上的分布情况。即我们要确定函数 $F:\left[0.2,1\right]\to\mathbb{R}_{\geq 0}$ ，满足在任何一个区间 $\left[a,b\right]$ 上，$F$ 的定积分在数值上约等于：落在$\left[a,b\right]$中的分数数值个数，与数值总个数26907的比值。注意到在$F$和$\bm{C}_A$之间有这一关系：$$F(t)=\bm{C}_A(t)\Big/{\displaystyle\int\limits_{0.2}^1 \bm{C}_A(x)\mathrm{d}x},\quad\forall t\in[0.2,1]$$
+    \subsection{从分数分布计算期望值分布}\label{sec:calculatingXfromC}
 
-            观察这些数据，可以发现数值的分布左侧（即靠近$0.2$一侧）稠密、右侧（即靠近$1$一侧）稀疏，于是尝试用递降的多项式函数、对数函数等常见函数，以及指数分布、截尾正态分布等“向左倾斜”的常见概率分布来拟合之。实验发现使用对数函数的拟合效果大幅好于其他方式，以下将描述对数函数的拟合过程和结果。
+        上一小节中得到了 $\bm{C}_A(x)$ 的表达式；这一小节将由此计算 $\bm{X}_A(x)$ 的表达式。$\bm{X}_A(x)$的闭合形式很可能并不存在，所以将用级数展开的方式来给出结果；并且由于偏移量分布函数 $\bm{\Delta}_A$ 的参数尚未确定，得到的表达式也将含有参数。
 
-            \begin{enumerate}[leftmargin=6em]
-                \item [\textbf{步骤 1.}] 对于 $t=0.25,0.30,\cdots,0.95$ ，计算：落在 $\left[t-0.05,t+0.05\right]$ 中的数值个数与总个数26907的比值。这个比值记为 $c(t)$ 。
-                \item [\textbf{步骤 2.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
-                \item [\textbf{步骤 3.}] 选取参数 $\alpha$ 并令 $F(x)=\alpha\log(x)$ 。注意到函数 $F$ 在 $[0.2,1]$ 上的定积分必须等于$1$，由此可唯一确定 $\alpha$ 的取值；计算得到 $\alpha\approx-2.09156$ 。
-                \item [\textbf{步骤 4.}] 检查函数 $$G(t)=\int\limits_{t-0.05}^{t+0.05}F(x)\mathrm{d}x$$ 的图像是否与 $t-c(t)$ 散点图吻合。
-            \end{enumerate}
+        由假设\ref{ass:simplicityOfCodingContests}，$A$是简单理想比赛；又根据命题\ref{prop:scoreDistributionInSimpleContest}，可从$\bm{X}_A$和$\bm{\Delta}_A$计算出$\bm{C}_A$ 。这一小节将给出从 $\bm{C}_A$ 和 $\bm{\Delta}_A$ 逆推出 $\bm{X}_A$ 的方法。
 
-            \begin{figure}
-                \centering
-                \includegraphics[width=\textwidth]{fig/fittingNoipScores.pdf}
-                \caption{散点图和拟合结果}
-                \label{fig:fittingNoipScoresByLogCurve}
-            \end{figure}
+        根据定理\ref{thm:normalityOfOffsetsDistribution}，存在 $\sigma>0$ 使得
+        $$
+        \bm{\Delta}_A(\delta)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{\delta^2}{2\sigma^2}\right)},\quad\forall \delta\in\mathbb{R}
+        $$
+        进而由命题\ref{prop:scoreDistributionInSimpleContest}得
+        \begin{equation}
+            \bm{C}_A(s)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 \bm{X}_A(x)\exp{\left(-\frac{(s-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
+            \label{formula:fromXtoC}
+        \end{equation}
 
-            图\ref{fig:fittingNoipScoresByLogCurve}展示了拟合的结果。可以看到全部数据点与曲线贴合紧密，且算得残差平方和约为$3.3\cdot 10^{-4}$，显示出了较好的拟合效果。基于此，我们确定取 $F(x)=\alpha\log(x)$ ，其中 $\alpha\approx-2.09156$ 。
+        为了便于表述，记变换 $T$ 将\eqref{formula:fromXtoC}式中的函数 $\bm{X}_A$ 映射到 $\bm{C}_A$ 。换句话说，对任何可积函数 $f:[0,1]\to\mathbb{R}_{\geq 0}$ 有
+        $$
+        T\left[f(\cdot)\right](t)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 f(x)\exp{\left(-\frac{(t-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall t\in\mathbb{R}
+        $$
+        其中 $T\left[f(\cdot)\right]$ 表示函数 $f$ 经过 $T$ 变换得到的函数。
 
-            我们推测在区间 $\left[0,0.2\right)$ 上，分数的分布依旧近似地符合对数曲线的形态。假定如此，则分数区间 $[0.2,1]$ 上的人数占总人数的比例应该等于 $$\dfrac{\displaystyle\int\limits_{0.2}^1 \log(x)\mathrm{d}x}{\displaystyle\int\limits_0^1 \log(x)\mathrm{d}x}\approx 0.478$$ 进而根据分数区间 $[0.2,1]$ 上的总人数为26907，可推算出（前述6场比赛的）参赛总人数约为56300。该值与真实值61100接近，于是我们的假设得到验证。
+        容易验证 $T$ 满足线性性，即：
+        \begin{asparaenum}
+            \item 对可积函数 $f,g$ 有 $T\left[f(\cdot)+g(\cdot)\right]=T\left[f(\cdot)\right]+T\left[g(\cdot)\right]$
+            \item 对可积函数 $f$ 和常数 $c$ 有 $T\left[c\cdot f(\cdot)\right]=c\cdot T\left[f(\cdot)\right]$
+        \end{asparaenum}
 
-            由此可知 $A$ 的分数分布函数的表达式同样形如 $\bm{C}_A(x)=\beta\log(x)$ ，其中系数 $\beta$ 可由等式 $$\int\limits_0^1 \bm{C}_A(x)\mathrm{d}x=1$$ 唯一确定；计算得 $\beta=-1$ 。
+        借助随机变量的特征函数可以证明 $T$ 为单射，从而 $T$ 的逆变换 $T^{-1}$ 是良定义的。由 $T$ 的线性性，又可以推得 $T^{-1}$ 同样满足线性性。
 
-            \begin{proposition}
-                $\bm{C}_A(x)=-\log(x)$ ，其中 $A$ 是根据\ref{sec:dataPreprocessingOfNOIP}小节中描述的过程所确定的理想比赛。
-                \label{prop:scoreDistributionOfStandardizedNoip}
-            \end{proposition}
-            
-        \subsubsection{从分数分布计算期望值分布}\label{sec:calculatingXfromC}
 
     \subsection{结合初赛分数的分析}\label{sec:analysisOnPreliminaryRound}
