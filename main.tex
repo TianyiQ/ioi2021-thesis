@@ -518,13 +518,13 @@
             \label{thm:normalityOfOffsetsDistribution}
         \end{theorem}
 
-\section{选手整体水平的估计}
+\section{选手整体水平的估计}\label{sec:estimationOfOverallDistribution}
 
     本节将借助联赛初赛（字母标号a）和联赛复赛（字母标号b）的分数数据，来估计全国信息学竞赛选手整体水平的分布情况。
 
     选手的“水平”是一个模糊的概念；为了将其量化，我们将用一名选手在联赛复赛中的期望分数来衡量这名选手的水平。
 
-    虽然由假设\ref{ass:equivalenceBetweenCodingContests}，不同年份的联赛复赛（所对应的理想比赛）是缩放等价的；但它们毕竟不相同，因此“在联赛复赛中的期望分数”这一概念需要澄清。\ref{sec:dataPreprocessingOfNOIP}小节将处理这一问题，并完成对复赛分数数据的初步分析。接着，\ref{sec:calculatingXfromC}小节将从这些数据中得到联赛复赛（所对应的理想比赛）的期望值分布的表达式。
+    虽然由假设\ref{ass:equivalenceBetweenCodingContests}，不同年份的联赛复赛（所对应的理想比赛）是缩放等价的；但它们毕竟不相同，因此“在联赛复赛中的期望分数”这一概念需要澄清。\ref{sec:dataPreprocessingOfNOIP}小节将处理这一问题，并完成对复赛分数数据的初步分析。接着，\ref{sec:calculatingXfromC}小节将从分数数据中，得到复赛（所对应的理想比赛）的期望值分布的表达式。
 
     由此得到的期望值分布仍不是真实的结果，因为联赛初赛在此之前已经筛选掉了一部分选手。对这一影响的处理是\ref{sec:analysisOnPreliminaryRound}小节的任务。
 
@@ -620,35 +620,42 @@
             \label{prop:scoreDistributionOfStandardizedNoip}
         \end{proposition}
             
-    \subsection{从分数分布计算期望值分布}\label{sec:calculatingXfromC}
+    \subsection{计算期望值分布}\label{sec:calculatingXfromC}
 
-        上一小节中得到了 $\bm{C}_A(x)$ 的表达式；这一小节将由此计算 $\bm{X}_A(x)$ 的表达式。$\bm{X}_A(x)$的闭合形式很可能并不存在，所以将用级数展开的方式来给出结果；并且由于偏移量分布函数 $\bm{\Delta}_A$ 的参数尚未确定，得到的表达式也将含有参数。
+        这一小节将计算理想比赛 $A$ 的期望值分布。其中，\ref{sec:assumptionsOnPreliminaryRound}小节将给出关于初赛的几个假设；第\ref{sec:estimationOfOverallDistribution}节的其余部分都将依赖于这些假设。\ref{sec:parameterOfDeltaDistribution}小节将计算理想比赛 $A$ 的偏移量分布的标准差，以为\ref{sec:calculatingXofSecondRound}小节中 $A$ 的期望值分布的计算做好准备。
 
-        由假设\ref{ass:simplicityOfCodingContests}，$A$是简单理想比赛；又根据命题\ref{prop:scoreDistributionInSimpleContest}，可从$\bm{X}_A$和$\bm{\Delta}_A$计算出$\bm{C}_A$ 。这一小节将给出从 $\bm{C}_A$ 和 $\bm{\Delta}_A$ 逆推出 $\bm{X}_A$ 的方法。
+        \subsubsection{有关初赛的几个假设}\label{sec:assumptionsOnPreliminaryRound}
 
-        根据定理\ref{thm:normalityOfOffsetsDistribution}，存在 $\sigma>0$ 使得
-        $$
-        \bm{\Delta}_A(\delta)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{\delta^2}{2\sigma^2}\right)},\quad\forall \delta\in\mathbb{R}
-        $$
-        进而由命题\ref{prop:scoreDistributionInSimpleContest}得
-        \begin{equation}
-            \bm{C}_A(s)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 \bm{X}_A(x)\exp{\left(-\frac{(s-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
-            \label{formula:fromXtoC}
-        \end{equation}
+        \subsubsection{计算偏移量分布的参数}\label{sec:parameterOfDeltaDistribution}
 
-        为了便于表述，记变换 $T$ 将\eqref{formula:fromXtoC}式中的函数 $\bm{X}_A$ 映射到 $\bm{C}_A$ 。换句话说，对任何可积函数 $f:[0,1]\to\mathbb{R}_{\geq 0}$ 有
-        $$
-        T\left[f(\cdot)\right](t)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 f(x)\exp{\left(-\frac{(t-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall t\in\mathbb{R}
-        $$
-        其中 $T\left[f(\cdot)\right]$ 表示函数 $f$ 经过 $T$ 变换得到的函数。
+        \subsubsection{计算复赛的期望值分布}\label{sec:calculatingXofSecondRound}
 
-        容易验证 $T$ 满足线性性，即：
-        \begin{asparaenum}
-            \item 对可积函数 $f,g$ 有 $T\left[f(\cdot)+g(\cdot)\right]=T\left[f(\cdot)\right]+T\left[g(\cdot)\right]$
-            \item 对可积函数 $f$ 和常数 $c$ 有 $T\left[c\cdot f(\cdot)\right]=c\cdot T\left[f(\cdot)\right]$
-        \end{asparaenum}
+            上一小节中得到了 $\bm{C}_A(x)$ 的表达式；这一小节将由此计算 $\bm{X}_A(x)$ 的表达式。$\bm{X}_A(x)$的闭合形式很可能并不存在，所以将用级数展开的方式来给出结果；并且由于偏移量分布函数 $\bm{\Delta}_A$ 的参数尚未确定，得到的表达式也将含有参数。
 
-        借助随机变量的特征函数可以证明 $T$ 为单射，从而 $T$ 的逆变换 $T^{-1}$ 是良定义的。由 $T$ 的线性性，又可以推得 $T^{-1}$ 同样满足线性性。
+            由假设\ref{ass:simplicityOfCodingContests}，$A$是简单理想比赛；又根据命题\ref{prop:scoreDistributionInSimpleContest}，可从$\bm{X}_A$和$\bm{\Delta}_A$计算出$\bm{C}_A$ 。这一小节将给出从 $\bm{C}_A$ 和 $\bm{\Delta}_A$ 逆推出 $\bm{X}_A$ 的方法。
 
+            根据定理\ref{thm:normalityOfOffsetsDistribution}，存在 $\sigma>0$ 使得
+            $$
+            \bm{\Delta}_A(\delta)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{\delta^2}{2\sigma^2}\right)},\quad\forall \delta\in\mathbb{R}
+            $$
+            进而由命题\ref{prop:scoreDistributionInSimpleContest}得
+            \begin{equation}
+                \bm{C}_A(s)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 \bm{X}_A(x)\exp{\left(-\frac{(s-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
+                \label{formula:fromXtoC}
+            \end{equation}
 
-    \subsection{结合初赛分数的分析}\label{sec:analysisOnPreliminaryRound}
+            为了便于表述，记变换 $T$ 将\eqref{formula:fromXtoC}式中的函数 $\bm{X}_A$ 映射到 $\bm{C}_A$ 。换句话说，对任何可积函数 $f:[0,1]\to\mathbb{R}_{\geq 0}$ 有
+            $$
+            T\left[f(\cdot)\right](t)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 f(x)\exp{\left(-\frac{(t-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall t\in\mathbb{R}
+            $$
+            其中 $T\left[f(\cdot)\right]$ 表示函数 $f$ 经过 $T$ 变换得到的函数。
+
+            容易验证 $T$ 满足线性性，即：
+            \begin{asparaenum}
+                \item 对可积函数 $f,g$ 有 $T\left[f(\cdot)+g(\cdot)\right]=T\left[f(\cdot)\right]+T\left[g(\cdot)\right]$
+                \item 对可积函数 $f$ 和常数 $c$ 有 $T\left[c\cdot f(\cdot)\right]=c\cdot T\left[f(\cdot)\right]$
+            \end{asparaenum}
+
+            借助随机变量的特征函数可以证明 $T$ 为单射，从而 $T$ 的逆变换 $T^{-1}$ 是良定义的。由 $T$ 的线性性，又可以推得 $T^{-1}$ 同样满足线性性。
+
+    \subsection{消除初赛对期望值分布的影响}\label{sec:analysisOnPreliminaryRound}
