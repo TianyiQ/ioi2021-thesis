@@ -528,7 +528,9 @@
 
     由此得到的期望值分布仍不是真实的结果，因为联赛初赛在此之前已经筛选掉了一部分选手。对这一影响的处理是\ref{sec:analysisOnPreliminaryRound}小节的任务。
 
-    \subsection{对复赛分数数据的获取、加工和拟合}\label{sec:dataPreprocessingOfNOIP}
+    本节中会多次对现实情况作近似、作假设，于是也会不可避免地带来可观的误差。因此，本节的目标旨在估计而非精准计算，所得的结果仅能反映趋势而不保证精确。
+
+    \subsection{复赛分数数据的获取、加工和拟合}\label{sec:dataPreprocessingOfNOIP}
 
         数据来自以下6场比赛：
         \begin{asparaitem}
@@ -589,9 +591,11 @@
 
         经过上述加工后，我们得到了26907个落在$[0.2,1]$之中的分数数据。由命题\ref{prop:scoreDistributionMeaning}，这些数据应当服从 $\bm{C}_A$ 所描述的概率分布。
         
-        受数据限制，我们暂时只关心 $[0.2,1]$ 这一分数区间上的分布情况。即我们要确定函数 $F:\left[0.2,1\right]\to\mathbb{R}_{\geq 0}$ ，满足在任何一个区间 $\left[a,b\right]$ 上，$F$ 的定积分在数值上约等于：落在$\left[a,b\right]$中的分数数值个数，与数值总个数26907的比值。注意到在$F$和$\bm{C}_A$之间有这一关系：$$F(t)=\bm{C}_A(t)\Big/{\displaystyle\int\limits_{0.2}^1 \bm{C}_A(x)\mathrm{d}x},\quad\forall t\in[0.2,1]$$
+        受数据限制，我们暂时只关心 $[0.2,1]$ 这一分数区间上的分布情况。即我们要确定函数 $F:\left[0.2,1\right]\to\mathbb{R}_{\geq 0}$ ，满足在任何一个区间 $\left[a,b\right]$ 上，$F$ 的定积分在数值上约等于：落在$\left[a,b\right]$中的分数数值个数，与数值总个数26907的比值。注意到在$F$和$\bm{C}_A$之间有这一关系：$$F(t)=\bm{C}_A(t)\big/{\displaystyle\int\limits_{0.2}^1 \bm{C}_A(x)\mathrm{d}x},\quad\forall t\in[0.2,1]$$
 
-        观察这些数据，可以发现数值的分布左侧（即靠近$0.2$一侧）稠密、右侧（即靠近$1$一侧）稀疏，于是尝试用递降的多项式函数、对数函数等常见函数，以及指数分布、截尾正态分布等“向左倾斜”的常见概率分布来拟合之。实验发现使用对数函数的拟合效果大幅好于其他方式，以下将描述对数函数的拟合过程和结果。
+        \vspace{1.5ex}
+
+        观察分数数据，可以发现数值的分布左侧（即靠近$0.2$一侧）稠密、右侧（即靠近$1$一侧）稀疏，于是尝试用递降的多项式函数、对数函数等常见函数，以及截尾指数分布、截尾正态分布等“向左倾斜”的常见概率分布来拟合之。实验发现使用对数函数的拟合效果大幅好于其他方式，以下将描述对数函数的拟合过程和结果。
 
         \begin{enumerate}[leftmargin=6em]
             \begin{samepage}
@@ -622,15 +626,65 @@
             
     \subsection{计算期望值分布}\label{sec:calculatingXfromC}
 
-        这一小节将计算理想比赛 $A$ 的期望值分布。其中，\ref{sec:assumptionsOnPreliminaryRound}小节将给出关于初赛的几个假设；第\ref{sec:estimationOfOverallDistribution}节的其余部分都将依赖于这些假设。\ref{sec:parameterOfDeltaDistribution}小节将计算理想比赛 $A$ 的偏移量分布的标准差，以为\ref{sec:calculatingXofSecondRound}小节中 $A$ 的期望值分布的计算做好准备。
+        这一小节将计算理想比赛 $A$ 的期望值分布。其中，\ref{sec:dataOfPreliminaryRound}小节将给出初赛分数数据的来源，\ref{sec:assumptionsOnPreliminaryRound}小节将结合这些数据给出关于初赛的几个假设；第\ref{sec:estimationOfOverallDistribution}节的其余部分都将依赖于这些假设。\ref{sec:parameterOfDeltaDistribution}小节将计算理想比赛 $A$ 的偏移量分布的标准差，以为\ref{sec:calculatingXofSecondRound}小节中 $A$ 的期望值分布的计算做好准备。
 
-        \subsubsection{有关初赛的几个假设}\label{sec:assumptionsOnPreliminaryRound}
+        \subsubsection{初赛分数数据的获取}\label{sec:dataOfPreliminaryRound}
+
+            分数数据采用NOIP2018初赛北京赛区的成绩。该场比赛共781人获得非零分数，其中417人晋级复赛并获得非零分数；该场比赛满分100分，最高分96分，晋级分数线约为40分。全部数据获取自官方网站上的成绩公示。
+
+            采用该场比赛的原因：后续分析需要分数表上包含选手姓名；而笔者所能找到的其他年份、其他省市的成绩公示，均未包含这一信息。
+
+            知道了选手姓名，我们就可以查询该名选手在NOIP2018复赛中的得分。通过这种方式，我们获得了417名晋级者的初赛和复赛分数。
+
+        \subsubsection{关于初赛的几个假设}\label{sec:assumptionsOnPreliminaryRound}
+
+            不同于复赛，信息学联赛的初赛是分省考试、分省排名的，这会给本文的分析带来很大困难。为了规避这一问题，我们作如下假设：
+
+            \begin{assumption}
+                每一年的联赛初赛为全国统一考试、统一排名，全国范围内分数最高的若干名选手晋级复赛。
+
+                \label{ass:preliminaryRoundsOfAllProvincesUnite}
+            \end{assumption}
+
+            作出这一假设，意味着忽略不同省市间选手水平上的差异，并用全国整体的选手水平和竞争激烈程度来代替之。
+
+            \vspace{1.5ex}
+
+            在给出下一个假设前，先对2018北京初赛的分数做一点分析。
+
+            \begin{asparaenum}[\bfseries{步骤} 1.]
+                \item 将417名晋级选手按初赛分数分组：分数在$[30,40)$中的、在$[40,50)$中的、……、在$[90,100)$中的，分别分为一组，共计7组。
+                \item 对每一组计算初赛平均分和复赛平均分。
+                \item 对每一组，以复赛平均分为横坐标、初赛平均分为纵坐标，将数据点画在二维平面上，并将这些数据点连成折线图。
+            \end{asparaenum}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingAvgScores.pdf}
+                \caption{平均分折线图}
+                \label{fig:plottingAvgScores}
+            \end{figure}
+
+            所得的折线图如图\ref{fig:plottingAvgScores}所示。可以看到，这些数据点近似地连成一条直线；这提示我们，初赛分数与复赛分数之间存在一个线性的对应关系。
+            
+            基于这一观察，我们作出如下假设：
+
+            \begin{assumption}
+                联赛初赛\textbf{在取参赛人群为晋级复赛的全体选手后}所对应的理想比赛，与联赛复赛所对应的理想比赛（即理想比赛 $A$ ）缩放等价。
+
+                \label{ass:equivalenceBetweenTwoRounds}
+            \end{assumption}
+
+            关于这一假设需要作几点说明：
+            \begin{asparaenum}
+                \item 
+            \end{asparaenum}
 
         \subsubsection{计算偏移量分布的参数}\label{sec:parameterOfDeltaDistribution}
 
-        \subsubsection{计算复赛的期望值分布}\label{sec:calculatingXofSecondRound}
+        \subsubsection{计算期望值分布}\label{sec:calculatingXofSecondRound}
 
-            上一小节中得到了 $\bm{C}_A(x)$ 的表达式；这一小节将由此计算 $\bm{X}_A(x)$ 的表达式。$\bm{X}_A(x)$的闭合形式很可能并不存在，所以将用级数展开的方式来给出结果；并且由于偏移量分布函数 $\bm{\Delta}_A$ 的参数尚未确定，得到的表达式也将含有参数。
+            在\ref{sec:dataPreprocessingOfNOIP}小节中得到了 $\bm{C}_A(x)$ 的表达式；这一小节将由此计算 $\bm{X}_A(x)$ 的表达式。$\bm{X}_A(x)$的闭合形式很可能并不存在，所以将用级数展开的方式来给出结果；并且由于偏移量分布函数 $\bm{\Delta}_A$ 的参数尚未确定，得到的表达式也将含有参数。
 
             由假设\ref{ass:simplicityOfCodingContests}，$A$是简单理想比赛；又根据命题\ref{prop:scoreDistributionInSimpleContest}，可从$\bm{X}_A$和$\bm{\Delta}_A$计算出$\bm{C}_A$ 。这一小节将给出从 $\bm{C}_A$ 和 $\bm{\Delta}_A$ 逆推出 $\bm{X}_A$ 的方法。
 
