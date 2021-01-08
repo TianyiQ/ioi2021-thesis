@@ -289,7 +289,7 @@
 
             证明显然，这里略去。
 
-    \subsection{几个关键的假设}
+    \subsection{几个关键的假设}\label{sec:keyAssumptions}
 
         为了使得后续分析成为可能，我们还需要对真实情况作一些近似处理。近似处理的具体方式由本小节的几个假设给出。
 
@@ -524,9 +524,7 @@
 
     选手的“水平”是一个模糊的概念；为了将其量化，我们将用一名选手在联赛复赛中的期望分数来衡量这名选手的水平。
 
-    虽然由假设\ref{ass:equivalenceBetweenCodingContests}，不同年份的联赛复赛（所对应的理想比赛）是缩放等价的；但它们毕竟不相同，因此“在联赛复赛中的期望分数”这一概念需要澄清。\ref{sec:dataPreprocessingOfNOIP}小节将处理这一问题，并完成对复赛分数数据的初步分析。接着，\ref{sec:calculatingXfromC}小节将从分数数据中，得到复赛（所对应的理想比赛）的期望值分布的表达式。
-
-    由此得到的期望值分布仍不是真实的结果，因为联赛初赛在此之前已经筛选掉了一部分选手。对这一影响的处理是\ref{sec:analysisOnPreliminaryRound}小节的任务。
+    虽然由假设\ref{ass:equivalenceBetweenCodingContests}，不同年份的联赛复赛（所对应的理想比赛）是缩放等价的；但它们毕竟不相同，因此“在联赛复赛中的期望分数”这一概念需要澄清。\ref{sec:dataPreprocessingOfNOIP}小节将处理这一问题，并完成对复赛分数数据的初步分析。接着，\ref{sec:analysisOfBothRounds}小节将从分数数据中，得到复赛在去除了初赛的筛选所带来的影响后，其（对应的理想比赛的）分数分布函数的表达式。最后，\ref{sec:calculatingXofSecondRound}小节将从分数分布计算出对应的期望值分布，这一分布即可体现全国选手整体水平的分布情况。
 
     本节中会多次对现实情况作近似、作假设，于是也会不可避免地带来可观的误差。因此，本节的目标旨在估计而非精准计算，所得的结果仅能反映趋势而不保证精确。
 
@@ -624,9 +622,9 @@
             \label{prop:scoreDistributionOfStandardizedNoip}
         \end{proposition}
             
-    \subsection{计算期望值分布}\label{sec:calculatingXfromC}
+    \subsection{结合初赛的分析}\label{sec:analysisOfBothRounds}
 
-        这一小节将计算理想比赛 $A$ 的期望值分布。其中，\ref{sec:dataOfPreliminaryRound}小节将给出初赛分数数据的来源，\ref{sec:assumptionsOnPreliminaryRound}小节将结合这些数据给出关于初赛的几个假设；第\ref{sec:estimationOfOverallDistribution}节的其余部分都将依赖于这些假设。\ref{sec:parameterOfDeltaDistribution}小节将计算理想比赛 $A$ 的偏移量分布的标准差，以为\ref{sec:calculatingXofSecondRound}小节中 $A$ 的期望值分布的计算做好准备。
+        这一小节将对于复赛所对应的理想比赛 $A$ ，在去除了初赛的筛选性所带来的影响后，计算所得的新的理想比赛（记为 $A^\prime$ ）的分数分布函数。其中，\ref{sec:dataOfPreliminaryRound}小节将给出初赛分数数据的来源，\ref{sec:assumptionsOnPreliminaryRound}小节将结合这些数据给出关于初赛的几个假设；第\ref{sec:estimationOfOverallDistribution}节的其余部分都将依赖于这些假设。\ref{sec:parameterOfDeltaDistribution}小节将计算初复赛（所对应理想比赛）的偏移量分布的标准差，以为\ref{sec:counteringPreliminaryRound}小节中 $\bm{C}_{A^\prime}$ 的计算做好准备。
 
         \subsubsection{初赛分数数据的获取}\label{sec:dataOfPreliminaryRound}
 
@@ -646,7 +644,7 @@
                 \label{ass:preliminaryRoundsOfAllProvincesUnite}
             \end{assumption}
 
-            作出这一假设，意味着忽略不同省市间选手水平上的差异，并用全国整体的选手水平和竞争激烈程度来代替之。
+            作出这一假设，意味着忽略不同省市间选手水平和竞争激烈程度上的差异，并用全国整体的选手水平和竞争激烈程度来代替之。
 
             \vspace{1.5ex}
 
@@ -670,46 +668,52 @@
             基于这一观察，我们作出如下假设：
 
             \begin{assumption}
-                联赛初赛\textbf{在取参赛人群为晋级复赛的全体选手后}所对应的理想比赛，与联赛复赛所对应的理想比赛（即理想比赛 $A$ ）缩放等价。
+                联赛初赛\textbf{在取参赛人群为晋级复赛的全体选手后}所对应的理想比赛，与联赛复赛所对应的理想比赛缩放等价。
 
                 \label{ass:equivalenceBetweenTwoRounds}
             \end{assumption}
 
             关于这一假设需要作几点说明：
             \begin{asparaenum}
-                \item 
+                \item \ref{sec:keyAssumptions}小节中，我们在为假设\ref{ass:equivalenceBetweenCodingContests}予以辩护时，断言了“一名选手的水平是固定的，不会随比赛的改变而改变”。但是，由于考察内容的不同，一名选手在初赛和复赛中的能力差异可能较大，故上述断言在将初赛加入考虑范围后似乎不再成立。
+                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep2} 为了使前述断言仍然成立，在\ref{sec:analysisOfBothRounds}小节内，我们需暂时改变命题\ref{def:realIdealCorrespondence}中“期望得分”这一概念的所指，将其改为：一名选手在初赛、复赛中（在按最高分和标准差折算后）期望分数的平均值。这会改变从现实比赛构造理想比赛的方式，并使得初、复赛所对应理想比赛的期望值分布和偏移量分布发生变化，变化后初、复赛所对应的理想比赛分别记作 $F_1,F_2$ （ $F_2$ 对应于变化前的 $A$ ）。显然，此时 $F_1,F_2$ 的期望值分布在经过缩放后是相同的。
+                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep3} 这样更改后，复赛作为现实比赛（记为 $B$ ），它在命题\ref{def:realIdealCorrespondence}中定义的随机变量$\Delta_B$的值也发生了变化。原先$\Delta_B$的取值等于选手实际表现与真实能力（即期望表现）的差；现在它的值还要在此基础上加上选手在复赛单项上的能力与初、复赛综合能力的差。但是，只要“单项能力减综合能力”这一随机变量服从正态分布，新的$\Delta_B$也一定服从正态分布——因为服从正态分布的独立随机变量之和依然服从正态分布。另一方面，假设初赛在原先定义下的随机变量$\Delta$服从正态分布，则对初赛可作与刚才类似的论证。
+                \item 关于 $F_1,F_2$ 间的缩放等价性，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep2}条对期望值分布的缩放等价予以了说明，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep3}条对偏移量分布的缩放等价予以了说明。需要注意，由于我们对概念的修改，关于 $F_1,F_2$ 的期望值分布、偏移量分布所作的一切讨论，在\ref{sec:analysisOfBothRounds}小节之外均没有意义。但是 $F_1,F_2$ 的分数分布不会受这一修改的影响，故本节计算出的分数分布函数会在后续分析中直接使用。
             \end{asparaenum}
 
         \subsubsection{计算偏移量分布的参数}\label{sec:parameterOfDeltaDistribution}
 
-        \subsubsection{计算期望值分布}\label{sec:calculatingXofSecondRound}
+        \subsubsection{消除初赛对分数分布的影响}\label{sec:counteringPreliminaryRound}
 
-            在\ref{sec:dataPreprocessingOfNOIP}小节中得到了 $\bm{C}_A(x)$ 的表达式；这一小节将由此计算 $\bm{X}_A(x)$ 的表达式。$\bm{X}_A(x)$的闭合形式很可能并不存在，所以将用级数展开的方式来给出结果；并且由于偏移量分布函数 $\bm{\Delta}_A$ 的参数尚未确定，得到的表达式也将含有参数。
 
-            由假设\ref{ass:simplicityOfCodingContests}，$A$是简单理想比赛；又根据命题\ref{prop:scoreDistributionInSimpleContest}，可从$\bm{X}_A$和$\bm{\Delta}_A$计算出$\bm{C}_A$ 。这一小节将给出从 $\bm{C}_A$ 和 $\bm{\Delta}_A$ 逆推出 $\bm{X}_A$ 的方法。
+    \subsection{从分数分布计算期望值分布}\label{sec:calculatingXofSecondRound}
 
-            根据定理\ref{thm:normalityOfOffsetsDistribution}，存在 $\sigma>0$ 使得
-            $$
-            \bm{\Delta}_A(\delta)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{\delta^2}{2\sigma^2}\right)},\quad\forall \delta\in\mathbb{R}
-            $$
-            进而由命题\ref{prop:scoreDistributionInSimpleContest}得
-            \begin{equation}
-                \bm{C}_A(s)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 \bm{X}_A(x)\exp{\left(-\frac{(s-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
-                \label{formula:fromXtoC}
-            \end{equation}
+        %% 本段需要对变量、用词、结构作大量修改
 
-            为了便于表述，记变换 $T$ 将\eqref{formula:fromXtoC}式中的函数 $\bm{X}_A$ 映射到 $\bm{C}_A$ 。换句话说，对任何可积函数 $f:[0,1]\to\mathbb{R}_{\geq 0}$ 有
-            $$
-            T\left[f(\cdot)\right](t)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 f(x)\exp{\left(-\frac{(t-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall t\in\mathbb{R}
-            $$
-            其中 $T\left[f(\cdot)\right]$ 表示函数 $f$ 经过 $T$ 变换得到的函数。
+        在\ref{sec:counteringPreliminaryRound}小节中得到了 $\bm{C}_A(x)$ 的表达式；这一小节将由此计算 $\bm{X}_A(x)$ 的表达式。$\bm{X}_A(x)$的闭合形式很可能并不存在，所以将用级数展开的方式来给出结果；并且由于偏移量分布函数 $\bm{\Delta}_A$ 的参数尚未确定，得到的表达式也将含有参数。
 
-            容易验证 $T$ 满足线性性，即：
-            \begin{asparaenum}
-                \item 对可积函数 $f,g$ 有 $T\left[f(\cdot)+g(\cdot)\right]=T\left[f(\cdot)\right]+T\left[g(\cdot)\right]$
-                \item 对可积函数 $f$ 和常数 $c$ 有 $T\left[c\cdot f(\cdot)\right]=c\cdot T\left[f(\cdot)\right]$
-            \end{asparaenum}
+        由假设\ref{ass:simplicityOfCodingContests}，$A$是简单理想比赛；又根据命题\ref{prop:scoreDistributionInSimpleContest}，可从$\bm{X}_A$和$\bm{\Delta}_A$计算出$\bm{C}_A$ 。这一小节将给出从 $\bm{C}_A$ 和 $\bm{\Delta}_A$ 逆推出 $\bm{X}_A$ 的方法。
 
-            借助随机变量的特征函数可以证明 $T$ 为单射，从而 $T$ 的逆变换 $T^{-1}$ 是良定义的。由 $T$ 的线性性，又可以推得 $T^{-1}$ 同样满足线性性。
+        根据定理\ref{thm:normalityOfOffsetsDistribution}，存在 $\sigma>0$ 使得
+        $$
+        \bm{\Delta}_A(\delta)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{\delta^2}{2\sigma^2}\right)},\quad\forall \delta\in\mathbb{R}
+        $$
+        进而由命题\ref{prop:scoreDistributionInSimpleContest}得
+        \begin{equation}
+            \bm{C}_A(s)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 \bm{X}_A(x)\exp{\left(-\frac{(s-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
+            \label{formula:fromXtoC}
+        \end{equation}
 
-    \subsection{消除初赛对期望值分布的影响}\label{sec:analysisOnPreliminaryRound}
+        为了便于表述，记变换 $T$ 将\eqref{formula:fromXtoC}式中的函数 $\bm{X}_A$ 映射到 $\bm{C}_A$ 。换句话说，对任何可积函数 $f:[0,1]\to\mathbb{R}_{\geq 0}$ 有
+        $$
+        T\left[f(\cdot)\right](t)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 f(x)\exp{\left(-\frac{(t-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall t\in\mathbb{R}
+        $$
+        其中 $T\left[f(\cdot)\right]$ 表示函数 $f$ 经过 $T$ 变换得到的函数。
+
+        容易验证 $T$ 满足线性性，即：
+        \begin{asparaenum}
+            \item 对可积函数 $f,g$ 有 $T\left[f(\cdot)+g(\cdot)\right]=T\left[f(\cdot)\right]+T\left[g(\cdot)\right]$
+            \item 对可积函数 $f$ 和常数 $c$ 有 $T\left[c\cdot f(\cdot)\right]=c\cdot T\left[f(\cdot)\right]$
+        \end{asparaenum}
+
+        借助随机变量的特征函数可以证明 $T$ 为单射，从而 $T$ 的逆变换 $T^{-1}$ 是良定义的。由 $T$ 的线性性，又可以推得 $T^{-1}$ 同样满足线性性。
