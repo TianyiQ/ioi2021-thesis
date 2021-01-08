@@ -628,7 +628,7 @@
 
         \subsubsection{初赛分数数据的获取}\label{sec:dataOfPreliminaryRound}
 
-            分数数据采用NOIP2018初赛北京赛区的成绩。该场比赛共781人获得非零分数，其中417人晋级复赛并获得非零分数；该场比赛满分100分，最高分96分，晋级分数线约为40分。全部数据获取自官方网站上的成绩公示。
+            分数数据采用NOIP2018初赛北京赛区的成绩。该场比赛共781人获得非零分数，其中417人晋级复赛并获得非零分数；该场比赛满分100分，最高分96分，晋级分数线约为40分；全国最高分为100分。全部数据获取自官方网站上的成绩公示。
 
             采用该场比赛的原因：后续分析需要分数表上包含选手姓名；而笔者所能找到的其他年份、其他省市的成绩公示，均未包含这一信息。
 
@@ -668,20 +668,64 @@
             基于这一观察，我们作出如下假设：
 
             \begin{assumption}
-                联赛初赛\textbf{在取参赛人群为晋级复赛的全体选手后}所对应的理想比赛，与联赛复赛所对应的理想比赛缩放等价。
+                联赛初赛\textbf{在取参赛人群为实际晋级复赛的全体选手后}所对应的理想比赛，与联赛复赛所对应的理想比赛缩放等价。
 
                 \label{ass:equivalenceBetweenTwoRounds}
             \end{assumption}
 
-            关于这一假设需要作几点说明：
+            注意：“取参赛人群为实际晋级复赛的全体选手”这一规定，只限制了参赛人群，而并未要求这些选手在理想比赛中的分数也一定得达到晋级的标准。也就是说，虽然我们只取那些在现实中达到了晋级分数线的选手，但在构造对应的理想比赛时，我们忽略现实中发生了什么，仍然只考察每名选手分数波动的概率分布和他的期望分数。
+
+            \vspace{1.5ex}
+
+            关于这一假设需要作几点说明：（下面这一段说明中若提到“初赛”，则默认取参赛人群为实际晋级复赛的全体选手）
             \begin{asparaenum}
                 \item \ref{sec:keyAssumptions}小节中，我们在为假设\ref{ass:equivalenceBetweenCodingContests}予以辩护时，断言了“一名选手的水平是固定的，不会随比赛的改变而改变”。但是，由于考察内容的不同，一名选手在初赛和复赛中的能力差异可能较大，故上述断言在将初赛加入考虑范围后似乎不再成立。
-                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep2} 为了使前述断言仍然成立，在\ref{sec:analysisOfBothRounds}小节内，我们需暂时改变命题\ref{def:realIdealCorrespondence}中“期望得分”这一概念的所指，将其改为：一名选手在初赛、复赛中（在按最高分和标准差折算后）期望分数的平均值。这会改变从现实比赛构造理想比赛的方式，并使得初、复赛所对应理想比赛的期望值分布和偏移量分布发生变化，变化后初、复赛所对应的理想比赛分别记作 $F_1,F_2$ （ $F_2$ 对应于变化前的 $A$ ）。显然，此时 $F_1,F_2$ 的期望值分布在经过缩放后是相同的。
-                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep3} 这样更改后，复赛作为现实比赛（记为 $B$ ），它在命题\ref{def:realIdealCorrespondence}中定义的随机变量$\Delta_B$的值也发生了变化。原先$\Delta_B$的取值等于选手实际表现与真实能力（即期望表现）的差；现在它的值还要在此基础上加上选手在复赛单项上的能力与初、复赛综合能力的差。但是，只要“单项能力减综合能力”这一随机变量服从正态分布，新的$\Delta_B$也一定服从正态分布——因为服从正态分布的独立随机变量之和依然服从正态分布。另一方面，假设初赛在原先定义下的随机变量$\Delta$服从正态分布，则对初赛可作与刚才类似的论证。
-                \item 关于 $F_1,F_2$ 间的缩放等价性，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep2}条对期望值分布的缩放等价予以了说明，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep3}条对偏移量分布的缩放等价予以了说明。需要注意，由于我们对概念的修改，关于 $F_1,F_2$ 的期望值分布、偏移量分布所作的一切讨论，在\ref{sec:analysisOfBothRounds}小节之外均没有意义。但是 $F_1,F_2$ 的分数分布不会受这一修改的影响，故本节计算出的分数分布函数会在后续分析中直接使用。
+                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep2} 为了使前述断言仍然成立，在\ref{sec:analysisOfBothRounds}小节内，我们需暂时改变命题\ref{def:realIdealCorrespondence}中“期望得分”这一概念的所指，将其改为：一名选手在初赛、复赛中（在按最高分和标准差折算后）期望分数的平均值。这会改变从现实比赛构造理想比赛的方式，并使得初、复赛所对应理想比赛的期望值分布和偏移量分布发生变化，变化后初、复赛所对应的理想比赛分别记作 $F_1,F_2$ （ $F_2$ 在各方面对应于变化前的 $A$ ）。显然，此时 $F_1,F_2$ 的期望值分布在经过缩放后是相同的。
+                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep3} 这样更改后，复赛作为现实比赛（记为 $B$ ），它在命题\ref{def:realIdealCorrespondence}中定义的随机变量$\Delta_B$的值也发生了变化。原先$\Delta_B$的取值等于选手实际表现与真实能力（即期望表现）的差；现在它的值还要在此基础上加上选手在复赛单项上的能力与初、复赛综合能力的差。但是，只要“单项能力减综合能力”这一随机变量服从正态分布，新的$\Delta_B$也一定服从正态分布——因为服从正态分布的独立随机变量之和依然服从正态分布。另一方面，假设初赛在原先定义下的随机变量$\Delta$服从正态分布，则对初赛可做与刚才类似的论证。
+                \item 关于 $F_1,F_2$ 间的缩放等价性，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep2}条对期望值分布的缩放等价予以了说明，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep3}条对偏移量分布的缩放等价予以了说明。需要注意，由于我们对概念的修改，关于 $F_1,F_2$ 的期望值分布、偏移量分布所作的一切讨论，在\ref{sec:analysisOfBothRounds}小节之外均没有意义。但是 $F_1,F_2$ 的分数分布不会受这一修改的影响，故\ref{sec:analysisOfBothRounds}小节计算出的分数分布函数会在后续分析中直接使用。
             \end{asparaenum}
 
         \subsubsection{计算偏移量分布的参数}\label{sec:parameterOfDeltaDistribution}
+
+            先前已经说明，理想比赛 $F_2$ 的偏移量分布为正态分布 $N(0,\sigma^2)$ 。这一小节将基于\ref{sec:dataOfPreliminaryRound}小节中获得的数据，来测量该分布的标准差 $\sigma$ 。
+
+            \vspace{1.5ex}
+
+            容易想到以下测量方式：
+            \begin{asparaenum}[\bfseries{步骤} 1.]
+                \item 对 $F_1$ 的分数作线性变换，使得变换后它的期望值、偏移量分布与 $F_2$ 相同。
+                \item 对先前提到的417名选手，计算每名选手在 $F_2$ 中的分数和在变换后的 $F_1$ 中的分数之差。
+                \item 这417个差值应该服从正态分布，那么计算这些值的标准差即可。
+            \end{asparaenum}
+
+            但一个问题是，这417个差值并非真正服从正态分布。如果一名选手考出了大幅低于自己期望分数的分数，那么他进入这417人之列的机会就会大大降低；换句话说，这417个数据是被人为选择出来的，而且选择的方式倾向于实际分数高于期望分数的选手，因此这些数据不能代表整体的分布。
+
+            \vspace{1.5ex}
+
+            假如我们召集那些没有晋级的选手，让他们也参加复赛考试并记录他们的分数，再把这些分数和原有的417个数据汇总，就能获得完整、有代表性的数据。但实际上，我们也可以“假装”已经获得了未晋级选手的数据，并对全体数据进行分析；如果这个过程中“碰巧”没有用到任何一个未晋级选手的数据，我们事实上就在只凭借已有的417个数据的情况下完成了测量。以下给出一个这样的测量方式。
+
+            \begin{asparaenum}[\bfseries{步骤} 1.]
+                \item \label{step:measureSigmaStep1} 对 $F_1$ 的分数作线性变换，使得变换后它的期望值、偏移量分布与 $F_2$ 相同。
+                \item 对先前提到的417名选手，计算每名选手在变换后的 $F_1$ 中的分数和在 $F_2$ 中的分数之差。（前者减后者）
+                \item \label{step:measureSigmaStep3} 取出这些差值中前35大的值，则这些值可以视为：某一组服从正态分布的781个数（781即初赛参赛人数），其中前35大的值。通过测量这些值可以得到正态分布的标准差。
+            \end{asparaenum}
+
+            \vspace{1.5ex}
+
+            在第\ref{step:measureSigmaStep3}步中，之所以说这35个值为781个数中的最大值，是因为：
+            \begin{asparaitem}
+                \item 计算发现第35大的差值约等于$0.45$，而初赛晋级分数线在经过变换后约等于$0.23$。又因为复赛分数不可能小于$0$，所以任何一个未达到晋级分数线的选手，其两试分数差值不可能超过$0.23$，更不可能达到$0.45$。（计算发现这35人中最低的初赛分数为60分，比晋级分数线高出20分）
+                \item 因此，除了417名晋级选手之外，其余选手不可能进入35人之列，故只考虑已有的417个数据是充分的。
+            \end{asparaitem}
+
+            \vspace{1.5ex}
+
+            在前述过程的步骤\ref{step:measureSigmaStep1}中需要作分数变换，以下给出具体步骤。
+            \begin{asparaenum}[\bfseries{步骤} 1.]
+                \item 对于复赛分数 $s\in [0,600]$ ，计算全国范围内高于 $s$ 的复赛分数个数 $c$ ，并将 $s$ 映射到 $t\in [0,1]$ ，满足 $f(x)=\log(x)$ 在 $(t,1]$ 上的定积分等于 $\frac {c+1}{N+1}$ ，其中 $N=8044$ 为复赛选手总数。这一映射方式保证了分数分布呈对数曲线，与命题\ref{prop:scoreDistributionOfStandardizedNoip}一致。
+                \item 计算北京初赛前200名的分数标准差 $\sigma_1$ ，并对映射后的复赛分数计算北京前200名的分数标准差 $\sigma_2$ 。然后对于初赛分数 $s\in [0,100]$ ，将其映射到 $1-(1-\frac {s}{100})\cdot\sigma_2/\frac{\sigma_1}{100}$ 。由命题\ref{prop:alphaAsQuotientOfStddev}，这一映射方式保证了映射后两个理想比赛相同。之所以只取前200名，是为了避开期望分数过于接近晋级分数线的选手；这些选手的分数是经过选择的（这些选手中实际分数大幅低于期望分数的将无法参加复赛），所以他们的数据需要剔除。
+            \end{asparaenum}
+
 
         \subsubsection{消除初赛对分数分布的影响}\label{sec:counteringPreliminaryRound}
 

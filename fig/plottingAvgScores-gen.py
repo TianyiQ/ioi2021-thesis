@@ -24,5 +24,6 @@ plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
 plot1 = plt.plot(x, y, 's-',label='分数段内的平均分',color='blue')
 plt.xlabel('复赛均分')
 plt.ylabel('初赛均分')
+plt.ylim(0,100)
 plt.legend(loc=0)
 plt.savefig(fname="plottingAvgScores.pdf",format="pdf")
