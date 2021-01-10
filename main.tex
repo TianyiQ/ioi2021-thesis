@@ -19,7 +19,7 @@
     \vspace{1.5ex}
 
     \begin{samepage}
-        本文中用到的全部数据可以在以下网址下载：\nobreak
+        本文中用到的全部数据和计算程序可以在以下网址下载：\nobreak
         \begin{compactitem}
             \item {\scriptsize\url{https://files.cnblogs.com/files/turboboost/qty-thesis-statdata.zip}}\nobreak
             \item {\scriptsize\url{https://github.com/TianyiQ/ioi2021-thesis/blob/main/qty-thesis-statdata.zip}}
@@ -583,7 +583,7 @@
 
         \vspace{1.5ex}
 
-        本节中我们约定使用理想比赛 $A$ 作为衡量选手水平的标尺，也就是说我们将用一名选手在 $A$ 中的期望分数，来代表该名选手的水平。
+        本节中我们约定使用理想比赛 $A$ 作为衡量选手水平的标尺，也就是说我们将用一名选手在 $A$ 中的期望分数，来代表该名选手的水平。后文中如果作为一个现实比赛提到“联赛复赛”，则默认指 $A$ 对应的现实比赛。
 
         \vspace{1.5ex}
 
@@ -644,7 +644,7 @@
                 \label{ass:preliminaryRoundsOfAllProvincesUnite}
             \end{assumption}
 
-            作出这一假设，意味着忽略不同省市间选手水平和竞争激烈程度上的差异，并用全国整体的选手水平和竞争激烈程度来代替之。
+            作出这一假设，意味着忽略不同省市间选手水平和竞争激烈程度上的差异，并用全国整体的选手水平和竞争激烈程度来代替之。即使如此，我们一般也并不能直接用一个地区的数据来“代表”全国的数据，而是只有在所研究的量与地域没有明显关联时（例如\ref{sec:parameterOfDeltaDistribution}小节中研究同一名选手的初赛得分与复赛得分间的关系）才能这样做。
 
             \vspace{1.5ex}
 
@@ -668,7 +668,7 @@
             基于这一观察，我们作出如下假设：
 
             \begin{assumption}
-                联赛初赛\textbf{在取参赛人群为实际晋级复赛的全体选手后}所对应的理想比赛，与联赛复赛所对应的理想比赛缩放等价。
+                记现实比赛 $B_1$ 为联赛初赛，\textbf{取参赛人群为实际晋级复赛的全体选手}；记现实比赛 $B_2$ 为联赛复赛；则 $B_1,B_2$ 对应的理想比赛缩放等价。
 
                 \label{ass:equivalenceBetweenTwoRounds}
             \end{assumption}
@@ -677,17 +677,29 @@
 
             \vspace{1.5ex}
 
-            关于这一假设需要作几点说明：（下面这一段说明中若提到“初赛”，则默认取参赛人群为实际晋级复赛的全体选手）
+            关于这一假设需要作几点说明：
             \begin{asparaenum}
-                \item \ref{sec:keyAssumptions}小节中，我们在为假设\ref{ass:equivalenceBetweenCodingContests}予以辩护时，断言了“一名选手的水平是固定的，不会随比赛的改变而改变”。但是，由于考察内容的不同，一名选手在初赛和复赛中的能力差异可能较大，故上述断言在将初赛加入考虑范围后似乎不再成立。
-                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep2} 为了使前述断言仍然成立，在\ref{sec:analysisOfBothRounds}小节内，我们需暂时改变命题\ref{def:realIdealCorrespondence}中“期望得分”这一概念的所指，将其改为：一名选手在初赛、复赛中（在按最高分和标准差折算后）期望分数的平均值。这会改变从现实比赛构造理想比赛的方式，并使得初、复赛所对应理想比赛的期望值分布和偏移量分布发生变化，变化后初、复赛所对应的理想比赛分别记作 $F_1,F_2$ （ $F_2$ 在各方面对应于变化前的 $A$ ）。显然，此时 $F_1,F_2$ 的期望值分布在经过缩放后是相同的。
-                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep3} 这样更改后，复赛作为现实比赛（记为 $B$ ），它在命题\ref{def:realIdealCorrespondence}中定义的随机变量$\Delta_B$的值也发生了变化。原先$\Delta_B$的取值等于选手实际表现与真实能力（即期望表现）的差；现在它的值还要在此基础上加上选手在复赛单项上的能力与初、复赛综合能力的差。但是，只要“单项能力减综合能力”这一随机变量服从正态分布，新的$\Delta_B$也一定服从正态分布——因为服从正态分布的独立随机变量之和依然服从正态分布。另一方面，假设初赛在原先定义下的随机变量$\Delta$服从正态分布，则对初赛可做与刚才类似的论证。
-                \item 关于 $F_1,F_2$ 间的缩放等价性，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep2}条对期望值分布的缩放等价予以了说明，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep3}条对偏移量分布的缩放等价予以了说明。需要注意，由于我们对概念的修改，关于 $F_1,F_2$ 的期望值分布、偏移量分布所作的一切讨论，在\ref{sec:analysisOfBothRounds}小节之外均没有意义。但是 $F_1,F_2$ 的分数分布不会受这一修改的影响，故\ref{sec:analysisOfBothRounds}小节计算出的分数分布函数会在后续分析中直接使用。
+                \item \ref{sec:keyAssumptions}小节中，我们在为假设\ref{ass:equivalenceBetweenCodingContests}予以辩护时，断言了“一名选手的水平是固定的，不会随比赛的改变而改变”。但是，由于考察内容的不同，一名选手在 $B_1$ 和 $B_2$ 中的能力差异可能较大，故上述断言在将初赛（即 $B_1$ ）加入考虑范围后似乎不再成立。
+                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep2} 为了使前述断言仍然成立，在\ref{sec:analysisOfBothRounds}小节内，我们需暂时改变命题\ref{def:realIdealCorrespondence}中“期望得分”这一概念的所指，将其改为：一名选手在 $B_1,B_2$ 中（在按最高分和标准差折算后）期望分数的平均值。这会改变从现实比赛构造理想比赛的方式，并使得 $B_1,B_2$ 所对应理想比赛的期望值分布和偏移量分布发生变化，变化后 $B_1,B_2$ 所对应的理想比赛分别记作 $F_1,F_2$ （所以 $A$ 和 $F_2$ 的区别，就是概念更改前和更改后的区别 ）。显然，此时 $F_1,F_2$ 的期望值分布在经过缩放后是相同的。
+                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep3} 这样更改后，$\Delta_{B_2}$的值也发生了变化。原先$\Delta_{B_2}$的取值等于选手实际表现与真实能力（即期望表现）的差；现在它的值还要在此基础上加上选手在复赛单项上的能力与初、复赛综合能力的差。但是，只要“单项能力减综合能力”这一随机变量服从正态分布，新的$\Delta_{B_2}$也一定服从正态分布——因为服从正态分布的独立随机变量之和依然服从正态分布。另一方面，假如在原先定义下的随机变量$\Delta_{B_1}$服从正态分布，则对新的 $\Delta_{B_1}$ 可做与刚才类似的论证。
+                \item 关于 $F_1,F_2$ 间的缩放等价性，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep2}条对期望值分布的缩放等价予以了说明，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep3}条对偏移量分布的缩放等价予以了说明；这些说明都有一些感性的成分，它们仅用作对假设\ref{ass:equivalenceBetweenTwoRounds}含义的澄清，而并非尝试对其予以证明。需要注意，由于我们对概念的修改，关于 $F_1,F_2$ 的期望值分布、偏移量分布所作的一切讨论，在\ref{sec:analysisOfBothRounds}小节之外均没有意义。但是 $F_1,F_2$ 的分数分布不会受这一修改的影响，故\ref{sec:analysisOfBothRounds}小节计算出的分数分布函数会在后续分析中直接使用。
             \end{asparaenum}
 
         \subsubsection{计算偏移量分布的参数}\label{sec:parameterOfDeltaDistribution}
 
             先前已经说明，理想比赛 $F_2$ 的偏移量分布为正态分布 $N(0,\sigma^2)$ 。这一小节将基于\ref{sec:dataOfPreliminaryRound}小节中获得的数据，来测量该分布的标准差 $\sigma$ 。
+
+            \vspace{1.5ex}
+
+            \begin{lemma}
+                独立随机变量 $X_1,X_2$ 分别服从分布 $N(0,\sigma_1^2),N(0,\sigma_2^2)$，则 $X_1+X_2$ 服从分布 $N(0,\sigma_1^2+\sigma_2^2)$ 。
+
+                \label{lem:stddevOfSumOfIndependentVars}
+            \end{lemma}
+
+            证明见维基百科相应条目\cite{wiki_sumOfNormVars}，这里不再重复。
+
+            由假设\ref{ass:equivalenceBetweenTwoRounds}，在对 $F_1$ 作线性的缩放变换 $T$ 之后，可以使其与 $F_2$ 相同；此时两者的偏移量分布均为 $N(0,\sigma^2)$ 。又注意到对现实比赛 $B_1,B_2$ ， $\Delta_{B_1},\Delta_{B_2}$ 应当是独立的（这里认为在定义\ref{def:realIdealCorrespondence}的步骤\ref{step:realToIdealStep3}中$B_1,B_2$共用同一个表示选手的随机变量 $p$ ），所以由引理\ref{lem:stddevOfSumOfIndependentVars}，$\Delta_{T\left[B_1\right]}+\Delta_{B_2}$ 服从正态分布 $N(0,2\sigma^2)$ 。因此，选手在 $T\left[F_1\right]$ 和 $F_2$ 中的分数之差，这一随机变量服从标准差为 $\sqrt{2}\sigma$ 的正态分布；只要测出它的标准差，即可得到 $\sigma$ 的取值。
 
             \vspace{1.5ex}
 
@@ -714,7 +726,7 @@
 
             在第\ref{step:measureSigmaStep3}步中，之所以说这35个值为781个数中的最大值，是因为：
             \begin{asparaitem}
-                \item 计算发现第35大的差值约等于$0.45$，而初赛晋级分数线在经过变换后约等于$0.23$。又因为复赛分数不可能小于$0$，所以任何一个未达到晋级分数线的选手，其两试分数差值不可能超过$0.23$，更不可能达到$0.45$。（计算发现这35人中最低的初赛分数为60分，比晋级分数线高出20分）
+                \item 计算发现第35大的差值约等于$0.28$，高于初赛晋级分数线经过变换后的值。又因为复赛分数不可能小于$0$，所以任何一个未达到晋级分数线的选手，其两试分数差值不可能达到$0.28$。（计算发现35人中最低的初赛分数为63分，比晋级分数线高出约20分）
                 \item 因此，除了417名晋级选手之外，其余选手不可能进入35人之列，故只考虑已有的417个数据是充分的。
             \end{asparaitem}
 
@@ -723,9 +735,44 @@
             在前述过程的步骤\ref{step:measureSigmaStep1}中需要作分数变换，以下给出具体步骤。
             \begin{asparaenum}[\bfseries{步骤} 1.]
                 \item 对于复赛分数 $s\in [0,600]$ ，计算全国范围内高于 $s$ 的复赛分数个数 $c$ ，并将 $s$ 映射到 $t\in [0,1]$ ，满足 $f(x)=\log(x)$ 在 $(t,1]$ 上的定积分等于 $\frac {c+1}{N+1}$ ，其中 $N=8044$ 为复赛选手总数。这一映射方式保证了分数分布呈对数曲线，与命题\ref{prop:scoreDistributionOfStandardizedNoip}一致。
-                \item 计算北京初赛前200名的分数标准差 $\sigma_1$ ，并对映射后的复赛分数计算北京前200名的分数标准差 $\sigma_2$ 。然后对于初赛分数 $s\in [0,100]$ ，将其映射到 $1-(1-\frac {s}{100})\cdot\sigma_2/\frac{\sigma_1}{100}$ 。由命题\ref{prop:alphaAsQuotientOfStddev}，这一映射方式保证了映射后两个理想比赛相同。之所以只取前200名，是为了避开期望分数过于接近晋级分数线的选手；这些选手的分数是经过选择的（这些选手中实际分数大幅低于期望分数的将无法参加复赛），所以他们的数据需要剔除。
+                \item 计算北京初赛前417名的分数标准差 $\sigma_1$ ，再对映射后的复赛分数计算北京选手（共417名）的分数标准差 $\sigma_2$ 。然后对于初赛分数 $s\in [0,100]$ ，将其映射到 $1-(1-\frac {s}{100})\cdot\sigma_2/\frac{\sigma_1}{100}$ 。由命题\ref{prop:alphaAsQuotientOfStddev}，这一映射方式保证了映射后两个理想比赛相同。
             \end{asparaenum}
 
+            \vspace{1.5ex}
+
+            设得到的35个差值按降序排列为 $d_1,\cdots,d_{35}$ ，考虑如何由此推断全体差值的标准差 $\sqrt{2}\sigma$ 。
+            
+            这里采用最大似然估计，即选取一个 $\sigma$ 以最大化：在全体差值服从 $N(0,2\sigma^2)$ 的条件下，测量得到 $d_1,\cdots,d_{35}$ 的概率。注意到这个概率实际上必定等于0，但可以通过取极限规避这一问题。下式给出最优的 $\sigma$ 的计算方式，其中 $u_{1},\cdots,u_{781}$ 表示随意排列的 $781$ 个差值，$v_{k}$ 表示 $u_{1},\cdots,u_{781}$ 中的第 $k$ 大值。
+
+            \begin{align*}
+                &\phantom{=\ }\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} \mathrm{Pr}\left[v_k\in\left[d_k-\epsilon,d_k+\epsilon\right],\forall 1\leq k\leq 35\right] \\
+                &=\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} \binom{781}{35}\cdot 35!\cdot\prod\limits_{k=1}^{35} \left(R_{2\sigma^2}(d_k+\epsilon)-R_{2\sigma^2}(d_k-\epsilon)\right)\cdot R_{2\sigma^2}(d_{35})^{746} \\
+                &=\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} (2\epsilon)^{-35}\cdot\prod\limits_{k=1}^{35} \left(R_{2\sigma^2}(d_k+\epsilon)-R_{2\sigma^2}(d_k-\epsilon)\right)\cdot R_{2\sigma^2}(d_{35})^{746} \\
+                &=\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} \prod\limits_{k=1}^{35} \frac{R_{2\sigma^2}(d_k+\epsilon)-R_{2\sigma^2}(d_k-\epsilon)}{2\epsilon}\cdot R_{2\sigma^2}(d_{35})^{746} \\
+                &=\argmax\limits_{\sigma\in\mathbb{R}_{>0}} \left(\prod\limits_{k=1}^{35} R^\prime_{2\sigma^2}(d_k)\right)\cdot R_{2\sigma^2}(d_{35})^{781-35} \\
+                &=\argmax\limits_{\sigma\in\mathbb{R}_{>0}} 746\cdot\log\left(R_{2\sigma^2}(d_{35})\right)+\sum\limits_{k=1}^{35} \log\left(P_{2\sigma^2}(d_k)\right) 
+            \end{align*}
+
+            至此，问题完全转化为一个最优化问题。最优化方法采用SciPy提供的BFGS算法的实现\cite{scipy_minimize}，算得$\sigma\approx 0.12224$。
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingNormalDistriOfDifference.pdf}
+                \caption{差值的分布情况}
+                \label{fig:distriOfDifference}
+            \end{figure}
+
+            图\ref{fig:distriOfDifference}中的橙色曲线展示了差值的概率分布，35条蓝色竖线表示实际测得最大的35个差值在其中的位置。
+
+            \begin{proposition}
+                $$
+                \bm{\Delta}_{T\left[F_1\right]}(t)=\bm{\Delta}_{F_2}(t)=P_{\sigma_F^2}(t)
+                $$
+                
+                其中“缩放变换” $T$ 满足 $T\left[F_1\right]=F_2$，常数 $\sigma_F$ 约等于 $0.12224$ ，$t$ 为任意实数。
+
+                \label{prop:deltaDistributionOfF2}
+            \end{proposition}
 
         \subsubsection{消除初赛对分数分布的影响}\label{sec:counteringPreliminaryRound}
 
@@ -761,3 +808,13 @@
         \end{asparaenum}
 
         借助随机变量的特征函数可以证明 $T$ 为单射，从而 $T$ 的逆变换 $T^{-1}$ 是良定义的。由 $T$ 的线性性，又可以推得 $T^{-1}$ 同样满足线性性。
+
+\begin{thebibliography}{9}
+    \bibitem{wiki_sumOfNormVars} 
+    Wikipedia: Sum of normally distributed random variables,
+    {\newline\scriptsize\url{https://en.wikipedia.org/wiki/Sum\_of\_normally\_distributed\_random\_variables}}
+
+    \bibitem{scipy_minimize} 
+    SciPy Documentation: scipy.optimize.minimize,
+    {\newline\scriptsize\url{https://docs.scipy.org/doc/scipy/reference/optimize.minimize-bfgs.html\#optimize-minimize-bfgs}}
+\end{thebibliography}
