@@ -74,7 +74,7 @@
         \begin{figure}
             \centering
             \begin{tikzcd}[column sep=large]
-                {} \arrow[r, ">100000"] & a \arrow[d, "20000"]                                     &     \\
+                {} \arrow[r, ">50000"] & a \arrow[d, "20000"]                                     &     \\
                                         & b \arrow[ld, "500"'] \arrow[d, "1000"] \arrow[rd, "500"] &     \\
                 d                       & c \arrow[d, "300"] \arrow[l, "300"]                      & efg \\
                                         & h \arrow[d, "70"]                                        &     \\
@@ -576,7 +576,7 @@
         \begin{asparaenum}[\bfseries{步骤} 1.]
             \item 将所有比赛中所有选手的分数除以当场比赛的最高分（也就是计算标准分；注意到最高分等于满分），用以代替原始分数。
             \item \label{step:noipDataRefinementStep2} 去除所有$<0.2$的分数。这是因为在这6场比赛中，获奖分数线与最高分的商的最大值为$0.2$；这意味着分数低于$0.2$的选手中有一部分未能获奖，于是这些选手中其余部分的数据也失去意义，因此一并剔除。
-            \item 对每场比赛计算分数标准差 $\sigma$ ，然后对分数作变换 $x\mapsto 1-\frac{1-x}{5.52\sigma}$ ，并用变换结果代替原分数。使用系数$5.52$的理由稍后说明。
+            \item 对每场比赛计算分数标准差 $\sigma$ ，然后对分数作变换 $R:x\mapsto 1-\frac{1-x}{5.52\sigma}$ ，并用变换结果代替原分数。使用系数$5.52$的理由稍后说明。
             \item 对每场比赛计算最低分，取所得的6个最低分的最大值$T$，并剔除所有$<T$的分数。这一步的理由与步骤\ref{step:noipDataRefinementStep2}中的类似：分数低于$T$的部分选手未能获奖，故将这些选手连同已获奖的那些一并剔除。计算可得 $T\approx 0.200$ ，与步骤\ref{step:noipDataRefinementStep2}中的阈值保持一致；这正是系数$5.52$的主要作用。
             \item 现在所有这些分数数据属于同一理想比赛 $A$ （满足 $A$ 与原先6个现实比赛所对应的理想比赛缩放等价），将它们汇集起来即可。注意到我们所取得的并非完整的分数数据，而只是$\geq 0.2$的那一部分分数。
         \end{asparaenum}
@@ -613,12 +613,12 @@
 
         图\ref{fig:fittingNoipScoresByLogCurve}展示了拟合的结果。可以看到全部数据点与曲线贴合紧密，且算得残差平方和约为$3.3\cdot 10^{-4}$，显示出了较好的拟合效果。基于此，我们确定取 $F(x)=\alpha\log(x)$ ，其中 $\alpha\approx-2.09156$ 。
 
-        我们推测在区间 $\left[0,0.2\right)$ 上，分数的分布依旧近似地符合对数曲线的形态。假定如此，则分数区间 $[0.2,1]$ 上的人数占总人数的比例应该等于 $$\dfrac{\displaystyle\int\limits_{0.2}^1 \log(x)\mathrm{d}x}{\displaystyle\int\limits_0^1 \log(x)\mathrm{d}x}\approx 0.478$$ 进而根据分数区间 $[0.2,1]$ 上的总人数为26907，可推算出（前述6场比赛的）参赛总人数约为56300。该值与真实值61100接近，于是我们的假设得到验证。
+        我们推测在区间 $\left[0,0.2\right)$ 上，分数的分布依旧近似地符合对数曲线的形态。假定如此，则分数区间 $[0.2,1]$ 上的人数占总人数的比例应该等于 $$\dfrac{\displaystyle\int\limits_{0.2}^1 \log(x)\mathrm{d}x}{\displaystyle\int\limits_0^1 \log(x)\mathrm{d}x}\approx 0.478$$ 进而根据分数区间 $[0.2,1]$ 上的总人数为26907，可推算出（前述6场比赛的）参赛总人数约为56300。该值与实际的复赛报名人数\footnote{这之中包括数千名缺考选手，故真正参赛的人数会低于61100}61100接近，于是我们的假设得到验证。
 
         由此可知 $A$ 的分数分布函数的表达式同样形如 $\bm{C}_A(x)=\beta\log(x)$ ，其中系数 $\beta$ 可由等式 $$\int\limits_0^1 \bm{C}_A(x)\mathrm{d}x=1$$ 唯一确定；计算得 $\beta=-1$ 。
 
         \begin{proposition}
-            $\bm{C}_A(x)=-\log(x)$ ，其中 $x\in(0,1]$ ；$A$ 是根据\ref{sec:dataPreprocessingOfNOIP}小节中描述的过程所确定的理想比赛。
+            $\bm{C}_A(x)=-\log(x)$ ，其中 $x\in(0,1]$ 且 $A$ 是根据\ref{sec:dataPreprocessingOfNOIP}小节中描述的过程所确定的理想比赛。
             \label{prop:scoreDistributionOfStandardizedNoip}
         \end{proposition}
             
@@ -628,11 +628,17 @@
 
         \subsubsection{初赛分数数据的获取}\label{sec:dataOfPreliminaryRound}
 
-            分数数据采用NOIP2018初赛北京赛区的成绩。该场比赛共781人获得非零分数，其中417人晋级复赛并获得非零分数；该场比赛满分100分，最高分96分，晋级分数线约为40分；全国最高分为100分。全部数据获取自官方网站上的成绩公示。
+            分数数据采用NOIP2018初赛北京赛区的成绩。该场比赛共781人获得非零分数（零分视为缺考），其中536人晋级复赛并获得非零分数；该场比赛满分100分，最高分96分，晋级分数线约为35分；全国最高分为100分。有关初赛的全部数据获取自官方网站上的成绩公示。
 
             采用该场比赛的原因：后续分析需要分数表上包含选手姓名；而笔者所能找到的其他年份、其他省市的成绩公示，均未包含这一信息。
 
-            知道了选手姓名，我们就可以查询该名选手在NOIP2018复赛中的得分。通过这种方式，我们获得了417名晋级者的初赛和复赛分数。
+            知道了选手姓名，我们就可以查询该名选手在NOIP2018复赛中的得分。通过这种方式，我们获得了536名晋级者的初赛和复赛分数。由于官方网站上的成绩公示仅包括获奖选手，这里所使用的北京选手复赛分数是按民间数据测试出的成绩。
+
+            \vspace{1.5ex}
+
+            除此以外，在\ref{sec:counteringPreliminaryRound}小节中，还将使用CSP2019初赛的全国分数数据，这些数据从官方网站上各省市发布的成绩公示汇总得到。CSP2019初赛报名人数48812人，由于个别省份仅公示了晋级选手或未缺考选手的分数，最终收集到47264人的数据。
+
+            全国分数数据的来源之所以采用CSP2019，是因为自2019年起才有完整的初赛分数公示。
 
         \subsubsection{关于初赛的几个假设}\label{sec:assumptionsOnPreliminaryRound}
 
@@ -651,7 +657,7 @@
             在给出下一个假设前，先对2018北京初赛的分数做一点分析。
 
             \begin{asparaenum}[\bfseries{步骤} 1.]
-                \item 将417名晋级选手按初赛分数分组：分数在$[30,40)$中的、在$[40,50)$中的、……、在$[90,100)$中的，分别分为一组，共计7组。
+                \item 将536名晋级选手按初赛分数分组：分数在$[30,40)$中的、在$[40,50)$中的、……、在$[90,100)$中的，分别分为一组，共计7组。
                 \item 对每一组计算初赛平均分和复赛平均分。
                 \item 对每一组，以复赛平均分为横坐标、初赛平均分为纵坐标，将数据点画在二维平面上，并将这些数据点连成折线图。
             \end{asparaenum}
@@ -699,26 +705,26 @@
 
             证明见维基百科相应条目\cite{wiki_sumOfNormVars}，这里不再重复。
 
-            由假设\ref{ass:equivalenceBetweenTwoRounds}，在对 $F_1$ 作线性的缩放变换 $T$ 之后，可以使其与 $F_2$ 相同；此时两者的偏移量分布均为 $N(0,\sigma^2)$ 。又注意到对现实比赛 $B_1,B_2$ ， $\Delta_{B_1},\Delta_{B_2}$ 应当是独立的（这里认为在定义\ref{def:realIdealCorrespondence}的步骤\ref{step:realToIdealStep3}中$B_1,B_2$共用同一个表示选手的随机变量 $p$ ），所以由引理\ref{lem:stddevOfSumOfIndependentVars}，$\Delta_{T\left[B_1\right]}+\Delta_{B_2}$ 服从正态分布 $N(0,2\sigma^2)$ 。因此，选手在 $T\left[F_1\right]$ 和 $F_2$ 中的分数之差，这一随机变量服从标准差为 $\sqrt{2}\sigma$ 的正态分布；只要测出它的标准差，即可得到 $\sigma$ 的取值。
+            由假设\ref{ass:equivalenceBetweenTwoRounds}，在对 $F_1$ 作线性的缩放变换 $T$ 之后，可以使其与 $F_2$ 相同；此时两者的偏移量分布均为 $N(0,\sigma^2)$ 。又注意到对现实比赛 $B_1,B_2$ ，其对应的随机变量 $\Delta_{B_1},\Delta_{B_2}$ 应当是独立的（这里认为在定义\ref{def:realIdealCorrespondence}的步骤\ref{step:realToIdealStep3}中$B_1,B_2$共用同一个表示选手的随机变量 $p$ ），所以由引理\ref{lem:stddevOfSumOfIndependentVars}，$\Delta_{T\left[B_1\right]}+\Delta_{B_2}$ 服从正态分布 $N(0,2\sigma^2)$ 。因此，选手在 $T\left[F_1\right]$ 和 $F_2$ 中的分数之差，这一随机变量服从标准差为 $\sqrt{2}\sigma$ 的正态分布；只要测出它的标准差，即可得到 $\sigma$ 的取值。
 
             \vspace{1.5ex}
 
             容易想到以下测量方式：
             \begin{asparaenum}[\bfseries{步骤} 1.]
                 \item 对 $F_1$ 的分数作线性变换，使得变换后它的期望值、偏移量分布与 $F_2$ 相同。
-                \item 对先前提到的417名选手，计算每名选手在 $F_2$ 中的分数和在变换后的 $F_1$ 中的分数之差。
-                \item 这417个差值应该服从正态分布，那么计算这些值的标准差即可。
+                \item 对先前提到的536名选手，计算每名选手在 $F_2$ 中的分数和在变换后的 $F_1$ 中的分数之差。
+                \item 这536个差值应该服从正态分布，那么计算这些值的标准差即可。
             \end{asparaenum}
 
-            但一个问题是，这417个差值并非真正服从正态分布。如果一名选手考出了大幅低于自己期望分数的分数，那么他进入这417人之列的机会就会大大降低；换句话说，这417个数据是被人为选择出来的，而且选择的方式倾向于实际分数高于期望分数的选手，因此这些数据不能代表整体的分布。
+            但一个问题是，这536个差值并非真正服从正态分布。如果一名选手考出了大幅低于自己期望分数的分数，那么他进入这536人之列的机会就会大大降低；换句话说，这536个数据的取样方法是有选择性的，而且选择的方式倾向于实际分数高于期望分数的选手，因此这些数据不能代表整体的分布。
 
             \vspace{1.5ex}
 
-            假如我们召集那些没有晋级的选手，让他们也参加复赛考试并记录他们的分数，再把这些分数和原有的417个数据汇总，就能获得完整、有代表性的数据。但实际上，我们也可以“假装”已经获得了未晋级选手的数据，并对全体数据进行分析；如果这个过程中“碰巧”没有用到任何一个未晋级选手的数据，我们事实上就在只凭借已有的417个数据的情况下完成了测量。以下给出一个这样的测量方式。
+            假如我们召集那些没有晋级的选手，让他们也参加复赛考试并记录他们的分数，再把这些分数和原有的536个数据汇总，就能获得完整、有代表性的数据。但实际上，我们也可以“假装”已经获得了未晋级选手的数据，并对全体数据进行分析；如果这个过程中“碰巧”没有用到任何一个未晋级选手的数据，我们事实上就在只凭借已有的536个数据的情况下完成了测量。以下给出一个这样的测量方式。
 
             \begin{asparaenum}[\bfseries{步骤} 1.]
                 \item \label{step:measureSigmaStep1} 对 $F_1$ 的分数作线性变换，使得变换后它的期望值、偏移量分布与 $F_2$ 相同。
-                \item 对先前提到的417名选手，计算每名选手在变换后的 $F_1$ 中的分数和在 $F_2$ 中的分数之差。（前者减后者）
+                \item 对先前提到的536名选手，计算每名选手在变换后的 $F_1$ 中的分数和在 $F_2$ 中的分数之差。（前者减后者）
                 \item \label{step:measureSigmaStep3} 取出这些差值中前35大的值，则这些值可以视为：某一组服从正态分布的781个数（781即初赛参赛人数），其中前35大的值。通过测量这些值可以得到正态分布的标准差。
             \end{asparaenum}
 
@@ -726,16 +732,17 @@
 
             在第\ref{step:measureSigmaStep3}步中，之所以说这35个值为781个数中的最大值，是因为：
             \begin{asparaitem}
-                \item 计算发现第35大的差值约等于$0.28$，高于初赛晋级分数线经过变换后的值。又因为复赛分数不可能小于$0$，所以任何一个未达到晋级分数线的选手，其两试分数差值不可能达到$0.28$。（计算发现35人中最低的初赛分数为63分，比晋级分数线高出约20分）
-                \item 因此，除了417名晋级选手之外，其余选手不可能进入35人之列，故只考虑已有的417个数据是充分的。
+                \item 计算发现第35大的差值约等于$0.26$，高于初赛晋级分数线经过变换后的值。又因为复赛分数不可能小于$0$，所以任何一个未达到晋级分数线的选手，其两试分数差值不可能达到$0.26$。（计算发现35人中最低的初赛分数为53分，比晋级分数线高出近20分）
+                \item 因此，除了536名晋级选手之外，其余选手不可能进入35人之列，故只考虑已有的536个数据是充分的。
             \end{asparaitem}
 
             \vspace{1.5ex}
 
             在前述过程的步骤\ref{step:measureSigmaStep1}中需要作分数变换，以下给出具体步骤。
             \begin{asparaenum}[\bfseries{步骤} 1.]
-                \item 对于复赛分数 $s\in [0,600]$ ，计算全国范围内高于 $s$ 的复赛分数个数 $c$ ，并将 $s$ 映射到 $t\in [0,1]$ ，满足 $f(x)=\log(x)$ 在 $(t,1]$ 上的定积分等于 $\frac {c+1}{N+1}$ ，其中 $N=8044$ 为复赛选手总数。这一映射方式保证了分数分布呈对数曲线，与命题\ref{prop:scoreDistributionOfStandardizedNoip}一致。
-                \item 计算北京初赛前417名的分数标准差 $\sigma_1$ ，再对映射后的复赛分数计算北京选手（共417名）的分数标准差 $\sigma_2$ 。然后对于初赛分数 $s\in [0,100]$ ，将其映射到 $1-(1-\frac {s}{100})\cdot\sigma_2/\frac{\sigma_1}{100}$ 。由命题\ref{prop:alphaAsQuotientOfStddev}，这一映射方式保证了映射后两个理想比赛相同。
+                \item 对于复赛分数 $s\in [120,600]$ （120为官方分数公示所覆盖的最低分数），计算该分数在全国范围内的排名 $c$ ，并将 $s$ 映射到 $t\in [0,1]$ ，满足 ${\int_t^1 \log(x)\mathrm{d}x}\big/{\int_{0.186}^1 \log(x)\mathrm{d}x}=\frac cN$ ，其中 $N=8044$ 为复赛不低于120分的选手总数，$0.186$为最低分数120依\ref{sec:dataPreprocessingOfNOIP}小节中的变换 $R$ 映射到的值。
+                \item 对于低于120分的复赛分数，我们将 $[0,120)$ 均匀地映射到 $[0,0.186)$ 上去。以上两个步骤所描述的映射方式，保证了分数分布呈对数曲线，与命题\ref{prop:scoreDistributionOfStandardizedNoip}一致。
+                \item 计算北京初赛排名前25\%选手（共195名）的分数标准差 $\sigma_1$ ，再对映射后的复赛分数计算北京选手前195名的分数标准差 $\sigma_2$ 。然后对于初赛分数 $s\in [0,100]$ ，将其映射到 $1-(1-\frac {s}{100})\cdot\sigma_2/\frac{\sigma_1}{100}$ 。由命题\ref{prop:alphaAsQuotientOfStddev}，这一映射方式保证了映射后两个理想比赛相同。这一步中只取前25\%的理由：对于初赛期望分数离晋级分数线较近的选手，这些选手中有相当一部分未能进入复赛，故复赛在相应分数段的分布会比真实情况稀疏；只有把考察范围限制在分数足够高的选手，才能避免这一问题。
             \end{asparaenum}
 
             \vspace{1.5ex}
@@ -747,13 +754,13 @@
             \begin{align*}
                 &\phantom{=\ }\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} \mathrm{Pr}\left[v_k\in\left[d_k-\epsilon,d_k+\epsilon\right],\forall 1\leq k\leq 35\right] \\
                 &=\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} \binom{781}{35}\cdot 35!\cdot\prod\limits_{k=1}^{35} \left(R_{2\sigma^2}(d_k+\epsilon)-R_{2\sigma^2}(d_k-\epsilon)\right)\cdot R_{2\sigma^2}(d_{35})^{746} \\
-                &=\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} (2\epsilon)^{-35}\cdot\prod\limits_{k=1}^{35} \left(R_{2\sigma^2}(d_k+\epsilon)-R_{2\sigma^2}(d_k-\epsilon)\right)\cdot R_{2\sigma^2}(d_{35})^{746} \\
+                &=\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} \ (2\epsilon)^{-35}\cdot\prod\limits_{k=1}^{35} \left(R_{2\sigma^2}(d_k+\epsilon)-R_{2\sigma^2}(d_k-\epsilon)\right)\cdot R_{2\sigma^2}(d_{35})^{746} \\
                 &=\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} \prod\limits_{k=1}^{35} \frac{R_{2\sigma^2}(d_k+\epsilon)-R_{2\sigma^2}(d_k-\epsilon)}{2\epsilon}\cdot R_{2\sigma^2}(d_{35})^{746} \\
-                &=\argmax\limits_{\sigma\in\mathbb{R}_{>0}} \left(\prod\limits_{k=1}^{35} R^\prime_{2\sigma^2}(d_k)\right)\cdot R_{2\sigma^2}(d_{35})^{781-35} \\
+                &=\argmax\limits_{\sigma\in\mathbb{R}_{>0}} \left(\prod\limits_{k=1}^{35} R^\prime_{2\sigma^2}(d_k)\right)\cdot R_{2\sigma^2}(d_{35})^{746} \\
                 &=\argmax\limits_{\sigma\in\mathbb{R}_{>0}} 746\cdot\log\left(R_{2\sigma^2}(d_{35})\right)+\sum\limits_{k=1}^{35} \log\left(P_{2\sigma^2}(d_k)\right) 
             \end{align*}
 
-            至此，问题完全转化为一个最优化问题。最优化方法采用SciPy提供的BFGS算法的实现\cite{scipy_minimize}，算得$\sigma\approx 0.12224$。
+            至此，问题完全转化为一个最优化问题。最优化方法采用SciPy提供的BFGS算法的实现\cite{scipy_minimize}，算得$\sigma\approx 0.109$。
 
             \begin{figure}
                 \centering
@@ -769,15 +776,20 @@
                 \bm{\Delta}_{T\left[F_1\right]}(t)=\bm{\Delta}_{F_2}(t)=P_{\sigma_F^2}(t)
                 $$
                 
-                其中“缩放变换” $T$ 满足 $T\left[F_1\right]=F_2$，常数 $\sigma_F$ 约等于 $0.12224$ ，$t$ 为任意实数。
+                其中“缩放变换” $T$ 满足 $T\left[F_1\right]=F_2$，常数 $\sigma_F$ 约等于 $0.109$ ，$t$ 为任意实数。
 
                 \label{prop:deltaDistributionOfF2}
             \end{proposition}
 
         \subsubsection{消除初赛对分数分布的影响}\label{sec:counteringPreliminaryRound}
 
+            这一小节将计算初赛分数线映射为复赛分数后的值，并借助该值计算出：消除初赛的筛选性带来的影响后（即假想初赛并未淘汰一人，所有选手都晋级复赛），复赛的分数分布函数。
 
-    \subsection{从分数分布计算期望值分布}\label{sec:calculatingXofSecondRound}
+            \vspace{1.5ex}
+
+            
+
+    \subsection{从分数分布还原期望值分布}\label{sec:calculatingXofSecondRound}
 
         %% 本段需要对变量、用词、结构作大量修改
 
