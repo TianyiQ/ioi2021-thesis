@@ -21,8 +21,8 @@
     \begin{samepage}
         本文中用到的全部数据和计算程序可以在以下网址下载：\nobreak
         \begin{compactitem}
-            \item {\scriptsize\url{https://files.cnblogs.com/files/turboboost/qty-thesis-statdata.zip}}\nobreak
-            \item {\scriptsize\url{https://github.com/TianyiQ/ioi2021-thesis/blob/main/qty-thesis-statdata.zip}}
+            \item \inserturl{https://files.cnblogs.com/files/turboboost/qty-thesis-statdata.zip}
+            \item \inserturl{https://github.com/TianyiQ/ioi2021-thesis/blob/main/qty-thesis-statdata.zip}
         \end{compactitem}
     \end{samepage}
 
@@ -91,8 +91,9 @@
 
         赛制即比赛的进行方式和比赛规则。信息学竞赛中采用笔试、COI赛制（机试）、IOI赛制（机试）这三种不同的赛制，表\ref{tab:formats}给出了每种赛制的特点和先前提到的比赛所分别采用的赛制。
 
-        \begin{table}\footnotesize
+        \begin{table}
             \centering
+            \settabularsize{
             \begin{tabular}{@{}llllll@{}}
                 \toprule
                     & 时长                  & 题数                 & 题目类型       & 反馈机制       & 对应比赛   \\ \midrule
@@ -100,6 +101,7 @@
                 COI赛制 & 3\textasciitilde 5h & 3\textasciitilde 4 & 编程题，有多档部分分 & 无反馈        & bcfghk \\
                 IOI赛制 & 3\textasciitilde 5h & 3\textasciitilde 4 & 编程题，有多档部分分 & 多次提交、有反馈 & deijl  \\ \bottomrule
             \end{tabular}
+            }
             \caption{信息学比赛采用的赛制}
             \label{tab:formats}
         \end{table}
@@ -316,9 +318,9 @@
         \begin{definition}[缩放等价]
             对简单理想比赛 $A_1,A_2$ ，当存在线性映射 $f(x)=\alpha x+\beta\quad(\alpha\in\mathbb{R}_{> 0},\beta\in\mathbb{R})$ 同时满足以下条件时，称 $A_1,A_2$ \textbf{缩放等价}，称 $f$ 为 $A_1,A_2$ 间的\textbf{等价映射}：
             \begin{asparaenum}
-                \item $f(1)=1$
+                \item \label{step:equivalenceCondition1} $f(1)=1$
                 \item $\bm{\Delta}_{A_2}(\alpha\delta)=\bm{\Delta}_{A_1}(\delta)\cdot \alpha^{-1},\quad\forall \delta\in\mathbb{R}$
-                \item $\widebar{\bm{X}}_{A_2}(f(x))=\widebar{\bm{X}}_{A_1}(x)\cdot \alpha^{-1},\quad\forall x\in\mathbb{R}$ ，其中
+                \item \label{step:equivalenceCondition3} $\widebar{\bm{X}}_{A_2}(f(x))=\widebar{\bm{X}}_{A_1}(x)\cdot \alpha^{-1},\quad\forall x\in\mathbb{R}$ ，其中
                     $$
                         \widebar{\bm{X}}(x)=
                         \begin{cases} 
@@ -327,6 +329,8 @@
                         \end{cases}
                     $$
             \end{asparaenum}
+
+            如果上述映射 $f$ 只满足条件\ref{step:equivalenceCondition1}和\ref{step:equivalenceCondition3}，则称 $A_1,A_2$ \textbf{弱缩放等价}，称 $f$ 为 $A_1,A_2$ 间的\textbf{弱等价映射}。
 
             \label{def:equivalenceAfterScaling}
         \end{definition}
@@ -337,6 +341,8 @@
                 \item $\displaystyle\int\limits_{-\infty}^{\delta_0} \bm{\Delta}_{A_1}(\delta)\mathrm{d}\delta=\displaystyle\int\limits_{-\infty}^{\alpha\delta_0} \bm{\Delta}_{A_2}(\delta)\mathrm{d}\delta,\quad\forall\delta\in\mathbb{R}$
                 \item $\displaystyle\int\limits_{-\infty}^{x_0} \widebar{\bm{X}}_{A_1}(x)\mathrm{d}x=\displaystyle\int\limits_{-\infty}^{f(x_0)} \widebar{\bm{X}}_{A_2}(x)\mathrm{d}x,\quad\forall x\in\mathbb{R}$
             \end{asparaenum}
+
+            对于弱缩放等价类似。
 
             \label{prop:equivalenceAfterScalingMeaning}
         \end{proposition}
@@ -354,7 +360,15 @@
         \end{proof}
 
         \begin{assumption}
-            对现实比赛 $B_1$ （对应理想比赛 $A_1$ ）和 $B_2$ （对应理想比赛 $A_2$ ），如果 $B_1,B_2$ 的\emph{规则}都基于COI或IOI赛制，且它们的\emph{参赛人群}相同，则 $A_1,A_2$ 一定缩放等价。
+            对现实比赛 $B_1$ （对应理想比赛 $A_1$ ）和 $B_2$ （对应理想比赛 $A_2$ ），如果
+            \begin{asparaitem}
+                \item \label{step:equivalenceAssumptionCondition1} $B_1,B_2$ 的\emph{规则}都基于COI或IOI赛制
+                \item \label{step:equivalenceAssumptionCondition2} $B_1,B_2$ 的\emph{规则}在除了赛制外的各方面均相同
+                \item \label{step:equivalenceAssumptionCondition3} $B_1,B_2$ 的\emph{参赛人群}相同
+            \end{asparaitem}
+
+            则 $A_1,A_2$ 一定缩放等价。如果 $B_1,B_2$ 满足条件\ref{step:equivalenceAssumptionCondition1}和\ref{step:equivalenceAssumptionCondition3}，则 $A_1,A_2$ 一定弱缩放等价。
+
             \label{ass:equivalenceBetweenCodingContests}
         \end{assumption}
 
@@ -364,7 +378,8 @@
             \item \label{step:argumentForAssumptionStep1} 如果假设所有比赛在考查角度上没有差异（因为我们只关心普遍的统计特征，所以这种假设是合理的），那么一名选手的解题能力（即，能够在比赛中解出多大难度的题目）就一定是固定的。
             \item \label{step:argumentForAssumptionStep2} 当组题人为一场比赛选择题目、出题人为命制的题目设置部分分时，他们会有意识地给较难的任务设置较高的分值、给较简单的任务设置较低的分值，而具体多高、多低，则取决于他们心中作的判断。虽然不同的人可能作出不一样的判断，但这些判断应该大体上是“成比例”的。例如：张三认为算法2应当获得三倍于算法1的得分、李四认为算法2应当获得2.5倍于算法1的得分，这两种判断在比例上是大致相符的。
             \item 综合\ref{step:argumentForAssumptionStep1}和\ref{step:argumentForAssumptionStep2}，我们知道了：每个选手的能力可以看作是不变的；选手比赛中完成的任务难度与所获分数间的关系，这一关系在不同比赛之间应该是“成比例”的。所以只要选手集合不变，不同比赛的“选手期望得分构成的分布”也应该是“成比例”的（特别地，这两个分布的最大值也应该是相对应的，所以在定义\ref{def:equivalenceAfterScaling}中要求$f(1)=1$）。这就为假设\ref{ass:equivalenceBetweenCodingContests}关于期望值分布的部分和对 $f(1)=1$ 的要求提供了依据。
-            \item 根据经验，一名选手考场发挥的稳定与否与水平高低等因素没有明显的相关性；所以虽然不同选手的稳定性存在差异，但是在样本很大时，这种差异不会给统计结果带来较大的系统性的偏差，因此我们近似地认为所有选手\emph{水平发挥}的稳定性是相同的。又因为得分与实际表现出的能力是“成比例”的，所以所有选手\emph{比赛得分}的稳定性也是相同的。这为假设\ref{ass:simplicityOfCodingContests}、假设\ref{ass:similarityOfDeltaDistributions}和假设\ref{ass:equivalenceBetweenCodingContests}关于偏移量分布的部分提供了依据。
+            \item \label{step:argumentForAssumptionStep4} 根据经验，一名选手考场发挥的稳定与否与水平高低等因素没有明显的相关性；所以虽然不同选手的稳定性存在差异，但是在样本很大时，这种差异不会给统计结果带来较大的系统性的偏差，因此我们近似地认为所有选手\emph{水平发挥}的稳定性是相同的。又因为得分与实际表现出的能力是“成比例”的，所以所有选手\emph{比赛得分}的稳定性也是相同的。这为假设\ref{ass:simplicityOfCodingContests}和假设\ref{ass:similarityOfDeltaDistributions}提供了依据。
+            \item 不同的比赛因为比赛天数、试题数目等的不同，可能导致选手得分稳定性的不同（一般来说比赛天数越多，选手得分越稳定）。但如果两场比赛的天数、题数（算作比赛\emph{规则}的一部分）等都相同，就可以用\ref{step:argumentForAssumptionStep4}中的论证，来为假设\ref{ass:equivalenceBetweenCodingContests}关于偏移量分布的部分提供依据。
             \item 真实的比赛中“离散”的特性——比如选择题三分一道——可以在理想化的模型中忽略。这样在人数趋于无穷时，我们很容易想到：其各种统计数据会是“连续”的。因此\ref{ass:existenceOfIdealContest}是一个很自然的假设。
             \item 根据经验，在COI赛制中表现好的选手，在IOI赛制往往表现也很好；反之亦然。因此COI/IOI赛制间的差异至多会对选手期望得分的分布起到缩放的作用，而不会带来本质的改变。类似地，选手在COI/IOI赛制中发挥稳定性的差异，也只有量的差别而无质的差别。所以，认为COI/IOI赛制的比赛有着本质相同（即在缩放后完全相同）的期望值分布、偏移量分布，是合理的。
             \item 假设\ref{ass:simplicityOfCodingContests}会带来一个问题：如果一名选手的期望得分十分接近0，但他的分数波动的幅度仍被认为与其他选手相同，就会使他可能考出“负分数”，并使得分数分布函数在负数处的点值非零。由于本文只研究近似的结果，且考虑到该现象并不会十分显著（因为一场比赛中只会有很少的选手期望得分接近0），所以可以容忍这一不合理的现象。
@@ -387,8 +402,9 @@
 
         这些比赛的参赛情况见表\ref{tab:ctt18to20}。
 
-        \begin{table}\footnotesize
+        \begin{table}
             \centering
+            \settabularsize{
             \begin{tabular}{@{}lcccc@{}}
             \toprule
              & \multicolumn{1}{l}{参赛总人数} & \multicolumn{1}{l}{正式选手人数} & \multicolumn{1}{l}{非正式选手人数} & \multicolumn{1}{l}{选拔人数} \\ \midrule
@@ -396,6 +412,7 @@
             北大集训2019 & 约70 & 50 & 约20 & 15 \\
             北大集训2020 & 约90 & 50 & 约40 & 30 \\ \bottomrule
             \end{tabular}
+            }
             \caption{三场比赛的参赛情况}
             \label{tab:ctt18to20}
         \end{table}
@@ -530,55 +547,55 @@
 
     \subsection{复赛分数数据的获取、加工和拟合}\label{sec:dataPreprocessingOfNOIP}
 
-        数据来自以下6场比赛：
+        数据来自以下4场比赛：
         \begin{asparaitem}
             \item NOIP2016\ ---\ 复赛（字母标号b）
             \item NOIP2017\ ---\ 复赛（字母标号b）
             \item NOIP2018\ ---\ 复赛（字母标号b）
             \item CSP2019\ ---\ 复赛（字母标号b）
-            \item CSP2020\ ---\ 复赛（字母标号b）
-            \item NOIP2020\ ---\ 复赛（字母标号b）\footnote{2020年情况较为特殊，NOIP与CSP同时存在，且NOIP初赛与CSP初赛合并为同一场比赛}
         \end{asparaitem}
 
         \vspace{1.5ex}
 
-        之所以只采用2016年及以后的比赛，是出于两个原因：
+        之所以只采用2016年到2019年的比赛，是出于三个原因：
         \begin{asparaitem}
             \item 年代过于久远的比赛对当今的参考意义有限。
-            \item 仅有的数据来源为NOI官网上的获奖名单公示，故只能取得\emph{获奖选手}的分数信息。而自2016年起CCF更改了获奖规则，增加了获奖人数，使得可以获取的数据量大了许多。
+            \item 仅有的数据来源为NOI官网上的获奖名单公示，故只能取得获奖选手的分数信息。而自2016年起CCF更改了获奖规则，增加了获奖人数，使得可以获取的数据量大了许多。
+            \item 2020年的比赛规则有所更改（两天六题改为一天四题），所以假设\ref{ass:equivalenceBetweenCodingContests}不再能保证2020年复赛与其他年份复赛缩放等价。
         \end{asparaitem}
 
         \vspace{1.5ex}
 
-        \begin{table}\footnotesize
+        \begin{table}
             \centering
+            \settabularsize{
             \begin{tabular}{@{}lccccc@{}}
                 \toprule
                     & \multicolumn{1}{l}{参赛人数} & \multicolumn{1}{l}{获奖人数} & \multicolumn{1}{l}{满分} & \multicolumn{1}{l}{最高分} & \multicolumn{1}{l}{获奖分数线} \\ \midrule
-                NOIP2016复赛 & 约8300  & 约5900 & 600 & 600 & 100 \\
-                NOIP2017复赛 & 约10300 & 约6600 & 600 & 600 & 80  \\
-                NOIP2018复赛 & 约12900 & 约8000 & 600 & 600 & 120 \\
-                CSP2019复赛  & 约13900 & 约8800 & 600 & 600 & 80  \\
-                CSP2020复赛  & 约11000 & 约6700 & 400 & 400 & 30  \\
-                NOIP2020复赛 & 约4700  & 约3600 & 400 & 400 & 60  \\ \bottomrule
+                NOIP2016复赛 & 约8300  & 约5900  & 600 & 600 & 100 \\
+                NOIP2017复赛 & 约10300 & 约6600  & 600 & 600 & 80  \\
+                NOIP2018复赛 & 约12900 & 约8000  & 600 & 600 & 120 \\
+                CSP2019复赛  & 约13900 & 约8800  & 600 & 600 & 80  \\ 
+                总计         & 约45400 & 约29300 &     &     &     \\ \bottomrule
             \end{tabular}
-            \caption{6场比赛的相关数据}
-            \label{tab:noip16to20}
+            }
+            \caption{4场比赛的相关数据}
+            \label{tab:noip16to19}
         \end{table}
 
-        表\ref{tab:noip16to20}展示了关于这6场比赛的几项统计数据。
+        表\ref{tab:noip16to19}展示了关于这4场比赛的几项统计数据。
 
         \vspace{1.5ex}
 
-        由假设\ref{ass:equivalenceBetweenCodingContests}，这6场现实比赛（所对应的理想比赛）是缩放等价的。进而由命题\ref{prop:alphaAsQuotientOfStddev}，这6场现实比赛所对应的理想比赛，在对分数作变换（变换方式见\ref{sec:dataPreprocessingOfCTT}小节）后，将成为完全相同的理想比赛。
+        由假设\ref{ass:equivalenceBetweenCodingContests}，这4场现实比赛（所对应的理想比赛）是缩放等价的。进而由命题\ref{prop:alphaAsQuotientOfStddev}，这4场现实比赛所对应的理想比赛，在对分数作变换（变换方式见\ref{sec:dataPreprocessingOfCTT}小节）后，将成为完全相同的理想比赛。
 
         于是，与\ref{sec:dataPreprocessingOfCTT}小节类似，数据加工将按以下步骤进行：
         \begin{asparaenum}[\bfseries{步骤} 1.]
             \item 将所有比赛中所有选手的分数除以当场比赛的最高分（也就是计算标准分；注意到最高分等于满分），用以代替原始分数。
-            \item \label{step:noipDataRefinementStep2} 去除所有$<0.2$的分数。这是因为在这6场比赛中，获奖分数线与最高分的商的最大值为$0.2$；这意味着分数低于$0.2$的选手中有一部分未能获奖，于是这些选手中其余部分的数据也失去意义，因此一并剔除。
+            \item \label{step:noipDataRefinementStep2} 去除所有$<0.2$的分数。这是因为在这4场比赛中，获奖分数线与最高分的商的最大值为$0.2$；这意味着分数低于$0.2$的选手中有一部分未能获奖，于是这些选手中其余部分的数据也失去意义，因此一并剔除。
             \item 对每场比赛计算分数标准差 $\sigma$ ，然后对分数作变换 $R:x\mapsto 1-\frac{1-x}{5.52\sigma}$ ，并用变换结果代替原分数。使用系数$5.52$的理由稍后说明。
-            \item 对每场比赛计算最低分，取所得的6个最低分的最大值$T$，并剔除所有$<T$的分数。这一步的理由与步骤\ref{step:noipDataRefinementStep2}中的类似：分数低于$T$的部分选手未能获奖，故将这些选手连同已获奖的那些一并剔除。计算可得 $T\approx 0.200$ ，与步骤\ref{step:noipDataRefinementStep2}中的阈值保持一致；这正是系数$5.52$的主要作用。
-            \item 现在所有这些分数数据属于同一理想比赛 $A$ （满足 $A$ 与原先6个现实比赛所对应的理想比赛缩放等价），将它们汇集起来即可。注意到我们所取得的并非完整的分数数据，而只是$\geq 0.2$的那一部分分数。
+            \item 对每场比赛计算最低分，取所得的4个最低分的最大值$T$，并剔除所有$<T$的分数。这一步的理由与步骤\ref{step:noipDataRefinementStep2}中的类似：分数低于$T$的部分选手未能获奖，故将这些选手连同已获奖的那些一并剔除。计算可得 $T\approx 0.200$ ，与步骤\ref{step:noipDataRefinementStep2}中的阈值保持一致；这正是系数$5.52$的主要作用。
+            \item 现在所有这些分数数据属于同一理想比赛 $A$ （满足 $A$ 与原先4个现实比赛所对应的理想比赛缩放等价），将它们汇集起来即可。注意到我们所取得的并非完整的分数数据，而只是$\geq 0.2$的那一部分分数。
         \end{asparaenum}
 
         \vspace{1.5ex}
@@ -587,21 +604,17 @@
 
         \vspace{1.5ex}
 
-        经过上述加工后，我们得到了26907个落在$[0.2,1]$之中的分数数据。由命题\ref{prop:scoreDistributionMeaning}，这些数据应当服从 $\bm{C}_A$ 所描述的概率分布。
+        经过上述加工后，我们得到了22093个落在$[0.2,1]$之中的分数数据。由命题\ref{prop:scoreDistributionMeaning}，这些数据应当服从 $\bm{C}_A$ 所描述的概率分布。
         
-        受数据限制，我们暂时只关心 $[0.2,1]$ 这一分数区间上的分布情况。即我们要确定函数 $F:\left[0.2,1\right]\to\mathbb{R}_{\geq 0}$ ，满足在任何一个区间 $\left[a,b\right]$ 上，$F$ 的定积分在数值上约等于：落在$\left[a,b\right]$中的分数数值个数，与数值总个数26907的比值。注意到在$F$和$\bm{C}_A$之间有这一关系：$$F(t)=\bm{C}_A(t)\big/{\displaystyle\int\limits_{0.2}^1 \bm{C}_A(x)\mathrm{d}x},\quad\forall t\in[0.2,1]$$
-
-        \vspace{1.5ex}
-
-        观察分数数据，可以发现数值的分布左侧（即靠近$0.2$一侧）稠密、右侧（即靠近$1$一侧）稀疏，于是尝试用递降的多项式函数、对数函数等常见函数，以及截尾指数分布、截尾正态分布等“向左倾斜”的常见概率分布来拟合之。实验发现使用对数函数的拟合效果大幅好于其他方式，以下将描述对数函数的拟合过程和结果。
+        接下来我们将确定函数 $\bm{C}_A:\left(0,1\right)\to\mathbb{R}_{\geq 0}$ ，满足在任何一个区间 $\left(a,b\right)$ 上，$\bm{C}_A$ 的定积分在数值上约等于：分数落在$\left(a,b\right)$中的选手人数，与总人数45400的比值。
+        
+        在对十余种常见函数和常见概率分布进行拟合之后，我们发现对数函数 $f(s)=-\log(s)$ 满足前述要求，且与已获得数据的贴合程度大幅好于所尝试的其他函数。此外，不难验证对数函数 $f(s)=-\log(s)$ 在 $(0,1)$ 上非负且定积分等于 $1$ ，因此是一个合法的分数分布函数。以下将在实际数据和据对数函数计算出的数值之间进行比对，并展示结果。
 
         \begin{enumerate}[leftmargin=6em]
-            \begin{samepage}
-            \item [\textbf{步骤 1.}] 对于 $t=0.25,0.30,\cdots,0.95$ ，计算：落在 $\left[t-0.05,t+0.05\right]$ 中的数值个数与总个数26907的比值。这个比值记为 $c(t)$ 。
-            \end{samepage}
-            \item [\textbf{步骤 2.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
-            \item [\textbf{步骤 3.}] 选取参数 $\alpha$ 并令 $F(x)=\alpha\log(x)$ 。注意到函数 $F$ 在 $[0.2,1]$ 上的定积分必须等于$1$，由此可唯一确定 $\alpha$ 的取值；计算得到 $\alpha\approx-2.09156$ 。
-            \item [\textbf{步骤 4.}] 检查函数 $$G(t)=\int\limits_{t-0.05}^{t+0.05}F(x)\mathrm{d}x$$ 的图像是否与 $t-c(t)$ 散点图吻合。
+            \item [\textbf{步骤 1.}] \label{step:plottingNoipStep1} 对于 $t=0.25,0.35,\cdots,0.95$ ，计算：落在 $\left[t-0.05,t+0.05\right]$ 中的分数个数与总人数45400的比值。这个比值记为 $c(t)$ 。
+            \item [\textbf{步骤 2.}] 关于 $<0.2$ 的分数段，我们不了解其中具体的分数分布，只知道这一部分共有$45400-22093=23307$人，占比 $\frac{23307}{45400}\approx 0.513$ 。为了与步骤\ref{step:plottingNoipStep1}中的数据统一，我们将数值$0.513$乘以$$\frac{\int_{0.05}^{0.15}-\log(s)\mathrm{d}s}{\int_{0}^{0.2}-\log(s)\mathrm{d}s}$$以将其换算为分数段 $(0.05,0.15)$ 上的人数占比，并记作 $c(0.1)$ 。
+            \item [\textbf{步骤 3.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
+            \item [\textbf{步骤 4.}] 检查函数 $$f(t)=\int\limits_{t-0.05}^{t+0.05}-\log(x)\mathrm{d}x$$ 的图像是否与 $t-c(t)$ 散点图吻合。
         \end{enumerate}
 
         \begin{figure}
@@ -611,14 +624,10 @@
             \label{fig:fittingNoipScoresByLogCurve}
         \end{figure}
 
-        图\ref{fig:fittingNoipScoresByLogCurve}展示了拟合的结果。可以看到全部数据点与曲线贴合紧密，且算得残差平方和约为$3.3\cdot 10^{-4}$，显示出了较好的拟合效果。基于此，我们确定取 $F(x)=\alpha\log(x)$ ，其中 $\alpha\approx-2.09156$ 。
-
-        我们推测在区间 $\left[0,0.2\right)$ 上，分数的分布依旧近似地符合对数曲线的形态。假定如此，则分数区间 $[0.2,1]$ 上的人数占总人数的比例应该等于 $$\dfrac{\displaystyle\int\limits_{0.2}^1 \log(x)\mathrm{d}x}{\displaystyle\int\limits_0^1 \log(x)\mathrm{d}x}\approx 0.478$$ 进而根据分数区间 $[0.2,1]$ 上的总人数为26907，可推算出（前述6场比赛的）参赛总人数约为56300。该值与实际的复赛报名人数\footnote{这之中包括数千名缺考选手，故真正参赛的人数会低于61100}61100接近，于是我们的假设得到验证。
-
-        由此可知 $A$ 的分数分布函数的表达式同样形如 $\bm{C}_A(x)=\beta\log(x)$ ，其中系数 $\beta$ 可由等式 $$\int\limits_0^1 \bm{C}_A(x)\mathrm{d}x=1$$ 唯一确定；计算得 $\beta=-1$ 。
+        图\ref{fig:fittingNoipScoresByLogCurve}展示了比对的结果。可以看到全部数据点与曲线贴合紧密，且算得残差平方和约为$9.2\cdot 10^{-5}$，显示出了较好的拟合效果。基于此，我们确定取 $\bm{C}_A(s)=-\log(s)$ 。
 
         \begin{proposition}
-            $\bm{C}_A(x)=-\log(x)$ ，其中 $x\in(0,1]$ 且 $A$ 是根据\ref{sec:dataPreprocessingOfNOIP}小节中描述的过程所确定的理想比赛。
+            $\bm{C}_A(s)=-\log(s)$ ，其中 $s\in(0,1]$ 且 $A$ 是根据\ref{sec:dataPreprocessingOfNOIP}小节中描述的过程所确定的理想比赛。
             \label{prop:scoreDistributionOfStandardizedNoip}
         \end{proposition}
             
@@ -740,7 +749,7 @@
 
             在前述过程的步骤\ref{step:measureSigmaStep1}中需要作分数变换，以下给出具体步骤。
             \begin{asparaenum}[\bfseries{步骤} 1.]
-                \item 对于复赛分数 $s\in [120,600]$ （120为官方分数公示所覆盖的最低分数），计算该分数在全国范围内的排名 $c$ ，并将 $s$ 映射到 $t\in [0,1]$ ，满足 ${\int_t^1 \log(x)\mathrm{d}x}\big/{\int_{0.186}^1 \log(x)\mathrm{d}x}=\frac cN$ ，其中 $N=8044$ 为复赛不低于120分的选手总数，$0.186$为最低分数120依\ref{sec:dataPreprocessingOfNOIP}小节中的变换 $R$ 映射到的值。
+                \item 对于复赛分数 $s\in [120,600]$ （120为官方分数公示所覆盖的最低分数），计算该分数在全国范围内的排名 $c$ ，并将 $s$ 映射到 $t\in [0,1]$ ，满足 $$\frac{\int_t^1 -\log(x)\mathrm{d}x}{\int_{0.186}^1 -\log(x)\mathrm{d}x}=\frac cN$$ 其中 $N=8044$ 为复赛不低于120分的选手总数，$0.186$为最低分数120依\ref{sec:dataPreprocessingOfNOIP}小节中的变换 $R$ 映射到的值。
                 \item 对于低于120分的复赛分数，我们将 $[0,120)$ 均匀地映射到 $[0,0.186)$ 上去。以上两个步骤所描述的映射方式，保证了分数分布呈对数曲线，与命题\ref{prop:scoreDistributionOfStandardizedNoip}一致。
                 \item 计算北京初赛排名前25\%选手（共195名）的分数标准差 $\sigma_1$ ，再对映射后的复赛分数计算北京选手前195名的分数标准差 $\sigma_2$ 。然后对于初赛分数 $s\in [0,100]$ ，将其映射到 $1-(1-\frac {s}{100})\cdot\sigma_2/\frac{\sigma_1}{100}$ 。由命题\ref{prop:alphaAsQuotientOfStddev}，这一映射方式保证了映射后两个理想比赛相同。这一步中只取前25\%的理由：对于初赛期望分数离晋级分数线较近的选手，这些选手中有相当一部分未能进入复赛，故复赛在相应分数段的分布会比真实情况稀疏；只有把考察范围限制在分数足够高的选手，才能避免这一问题。
             \end{asparaenum}
@@ -749,7 +758,7 @@
 
             设得到的35个差值按降序排列为 $d_1,\cdots,d_{35}$ ，考虑如何由此推断全体差值的标准差 $\sqrt{2}\sigma$ 。
             
-            这里采用最大似然估计，即选取一个 $\sigma$ 以最大化：在全体差值服从 $N(0,2\sigma^2)$ 的条件下，测量得到 $d_1,\cdots,d_{35}$ 的概率。注意到这个概率实际上必定等于0，但可以通过取极限规避这一问题。下式给出最优的 $\sigma$ 的计算方式，其中 $u_{1},\cdots,u_{781}$ 表示随意排列的 $781$ 个差值，$v_{k}$ 表示 $u_{1},\cdots,u_{781}$ 中的第 $k$ 大值。
+            这里采用最大似然估计，即选取一个 $\sigma$ 以最大化：在全体差值服从 $N(0,2\sigma^2)$ 的条件下，测量得到 $d_1,\cdots,d_{35}$ 的概率。注意到这个概率实际上必定等于0，但可以通过取极限规避这一问题。下式给出 $\sigma$ 的计算方式，其中 $u_{1},\cdots,u_{781}$ 表示随意排列的 $781$ 个差值，$v_{k}$ 表示 $u_{1},\cdots,u_{781}$ 中的第 $k$ 大值。
 
             \begin{align*}
                 &\phantom{=\ }\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} \mathrm{Pr}\left[v_k\in\left[d_k-\epsilon,d_k+\epsilon\right],\forall 1\leq k\leq 35\right] \\
@@ -773,10 +782,10 @@
 
             \begin{proposition}
                 $$
-                \bm{\Delta}_{T\left[F_1\right]}(t)=\bm{\Delta}_{F_2}(t)=P_{\sigma_F^2}(t)
+                \bm{\Delta}_{T\left[F_1\right]}(\delta)=\bm{\Delta}_{F_2}(\delta)=P_{\sigma_F^2}(\delta),\quad\forall \delta\in\mathbb{R}
                 $$
                 
-                其中“缩放变换” $T$ 满足 $T\left[F_1\right]=F_2$，常数 $\sigma_F$ 约等于 $0.109$ ，$t$ 为任意实数。
+                其中“缩放变换” $T$ 满足 $T\left[F_1\right]=F_2$，常数 $\sigma_F$ 约等于 $0.109$ 。
 
                 \label{prop:deltaDistributionOfF2}
             \end{proposition}
@@ -787,46 +796,149 @@
 
             \vspace{1.5ex}
 
+            在\ref{sec:dataOfPreliminaryRound}小节中，已经得到了CSP2019初赛参赛选手的分数数据。由表\ref{tab:noip16to19}中的数据知，在2016到2019四年中，平均每年的初赛晋级人数约为11350；因此我们选择CSP2019初赛全国第11350名的分数，作为假设\ref{ass:preliminaryRoundsOfAllProvincesUnite}中的“全国统一晋级分数线”。
+
+            这里之所以对晋级人数而不是晋级率取平均数，是因为初赛的参赛选手总数受收费、政策等无关因素影响过大，而晋级复赛的人数与复赛获奖的人数呈固定比例，因而相对可靠。
+
+            最终算得分数线为63分。作为参照，CSP2019初赛中，浙江、山东、江苏实际的分数线\footnote{这里给出的是全省分数线，省内各市的分数线可能高于全省分数线}分别为72.5,60,53。
+
+            \vspace{1.5ex}
+
+            下面将这一分数线映射为复赛分数。为了与\ref{sec:parameterOfDeltaDistribution}小节保持一致，这里仍然使用同样的计算方式，并同样采用北京的数据。
             
+            我们将计算CSP2019初赛中，北京排名前195名的分数标准差 $\sigma_1$ ，再对（按\ref{sec:parameterOfDeltaDistribution}小节中的方式）映射后的NOIP2018复赛分数计算北京选手前195名的分数标准差 $\sigma_2$ 。然后对于CSP2019初赛分数 $s\in [0,100]$ ，将其映射到 $1-(1-\frac {s}{100})\cdot\sigma_2/\frac{\sigma_1}{100}$ 。这一计算过程基于如下假设：2019年北京选手整体水平，与2018年大体相同。
+
+            对分数线63施加上述变换，得到其对应的复赛分数为$h\approx 0.1035$。另一方面，由命题\ref{prop:deltaDistributionOfF2}可知，任何一名选手的初赛、复赛的（变换后）实际分数之差服从概率分布 $N(0,2\sigma_F^2)$ 。从而，如果假想所有初赛选手都参加了复赛，则对于复赛实际分数为 $t$ 的选手 $p$ ，其初赛分数达到 63 的概率为 $1-R_{2\sigma_F^2}(h-t)$ 。
+            
+            需要注意，这样得到的概率，是在获得具体的期望值分布前的先验概率。假如已知全体选手的期望分数分布情况，我们可以用贝叶斯公式得到前述选手 $p$ 的期望分数取每一个值的概率，进而得到 $p$ 的初赛分数取每一个值的概率，也就是后验概率。简便起见这里采用先验概率，即使它相比后验概率略失精确。
+
+            记 $F_2^\prime$ 为现实比赛 $B_2$ 在消除初赛的筛选性带来的影响后所对应的理想比赛，则由以上讨论可得：
+            $$
+            \bm{C}_{F_2^\prime}(s)\propto\frac{\bm{C}_{F_2}(s)}{1-R_{2\sigma_F^2}(h-s)}=\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)},\quad\forall s\in (0,1]
+            $$
+
+            上式中之所以使用“正比于”而不是“等于”，是因为分数分布函数表达的是分布“密度”，而不是样本“数量”。计算出对应的比例系数后得到：
+            $$
+            \bm{C}_{F_2^\prime}(s)=\gamma\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)},\quad\forall s\in (0,1]
+            $$
+            其中常数 $\gamma\approx0.549$ ，它使得$\bm{C}_{F_2^\prime}$在$[0,1]$上的定积分等于1。
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingNewNoipScores.pdf}
+                \caption{消除初赛影响前后的分数分布函数}
+                \label{fig:curvesBeforeAndAfterCountering}
+            \end{figure}
+
+            图\ref{fig:curvesBeforeAndAfterCountering}分别展示了以下三个函数的图像：
+            \begin{asparaitem}
+                \vspace{1ex}
+                \item [\textbf{蓝色}] $f(s)=-\log(s)$，即$\bm{C}_{F_2}(s)$或$\bm{C}_A(s)$。
+                \vspace{1ex}
+                \item [\textbf{红色}] $f(s)=\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)}$
+                \vspace{1ex}
+                \item [\textbf{橙色}] $f(s)=\gamma\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)}$，即$\bm{C}_{F_2^\prime}(s)$。
+                \vspace{1ex}
+            \end{asparaitem}
+
+            \vspace{1.5ex}
+
+            由\ref{sec:assumptionsOnPreliminaryRound}小节中的讨论知，$\bm{C}_A$ 与 $\bm{C}_{F_2}$ 相同。同理，如果定义 $A^\prime$ 为：复赛在去除初赛影响后对应的理想比赛（这里采用\textbf{按原本的方式}解读的定义\ref{def:realIdealCorrespondence}），则 $\bm{C}_{A^\prime}$ 亦与 $\bm{C}_{F_2^\prime}$ 相同。因此有以下命题：
+
+            \begin{proposition}
+                $$
+                \bm{C}_{A^\prime}(s)=\gamma\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)},\quad\forall s\in (0,1]
+                $$
+                其中常数 $\gamma\approx0.549$ ，且 $A^\prime$ 为复赛在去除初赛影响后对应的理想比赛。
+
+                \label{prop:scoreDistributionAfterCountering}
+            \end{proposition}
 
     \subsection{从分数分布还原期望值分布}\label{sec:calculatingXofSecondRound}
 
-        %% 本段需要对变量、用词、结构作大量修改
+        在\ref{sec:counteringPreliminaryRound}小节中得到了 $\bm{C}_{A^\prime}(s)$ 的表达式；这一小节将由此计算 $\bm{X}_{A^\prime}(x)$ 。
 
-        在\ref{sec:counteringPreliminaryRound}小节中得到了 $\bm{C}_A(x)$ 的表达式；这一小节将由此计算 $\bm{X}_A(x)$ 的表达式。$\bm{X}_A(x)$的闭合形式很可能并不存在，所以将用级数展开的方式来给出结果；并且由于偏移量分布函数 $\bm{\Delta}_A$ 的参数尚未确定，得到的表达式也将含有参数。
-
-        由假设\ref{ass:simplicityOfCodingContests}，$A$是简单理想比赛；又根据命题\ref{prop:scoreDistributionInSimpleContest}，可从$\bm{X}_A$和$\bm{\Delta}_A$计算出$\bm{C}_A$ 。这一小节将给出从 $\bm{C}_A$ 和 $\bm{\Delta}_A$ 逆推出 $\bm{X}_A$ 的方法。
+        由假设\ref{ass:simplicityOfCodingContests}，$A^\prime$是简单理想比赛；又根据命题\ref{prop:scoreDistributionInSimpleContest}，可从$\bm{X}_{A^\prime}$和$\bm{\Delta}_{A^\prime}$计算出$\bm{C}_{A^\prime}$ 。这一小节将给出从 $\bm{C}_{A^\prime}$ 和 $\bm{\Delta}_{A^\prime}$ 逆推出 $\bm{X}_{A^\prime}$ 的方法。
 
         根据定理\ref{thm:normalityOfOffsetsDistribution}，存在 $\sigma>0$ 使得
         $$
-        \bm{\Delta}_A(\delta)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{\delta^2}{2\sigma^2}\right)},\quad\forall \delta\in\mathbb{R}
+        \bm{\Delta}_{A^\prime}(\delta)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{\delta^2}{2\sigma^2}\right)},\quad\forall \delta\in\mathbb{R}
         $$
         进而由命题\ref{prop:scoreDistributionInSimpleContest}得
         \begin{equation}
-            \bm{C}_A(s)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 \bm{X}_A(x)\exp{\left(-\frac{(s-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
+            \bm{C}_{A^\prime}(s)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 \bm{X}_{A^\prime}(x)\exp{\left(-\frac{(s-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
             \label{formula:fromXtoC}
         \end{equation}
 
-        为了便于表述，记变换 $T$ 将\eqref{formula:fromXtoC}式中的函数 $\bm{X}_A$ 映射到 $\bm{C}_A$ 。换句话说，对任何可积函数 $f:[0,1]\to\mathbb{R}_{\geq 0}$ 有
-        $$
-        T\left[f(\cdot)\right](t)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 f(x)\exp{\left(-\frac{(t-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall t\in\mathbb{R}
-        $$
-        其中 $T\left[f(\cdot)\right]$ 表示函数 $f$ 经过 $T$ 变换得到的函数。
+        \vspace{1.5ex}
 
-        容易验证 $T$ 满足线性性，即：
-        \begin{asparaenum}
-            \item 对可积函数 $f,g$ 有 $T\left[f(\cdot)+g(\cdot)\right]=T\left[f(\cdot)\right]+T\left[g(\cdot)\right]$
-            \item 对可积函数 $f$ 和常数 $c$ 有 $T\left[c\cdot f(\cdot)\right]=c\cdot T\left[f(\cdot)\right]$
+        在进行逆推之前，先测量 $\sigma$ 的值。我们获取了CSP2019复赛全体选手的民间分数（零分选手被去除，共计12108人获得非零分数），并按以下步骤进行测量：
+        \begin{asparaenum}[\bfseries{步骤} 1.]
+            \item 将每名选手每一天的分数除以当天最高分（两天最高分均为满分300分），再将每一天的所有分数做变换，以使得两天的分数分布分别呈对数曲线状。具体变换方式与\ref{sec:parameterOfDeltaDistribution}小节中相同；经过变换后，两天分别对应的理想比赛应当与 $A^\prime$ 相同。
+            \item 对每名选手计算两天分数之差，计算所有这些差值的标准差 $\sigma_0$ 。
         \end{asparaenum}
 
-        借助随机变量的特征函数可以证明 $T$ 为单射，从而 $T$ 的逆变换 $T^{-1}$ 是良定义的。由 $T$ 的线性性，又可以推得 $T^{-1}$ 同样满足线性性。
+        \vspace{1.5ex}
+
+        与\ref{sec:parameterOfDeltaDistribution}小节中类似，同一名选手的单日分数（变换后的分数），应该服从标准差为 $\sigma_1=\frac {\sigma_0}{\sqrt 2}$ 的正态分布。记CSP2019复赛第一天、第二天，这两个现实比赛分别为 $D_1,D_2$ ，则 $\Delta_{D_1},\Delta_{D_2}$ 服从正态分布 $N(0,\sigma_1^2)=N(0,\frac {\sigma_0^2}{2})$ 。记现实比赛 $D$ 为CSP2019复赛（两天综合），则有 $\Delta_D=\frac{\Delta_{D_1}+\Delta_{D_2}}2$ 。进而由引理\ref{lem:stddevOfSumOfIndependentVars}：
+        
+        \begin{align*}
+            \mathrm{Stddev}\left[\Delta_D\right]&=\frac{\sqrt{\mathrm{Stddev}\left[\Delta_{D_1}\right]^2+\mathrm{Stddev}\left[\Delta_{D_2}\right]^2}}2 \\
+                                                &=\frac{\sqrt{2}\sigma_1}{2} \\
+                                                &=\frac{\sigma_0}{2}
+        \end{align*}
+        
+        得到 $\sigma=\frac {\sigma_0}2$ 。换句话说：同一名选手在CSP2019复赛中（变换后）的分数波动，服从标准差为 $\sigma=\frac {\sigma_0}2$ 的正态分布。
+        
+        最终算得 $\sigma\approx0.078$ 。
+
+        \vspace{1.5ex}
+
+        从 $\bm{C}_{A^\prime}$ 和 $\bm{\Delta}_{A^\prime}$ 逆推出 $\bm{X}_{A^\prime}$ 难以精确地实现，因此这里只能近似地计算 $\bm{X}_{A^\prime}$ 在许多个离散的点处的点值。
+
+        我们将区间 $(0,1]$ 作500等分，并设立500个未知数 $x_{1\cdots 500}$ ，分别表示在500个分点处 $\bm{X}_{A^\prime}$ 的取值。另一方面，我们在\eqref{formula:fromXtoC}中将$s$取遍每一个分点，由此得到500个等式限制；注意到仅凭 $x_{1\cdots 500}$ 无法表示出\eqref{formula:fromXtoC}中的定积分，因此定积分被换成离散的求和。在作了这样的“离散化”之后，原先的等式显然不再成立，因此改为最小化所有每一个等式两端之差的平方和。为了避免无意义的结果，我们额外加入了关于序列 $x_{1\cdots 500}$ 非负性和“光滑性”的限制；后者通过序列 $x_{1\cdots 500}$ 的高阶差分来表示。
+
+        上述问题最终归结到了一个二次规划模型的求解；可以证明其为凸二次规划，因此任何一个极值点都是最值点。最优化方法采用SciPy提供的信赖域算法的实现\cite{scipy_minimize}。用于计算的程序和最终算得的点值 $x_{1\cdots 500}$ ，可以在本文开头的链接中找到。
+
+        观察所得的500个点值，发现：
+        \begin{asparaenum}
+            \item 在与0紧邻的位置处，点值明显大于其他位置。
+            \item 在其余位置处，点值构成一条平滑的曲线。计算发现这些点值近似地符合二次函数 $f(x)=ax^2+bx+c$ ，其中 $a\approx 1.697,b\approx -3.352,c\approx 1.655$ 。图\ref{fig:quadFuncOfXAprime}展示了该函数的图像。
+        \end{asparaenum}
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=\textwidth]{fig/plottingQuadFuncOfXAprime.pdf}
+            \caption{二次函数$f(x)=ax^2+bx+c$}
+            \label{fig:quadFuncOfXAprime}
+        \end{figure}
+
+        至此，我们得到了函数$\bm{X}_{A^\prime}$的表达式。
+
+        \begin{theorem}
+            对于 $x\in(\epsilon,1]$ 有 $\bm{X}_{A^\prime}(x)=ax^2+bx+c$ ，其中 $a\approx 1.697,b\approx -3.352,c\approx 1.655$ ，$\epsilon$ 为小常数，$A^\prime$ 为复赛在去除初赛影响后对应的理想比赛。
+
+            \label{thm:formulaforXAprime}
+        \end{theorem}
+
+        最后，如前文所说，本节的目标旨在估计而非精准计算，所得的结果仅能反映趋势而不保证精确；这对上述定理也同样成立。
+
+\section{致谢}
+
+    感谢中国计算机学会提供交流和学习的平台；
+
+    感谢国家集训队高闻远教练的指导；
+
+    感谢教导过我的老师、教练们；
+
+    感谢清芷等同学与我讨论本文内容。
 
 \begin{thebibliography}{9}
     \bibitem{wiki_sumOfNormVars} 
-    Wikipedia: Sum of normally distributed random variables,
-    {\newline\scriptsize\url{https://en.wikipedia.org/wiki/Sum\_of\_normally\_distributed\_random\_variables}}
+    Wikipedia: Sum of normally distributed random variables,\\
+    \inserturl{https://en.wikipedia.org/wiki/Sum\_of\_normally\_distributed\_random\_variables}
 
     \bibitem{scipy_minimize} 
-    SciPy Documentation: scipy.optimize.minimize,
-    {\newline\scriptsize\url{https://docs.scipy.org/doc/scipy/reference/optimize.minimize-bfgs.html\#optimize-minimize-bfgs}}
+    SciPy Documentation: scipy.optimize.minimize,\\
+    \inserturl{https://docs.scipy.org/doc/scipy/reference/optimize.minimize-bfgs.html\#optimize-minimize-bfgs}
 \end{thebibliography}

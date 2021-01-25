@@ -31,4 +31,4 @@ plt.xlabel('分数偏移量')
 plt.ylabel('人数占比')
 plt.legend(loc='lower center') #指定legend的位置右下角
 # plt.title('curve_fit'))
-plt.savefig(fname="fittingOffsets.pdf",format="pdf")
+plt.savefig(fname="fittingOffsets.pdf",format="pdf",bbox_inches='tight',pad_inches=0.05)
