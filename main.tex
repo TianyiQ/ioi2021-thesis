@@ -430,6 +430,7 @@
             $$
             \alpha=\frac{\mathrm{Stddev}\left[\bm{C}_{A_2}\right]}{\mathrm{Stddev}\left[\bm{C}_{A_1}\right]}
             $$
+
             其中 $\mathrm{Stddev}\left[F\right]$ 表示以 $F$ 为概率密度函数的随机变量\footnote{换句话说，这样的随机变量 $Y$ 满足 $\mathrm{Pr}\left[Y\leq t\right]=\int\limits_{-\infty}^t F(s)\mathrm{d}s,\quad\forall t\in\mathbb{R}$}的标准差。
 
             另外注意到由 $f(1)=1$ 可得 $f(x)=1-\alpha(1-x)$ ，所以不必再考虑 $\beta$ 的取值。
@@ -849,6 +850,7 @@
                 $$
                 \bm{C}_{A^\prime}(s)=\gamma\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)},\quad\forall s\in (0,1]
                 $$
+
                 其中常数 $\gamma\approx0.549$ ，且 $A^\prime$ 为复赛在去除初赛影响后对应的理想比赛。
 
                 \label{prop:scoreDistributionAfterCountering}
@@ -862,11 +864,20 @@
 
         根据定理\ref{thm:normalityOfOffsetsDistribution}，存在 $\sigma>0$ 使得
         $$
-        \bm{\Delta}_{A^\prime}(\delta)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{\delta^2}{2\sigma^2}\right)},\quad\forall \delta\in\mathbb{R}
+        \bm{\Delta}_{A^\prime}(\delta)=P_{\sigma^2}(\delta),\quad\forall \delta\in\mathbb{R}
         $$
+
         进而由命题\ref{prop:scoreDistributionInSimpleContest}得
         \begin{equation}
-            \bm{C}_{A^\prime}(s)=\frac{1}{\sqrt{2\pi}\sigma}\int\limits_0^1 \bm{X}_{A^\prime}(x)\exp{\left(-\frac{(s-x)^2}{2\sigma^2}\right)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
+            \bm{C}_{A^\prime}(s)=\int\limits_0^1 \bm{X}_{A^\prime}(x)P_{\sigma^2}(s-x)\mathrm{d}x,\quad\forall s\in\mathbb{R}
+            \label{formula:fromXtoC_beforeUpd}
+        \end{equation}
+
+        但是在这个问题中，期望分数接近0的选手占了总数中相当的比重，因此若单纯按\eqref{formula:fromXtoC_beforeUpd}计算，则“负分数”问题（在\ref{sec:keyAssumptions}小节末尾有所提及）会变得十分显著。为解决这一问题，我们对于每一名选手，将其分数的概率分布中负的一段截掉，再将剩余部分的概率密度函数乘以某个系数，以使得乘完后剩余部分的总概率为1。若一名选手期望分数为 $x$ ，则容易证明：对该名选手而言，在上述过程中使用的系数$c(x)$等于 $$\left(\int\limits_0^1 P_{\sigma^2}(t-x)\mathrm{d}t\right)^{-1}=\left(R_{\sigma^2}(1-x)-R_{\sigma^2}(0-x)\right)^{-1}$$
+
+        于是$\bm{C}_{A^\prime}$与$\bm{X}_{A^\prime}$间的关系被更新为
+        \begin{equation}
+            \bm{C}_{A^\prime}(s)=\int\limits_0^1 \bm{X}_{A^\prime}(x)\cdot\frac{P_{\sigma^2}(s-x)}{R_{\sigma^2}(1-x)-R_{\sigma^2}(0-x)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
             \label{formula:fromXtoC}
         \end{equation}
 
@@ -916,7 +927,7 @@
         至此，我们得到了函数$\bm{X}_{A^\prime}$的表达式。
 
         \begin{theorem}
-            对于 $x\in(\epsilon,1]$ 有 $\bm{X}_{A^\prime}(x)=ax^2+bx+c$ ，其中 $a\approx 1.697,b\approx -3.352,c\approx 1.655$ ，$\epsilon$ 为小常数，$A^\prime$ 为复赛在去除初赛影响后对应的理想比赛。
+            对于 $x\in(\epsilon,1]$ 有 $\bm{X}_{A^\prime}(x)=ax^2+bx+c$ ，其中 $a\approx 1.697,b\approx -3.352,c\approx 1.655$ ，$\epsilon$ 为某个小常数，$A^\prime$ 为复赛在去除初赛影响后对应的理想比赛。
 
             \label{thm:formulaforXAprime}
         \end{theorem}
