@@ -33,7 +33,7 @@
     \begin{asparaenum}
         \item [\textbf{第二节}]{建立用于描述信息学比赛的数学模型，作为后续分析的基础。}
         \item [\textbf{第三节}]{分析同一名选手的得分波动所服从的分布。}
-        \item [\textbf{第四节}]{利用NOIP初赛、复赛的得分数据推算出信息学竞赛选手整体水平的分布情况。}
+        \item [\textbf{第四节}]{利用联赛初赛、复赛的得分数据推算出信息学竞赛选手整体水平的分布情况。}
         \item [\textbf{第五节}]{对于在比赛名次中出现的现象进行讨论。}
         \item [\textbf{第六节}]{\emph{待完成后更新。}}
     \end{asparaenum}
@@ -996,11 +996,50 @@
             \begin{figure}
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingD_1D_2.pdf}
-                \caption{$D_1,D_2$的图像，当$A$为定理\ref{thm:formulaforXAprime}中的$A'$}
+                \caption{$D_1,D_2$的图像，当$A$为定理\ref{thm:formulaforXAprime}中的$A'$时}
                 \label{fig:plottingD_1D_2forAprime}
             \end{figure}
 
             取理想比赛 $A$ 为定理\ref{thm:formulaforXAprime}中“复赛在去除初赛影响后对应的理想比赛”$A'$、取$\sigma=\sigma_B\approx 0.078$（该数值来自于\ref{sec:calculatingXofSecondRound}小节中的测量），则 $D_1,D_2$ 关于 $\mu$ 的图像如图\ref{fig:plottingD_1D_2forAprime}。这里对于期望分数小于（定理\ref{thm:formulaforXAprime}中的）$\epsilon$的选手，将他们从$\mathcal{X}_A$中剔除，并将 $\mathcal{X}_A$ 剩余部分的点值乘上某个系数，以使得其在$[0,1]$上定积分仍为$1$。这样得到的$\mathcal{X}_A$为二次函数。此外，$D_1,D_2$ 本身是“绝对差值”，图中还用虚线绘制了“相对差值”$\frac{D_1}{\mathrm{E}\left[U_p\right]},\frac{D_2}{\mathrm{Med}\left[U_p\right]}$的图像。
+
+            \vspace{1.5ex}
+
+            图\ref{fig:plottingD_1D_2forAprime}所考虑的情况是：现实比赛$B$的\emph{参赛人群}为期望分数达到$\epsilon$的\textbf{全体}信息学选手。但是对于实际中的比赛，其参赛选手往往是经过选拔的；以下将研究此类比赛。
+
+            简便起见，我们作如下假设：现实比赛$B$的\emph{参赛人群}，是期望分数达到$\epsilon$的\textbf{全体}信息学选手，经过一场现实比赛 $C$ 的选拔后达到分数线的那些；其中 $C$ 所对应的理想比赛与（定理\ref{thm:formulaforXAprime}中的） $A'$ 完全相同，且分数线为 $\textit{thres}\in[0,1]$ 。
+
+            由此易知，对于一名期望分数为 $\mu_q\in [0,1]$ 的选手 $q$ ，他达到分数线的概率为 $1-R_{(0.078)^2}(\textit{thres}-\mu_q)$ 。进而得到：
+            $$
+            \mathcal{X}_A(x)\propto (ax^2+bx+c)(1-R_{(0.078)^2}(\textit{thres}-x)),\quad\forall x\in [0,1]
+            $$
+
+            其中 $a,b,c$ 为定理\ref{thm:formulaforXAprime}中的系数。
+
+            \vspace{1.5ex}
+
+            为模拟联赛复赛的情况，取 $\textit{thres}=0.1053$ （该数值为\ref{sec:counteringPreliminaryRound}小节中的计算结果），此时 $D_1,D_2$ 的图像如图\ref{fig:plottingD_1D_2forNoip}；为模拟NOI的情况，取 $\textit{thres}=0.7$ （计算发现近几年联赛中得分高于该数值的选手人数与NOI的参赛人数相近，故选择该数值），此时 $D_1,D_2$ 的图像如图\ref{fig:plottingD_1D_2forNoi}。
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingNoipD_1D_2.pdf}
+                \caption{$D_1,D_2$的图像，当$A$对应联赛复赛时}
+                \label{fig:plottingD_1D_2forNoip}
+            \end{figure}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingNoiD_1D_2.pdf}
+                \caption{$D_1,D_2$的图像，当$A$对应NOI时}
+                \label{fig:plottingD_1D_2forNoi}
+            \end{figure}
+
+            \vspace{1.5ex}
+
+            观察图\ref{fig:plottingD_1D_2forAprime}、图\ref{fig:plottingD_1D_2forNoip}和图\ref{fig:plottingD_1D_2forNoi}，可以得到以下结论：
+
+            \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
+                在一场信息学比赛中，对任何一名期望得分“不太低”的选手，他的期望名次、中位名次，均\textbf{差于}他的实际水平（以期望得分来衡量）在全体参赛选手中的位次。这一现象随着该名选手期望得分的升高而越发明显，在高分段尤其显著。
+            \end{tcolorbox}
 
         \subsubsection{分数波动幅度与比赛名次的关系}
 
