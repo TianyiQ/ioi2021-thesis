@@ -948,11 +948,13 @@
 
         \subsubsection{期望分数与比赛名次的关系}
 
-            记随机变量 $C_p$ 为 $p$ 的（与 $B$ 中的选手分数一起，按定义\ref{def:realIdealCorrespondence}中的方式变换过后的）分数，设其服从期望值为 $\mu$ 、标准差为 $\sigma$ 的正态分布，并用 $\mathcal{C}_p$ 来表示其概率密度函数。
+            记随机变量 $C_p$ 为 $p$ 的（与 $B$ 中的选手分数一起，按定义\ref{def:realIdealCorrespondence}中的方式变换过后的）分数，设其服从期望值为 $\mu$ 、标准差为 $\sigma$ 的正态分布，并用 $\mathcal{D}_p$ 来表示 $C_p-\mu$ 的概率密度函数。
 
             令随机变量 $U_p$ 表示： $B$ 中有多大比例的选手实际得分高于 $p$ 的实际得分（例如 $U_p=0.5$ 表示 $B$ 中恰一半的选手实际得分高于 $p$）。
 
             令实数 $V_p$ 表示： $B$ 中有多大比例的选手期望得分高于 $p$ 的期望得分（例如 $V_p=0.5$ 表示 $B$ 中恰一半的选手期望得分高于 $p$）。
+
+            此外设 $\Delta_B$ 服从正态分布 $N(0,\sigma_B^2)$ ，从而对任意 $\delta$ 有 $\mathcal{D}_A(\delta)=P_{\sigma_B^2}(\delta)$ 。
 
             \vspace{1.5ex}
 
@@ -964,27 +966,41 @@
 
             \vspace{1.5ex}
 
-            对于前者，容易发现
+            对于$\mathrm{E}\left[U_p\right]$不难发现：
             \begin{align*}
                 \mathrm{E}\left[U_p\right]
-                &=\int\limits_{-\infty}^{+\infty} \mathcal{C}_p(t)\left(\int\limits_t^{+\infty} \mathcal{C}_A(s)\mathrm{d}s\right)\mathrm{d}t \\
-                &=\int\limits_{-\infty}^{+\infty} P_{\sigma^2}(t-\mu)\left(\int\limits_t^{+\infty} \mathcal{C}_A(s)\mathrm{d}s\right)\mathrm{d}t \\
-                &=\int\limits_{-\infty}^{+\infty} R_{\sigma^2}(s-\mu)\mathcal{C}_A(s)\mathrm{d}s
+                &=\int\limits_0^1 \mathcal{X}_A(x)\left(\iint\limits_{\left\{(\delta_1,\delta_2):\mu+\delta_1\leq x+\delta_2\right\}} \mathcal{D}_p(\delta_1)\mathcal{D}_A(\delta_2)\mathrm{d}(\delta_1,\delta_2)\right)\mathrm{d}x \\
+                &=\int\limits_0^1 \mathcal{X}_A(x)\left(\iint\limits_{\left\{(\delta_1,\delta_2^-):\delta_1+\delta_2^-\leq x-\mu\right\}} P_{\sigma^2}(\delta_1)P_{\sigma_B^2}(-\delta_2^-)\mathrm{d}(\delta_1,\delta_2^-)\right)\mathrm{d}x \\
+                &=\int\limits_0^1 \mathcal{X}_A(x)\left(\int\limits_{-\infty}^{x-\mu} P_{\sigma^2+\sigma_B^2}(\delta)\mathrm{d}\delta\right)\mathrm{d}x \\
+                &=\int\limits_0^1 \mathcal{X}_A(x)R_{\sigma^2+\sigma_B^2}(x-\mu) \mathrm{d}x
             \end{align*}
 
-            而对于后者有
-            $$
-            \mathrm{Med}\left[U_p\right]=\int\limits_{\mu}^{+\infty} \mathcal{C}_A(s)\mathrm{d}s
-            $$
+            而对于$\mathrm{Med}\left[U_p\right]$有
+            \begin{align}
+                \mathrm{Med}\left[U_p\right]
+                &=\int\limits_{\mu}^{+\infty} \mathcal{C}_A(s)\mathrm{d}s \label{formula:whatMedIs}\\
+                &=\int\limits_0^1 \mathcal{X}_A(x)R_{\sigma_B^2}(x-\mu) \mathrm{d}x \notag
+            \end{align}
 
-            这是因为
+            其中等式\eqref{formula:whatMedIs}的理由是
             \begin{align*}
             &\phantom{=\ }\mathrm{Pr}\left[U_p>\int\limits_{\mu}^{+\infty} \mathcal{C}_A(s)\mathrm{d}s\right] \\
             &=\mathrm{Pr}\left[C_p>\mu\right] \\
             &=0.5
             \end{align*}
 
-            由此可以对给定的 $\mu,\sigma,\mathcal{C}_A$ 计算 $D_1,D_2$ 的值。
+            由此可以对给定的 $\mu,\sigma,\mathcal{X}_A$ 计算 $D_1,D_2$ 的值。
+
+            \vspace{1.5ex}
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingD_1D_2.pdf}
+                \caption{$D_1,D_2$的图像，当$A$为定理\ref{thm:formulaforXAprime}中的$A'$}
+                \label{fig:plottingD_1D_2forAprime}
+            \end{figure}
+
+            取理想比赛 $A$ 为定理\ref{thm:formulaforXAprime}中“复赛在去除初赛影响后对应的理想比赛”$A'$、取$\sigma=\sigma_B\approx 0.078$（该数值来自于\ref{sec:calculatingXofSecondRound}小节中的测量），则 $D_1,D_2$ 关于 $\mu$ 的图像如图\ref{fig:plottingD_1D_2forAprime}。这里对于期望分数小于（定理\ref{thm:formulaforXAprime}中的）$\epsilon$的选手，将他们从$\mathcal{X}_A$中剔除，并将 $\mathcal{X}_A$ 剩余部分的点值乘上某个系数，以使得其在$[0,1]$上定积分仍为$1$。这样得到的$\mathcal{X}_A$为二次函数。此外，$D_1,D_2$ 本身是“绝对差值”，图中还用虚线绘制了“相对差值”$\frac{D_1}{\mathrm{E}\left[U_p\right]},\frac{D_2}{\mathrm{Med}\left[U_p\right]}$的图像。
 
         \subsubsection{分数波动幅度与比赛名次的关系}
 
