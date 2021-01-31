@@ -1,5 +1,5 @@
 \begin{abstract}
-    本文建立了描述信息学比赛的数学模型，并基于该模型研究了过往比赛的选手分数数据。本文通过统计确定了同一名选手的得分波动所服从的分布，基于此从联赛分数推算出了选手整体水平的分布情况，并分析了信息学竞赛选拔流程的效率、回答了有关比赛名次与得分的问题。\emph{上一句待完成后更新。}本文中得到的结论对信息学竞赛赛制的优化、选手的日常训练和比赛策略制定具有参考意义。
+    本文建立了描述信息学比赛的数学模型，并基于该模型研究了过往比赛的选手分数数据。本文通过统计确定了同一名选手的得分波动所服从的分布，基于此从联赛分数推算出了选手整体水平的分布情况，并研究了竞赛选拔流程的效率、回答了有关比赛名次与得分的问题。\emph{上一句待完成后更新。}本文中得到的结论对信息学竞赛赛制的优化、选手的日常训练和比赛策略制定具有参考意义。
 \end{abstract}
 
 \section{引言}
@@ -34,7 +34,7 @@
         \item [\textbf{第二节}]{建立用于描述信息学比赛的数学模型，作为后续分析的基础。}
         \item [\textbf{第三节}]{分析同一名选手的得分波动所服从的分布。}
         \item [\textbf{第四节}]{利用NOIP初赛、复赛的得分数据推算出信息学竞赛选手整体水平的分布情况。}
-        \item [\textbf{第五节}]{\emph{待完成后更新。}}
+        \item [\textbf{第五节}]{对于在比赛名次中出现的现象进行讨论。}
         \item [\textbf{第六节}]{\emph{待完成后更新。}}
     \end{asparaenum}
 
@@ -136,17 +136,17 @@
             接下来定义从现实比赛抽象而来的数学模型。
 
             \begin{definition}[理想比赛]
-                \textbf{理想比赛} $A$ 由二元函数 $\bm{H}_A:\left[0,1\right]\times\mathbb{R}\to\mathbb{R}_{\geq 0}$ 确定，其中 $\bm{H}_A$ 连续且满足
+                \textbf{理想比赛} $A$ 由二元函数 $\mathcal{H}_A:\left[0,1\right]\times\mathbb{R}\to\mathbb{R}_{\geq 0}$ 确定，其中 $\mathcal{H}_A$ 连续且满足
                 \begin{equation}
-                    \int\limits_0^1\int\limits_{-\infty}^{+\infty} \bm{H}_A(x,\delta)\mathrm{d}\delta\mathrm{d}x=1
+                    \int\limits_0^1\int\limits_{-\infty}^{+\infty} \mathcal{H}_A(x,\delta)\mathrm{d}\delta\mathrm{d}x=1
                     \label{formula:totalEqual1}
                 \end{equation}
                 和
                 \begin{equation}
-                    \int\limits_{-\infty}^{+\infty} \delta\cdot\bm{H}_A(x_0,\delta)\mathrm{d}\delta=0,\quad\forall x_0\in\left[0,1\right]
+                    \int\limits_{-\infty}^{+\infty} \delta\cdot\mathcal{H}_A(x_0,\delta)\mathrm{d}\delta=0,\quad\forall x_0\in\left[0,1\right]
                     \label{formula:expectationEqual0}
                 \end{equation}
-                此时我们把 $\bm{H}_A$ 称为 $A$ 的\textbf{综合分布函数}。
+                此时我们把 $\mathcal{H}_A$ 称为 $A$ 的\textbf{综合分布函数}。
                 \label{def:idealContest}
             \end{definition}
 
@@ -173,38 +173,38 @@
                         \item 定义 $\mathbb{R}$ 上的随机变量 $\Delta_B=\frac{\textit{score}_p-\textit{exscore}_p}{M_B}$ 。易见随机变量 $\Delta_B$ 的实际取值由选取 $p$ 的方式和考场上的偶然因素（如选手临场发挥）共同确定。
                         \item [◦] 请注意，$X_B$ 和 $\Delta_B$ 的定义中所用的 $p$ 是\emph{同一名}随机选择的选手，而不是独立的两次选择。
                     \end{itemize}
-                    \item 取 $A$ 的综合分布函数 $\bm{H}_A$ 为 $X_B$ 与 $\Delta_B$ 的联合概率密度函数，从而确定 $A$ 。换句话说，对所有 $x_0\in[0,1],\delta_0\in\mathbb{R}$ ，需要满足\footnote{也可以直观地理解为$\bm{H}_A(x_0,\delta_0)=\mathrm{Pr}\left[\left(X_B\approx x_0\right)\land\left(\Delta_B\approx\delta_0\right)\right]$，不写作 $X_B=x_0$ 是因为取等概率为 $0$ }
+                    \item 取 $A$ 的综合分布函数 $\mathcal{H}_A$ 为 $X_B$ 与 $\Delta_B$ 的联合概率密度函数，从而确定 $A$ 。换句话说，对所有 $x_0\in[0,1],\delta_0\in\mathbb{R}$ ，需要满足\footnote{也可以直观地理解为$\mathcal{H}_A(x_0,\delta_0)=\mathrm{Pr}\left[\left(X_B\approx x_0\right)\land\left(\Delta_B\approx\delta_0\right)\right]$，不写作 $X_B=x_0$ 是因为取等概率为 $0$ }
                     \begin{equation}
-                        \int\limits_0^{x_0}\int\limits_{-\infty}^{\delta_0} \bm{H}_A(x,\delta)\mathrm{d}\delta\mathrm{d}x=\mathrm{Pr}\left[\left(X_B\leq x_0\right)\land\left(\Delta_B\leq\delta_0\right)\right]
+                        \int\limits_0^{x_0}\int\limits_{-\infty}^{\delta_0} \mathcal{H}_A(x,\delta)\mathrm{d}\delta\mathrm{d}x=\mathrm{Pr}\left[\left(X_B\leq x_0\right)\land\left(\Delta_B\leq\delta_0\right)\right]
                         \label{formula:definitionOfJointDensityFunction}
                     \end{equation}
 
                 \end{asparaenum}
 
-                由\eqref{formula:definitionOfJointDensityFunction}知定义\ref{def:idealContest}的等式\eqref{formula:totalEqual1}满足；由 $\mathrm{E}\left[\Delta_B\right]=0$ 知等式\eqref{formula:expectationEqual0}满足。从而只要联合概率密度函数 $\bm{H}_A$ 存在且连续， $A$ 就符合理想比赛的定义。
+                由\eqref{formula:definitionOfJointDensityFunction}知定义\ref{def:idealContest}的等式\eqref{formula:totalEqual1}满足；由 $\mathrm{E}\left[\Delta_B\right]=0$ 知等式\eqref{formula:expectationEqual0}满足。从而只要联合概率密度函数 $\mathcal{H}_A$ 存在且连续， $A$ 就符合理想比赛的定义。
 
-                对于按上述方式得到的 $A$ ，我们称 $A$ 与 $B$ \textbf{互相对应}。如果按上述过程得到的 $\bm{H}_A$ 不连续或根本不存在，则认为不存在与 $B$ 对应的 $A$ 。
+                对于按上述方式得到的 $A$ ，我们称 $A$ 与 $B$ \textbf{互相对应}。如果按上述过程得到的 $\mathcal{H}_A$ 不连续或根本不存在，则认为不存在与 $B$ 对应的 $A$ 。
                 
                 \label{def:realIdealCorrespondence}
             \end{definition}
 
-            冗长的定义可以用一句话来作直观的总结：$\bm{H}_A\left(x,\delta\right)$ 表示真实水平（即期望得分）约为 $x$ （$x\in\left[0,1\right]$为按最高分折算后的标准分）、实际表现约为 $x+\delta$ （同样表示标准分）的选手的\emph{期望}人数占总人数的比例；之所以实际表现会偏离真实水平——以及这里之所以说“期望人数”——是因为考场上的各种偶然因素为比赛结果带来了随机性。
+            冗长的定义可以用一句话来作直观的总结：$\mathcal{H}_A\left(x,\delta\right)$ 表示真实水平（即期望得分）约为 $x$ （$x\in\left[0,1\right]$为按最高分折算后的标准分）、实际表现约为 $x+\delta$ （同样表示标准分）的选手的\emph{期望}人数占总人数的比例；之所以实际表现会偏离真实水平——以及这里之所以说“期望人数”——是因为考场上的各种偶然因素为比赛结果带来了随机性。
 
             可以看到，理想比赛这一模型只考虑了哪些结果\emph{可能}出现，而未考虑哪种结果\emph{实际}出现。而在现实中，能够获知的却只有实际出现的结果——和它恰恰相反。下面定义的概念将处理这一问题。
 
             \begin{definition}[分数分布函数]
-                对理想比赛 $A$ ，定义其\textbf{分数分布函数} $\bm{C}_A:\mathbb{R}\to\mathbb{R}_{\geq 0}$ 满足
+                对理想比赛 $A$ ，定义其\textbf{分数分布函数} $\mathcal{C}_A:\mathbb{R}\to\mathbb{R}_{\geq 0}$ 满足
                 $$
-                \bm{C}_A(s)=\int\limits_{0}^1 \bm{H}_A(x,s-x) \mathrm{d}x,\quad\forall s\in\mathbb{R}
+                \mathcal{C}_A(s)=\int\limits_{0}^1 \mathcal{H}_A(x,s-x) \mathrm{d}x,\quad\forall s\in\mathbb{R}
                 $$
 
                 \label{def:scoreDistribution}
             \end{definition}
 
             \begin{proposition}[分数分布函数的实际含义]
-                对现实比赛 $B$ 和与之对应的理想比赛 $A$ ，假想比赛 $B$ 的参赛人数 $|S_B|$ 趋于无穷，等概率随机选取选手 $p\in S_B$ ，则\footnote{也就是说 $\bm{C}_A$ 为随机变量 $\frac{\textit{score}_p}{M_B}$ 的概率密度函数。和先前类似，这里也可以直观理解为 $\bm{C}_A(r)=\mathrm{Pr}\left[\frac{\textit{score}_p}{M_B}\approx r\right]$ }：
+                对现实比赛 $B$ 和与之对应的理想比赛 $A$ ，假想比赛 $B$ 的参赛人数 $|S_B|$ 趋于无穷，等概率随机选取选手 $p\in S_B$ ，则\footnote{也就是说 $\mathcal{C}_A$ 为随机变量 $\frac{\textit{score}_p}{M_B}$ 的概率密度函数。和先前类似，这里也可以直观理解为 $\mathcal{C}_A(r)=\mathrm{Pr}\left[\frac{\textit{score}_p}{M_B}\approx r\right]$ }：
                 $$
-                \mathrm{Pr}\left[\frac{\textit{score}_p}{M_B}\leq r\right]=\int\limits_{-\infty}^r \bm{C}_A(s)\mathrm{d}s,\quad\forall r\in\mathbb{R}
+                \mathrm{Pr}\left[\frac{\textit{score}_p}{M_B}\leq r\right]=\int\limits_{-\infty}^r \mathcal{C}_A(s)\mathrm{d}s,\quad\forall r\in\mathbb{R}
                 $$
 
                 \label{prop:scoreDistributionMeaning}
@@ -214,10 +214,10 @@
                 \begin{align*}
                     \mathrm{Pr}\left[\frac{\textit{score}_p}{M_B}\leq r\right]
                     &=\mathrm{Pr}\left[X_B+\Delta_B\leq r\right] \\
-                    &=\iint\limits_{\left\{(x,\delta):x\in\left[0,1\right],\delta\in\mathbb{R},x+\delta\leq r\right\}}\bm{H}_A(x,\delta)\mathrm{d}(x,\delta) \\
-                    &=\iint\limits_{\left\{(x,s):x\in\left[0,1\right],s\in\left(-\infty,r\right]\right\}}\bm{H}_A(x,s-x)\mathrm{d}(x,s) \\
-                    &=\int\limits_{-\infty}^r\left(\int\limits_0^1 \bm{H}_A(x,s-x)\mathrm{d}x\right)\mathrm{d}s \\
-                    &=\int\limits_{-\infty}^r \bm{C}_A(s)\mathrm{d}s
+                    &=\iint\limits_{\left\{(x,\delta):x\in\left[0,1\right],\delta\in\mathbb{R},x+\delta\leq r\right\}}\mathcal{H}_A(x,\delta)\mathrm{d}(x,\delta) \\
+                    &=\iint\limits_{\left\{(x,s):x\in\left[0,1\right],s\in\left(-\infty,r\right]\right\}}\mathcal{H}_A(x,s-x)\mathrm{d}(x,s) \\
+                    &=\int\limits_{-\infty}^r\left(\int\limits_0^1 \mathcal{H}_A(x,s-x)\mathrm{d}x\right)\mathrm{d}s \\
+                    &=\int\limits_{-\infty}^r \mathcal{C}_A(s)\mathrm{d}s
                 \end{align*}
             \end{proof}
 
@@ -232,8 +232,8 @@
             \begin{definition}[期望值分布函数和偏移量分布函数]
                 对任意的理想比赛 $A$ ：
                 \begin{asparaitem}
-                    \item 定义其\textbf{期望值分布函数} $\bm{X}_A:[0,1]\to\mathbb{R}_{\geq 0}$ 满足 $$\bm{X}_A(x_0)=\int\limits_{-\infty}^{+\infty}\bm{H}_A(x_0,\delta)\mathrm{d}\delta,\quad\forall x_0\in[0,1]$$
-                    \item 定义其\textbf{偏移量分布函数} $\bm{\Delta}_A:\mathbb{R}\to\mathbb{R}_{\geq 0}$ 满足 $$\bm{\Delta}_A(\delta_0)=\int\limits_0^1\bm{H}_A(x,\delta_0)\mathrm{d}x,\quad\forall\delta_0\in\mathbb{R}$$
+                    \item 定义其\textbf{期望值分布函数} $\mathcal{X}_A:[0,1]\to\mathbb{R}_{\geq 0}$ 满足 $$\mathcal{X}_A(x_0)=\int\limits_{-\infty}^{+\infty}\mathcal{H}_A(x_0,\delta)\mathrm{d}\delta,\quad\forall x_0\in[0,1]$$
+                    \item 定义其\textbf{偏移量分布函数} $\mathcal{D}_A:\mathbb{R}\to\mathbb{R}_{\geq 0}$ 满足 $$\mathcal{D}_A(\delta_0)=\int\limits_0^1\mathcal{H}_A(x,\delta_0)\mathrm{d}x,\quad\forall\delta_0\in\mathbb{R}$$
                 \end{asparaitem}
                 \label{def:marginalDistributions}
             \end{definition}
@@ -241,8 +241,8 @@
             \begin{proposition}[期望值分布函数和偏移量分布函数的实际含义]
                 对现实比赛 $B$ 和与之对应的理想比赛 $A$ ：
                 \begin{asparaitem}
-                    \item $\bm{X}_A$ 为 $X_B$ 的概率密度函数。换句话说\footnote{也可以直观地理解为：$\mathrm{Pr}[X_B\approx x_0]=\bm{X}_A(x_0)$}：$$\mathrm{Pr}[X_B\leq x_0]=\int\limits_0^{x_0} \bm{X}_A(x)\mathrm{d}x,\quad\forall x_0\in[0,1]$$
-                    \item $\bm{\Delta}_A$ 为 $\Delta_B$ 的概率密度函数。换句话说\footnote{也可以直观地理解为：$\mathrm{Pr}[\Delta_B\approx \delta_0]=\bm{\Delta}_A(\delta_0)$}：$$\mathrm{Pr}[\Delta_B\leq \delta_0]=\int\limits_{-\infty}^{\delta_0} \bm{\Delta}_A(\delta)\mathrm{d}\delta,\quad\forall \delta_0\in\mathbb{R}$$
+                    \item $\mathcal{X}_A$ 为 $X_B$ 的概率密度函数。换句话说\footnote{也可以直观地理解为：$\mathrm{Pr}[X_B\approx x_0]=\mathcal{X}_A(x_0)$}：$$\mathrm{Pr}[X_B\leq x_0]=\int\limits_0^{x_0} \mathcal{X}_A(x)\mathrm{d}x,\quad\forall x_0\in[0,1]$$
+                    \item $\mathcal{D}_A$ 为 $\Delta_B$ 的概率密度函数。换句话说\footnote{也可以直观地理解为：$\mathrm{Pr}[\Delta_B\approx \delta_0]=\mathcal{D}_A(\delta_0)$}：$$\mathrm{Pr}[\Delta_B\leq \delta_0]=\int\limits_{-\infty}^{\delta_0} \mathcal{D}_A(\delta)\mathrm{d}\delta,\quad\forall \delta_0\in\mathbb{R}$$
                 \end{asparaitem}
                 \label{prop:marginalDistributionsMeaning}
             \end{proposition}
@@ -252,7 +252,7 @@
             \begin{proposition}
                 对现实比赛 $B$ 和与之对应的理想比赛 $A$ ，如果 $X_B$ 与 $\Delta_B$ 独立，则：
                 \begin{equation}
-                    \bm{H}_A(x_0,\delta_0)=\bm{X}_A(x_0)\bm{\Delta}_A(\delta_0),\quad\forall (x_0,\delta_0)\in[0,1]\times\mathbb{R}
+                    \mathcal{H}_A(x_0,\delta_0)=\mathcal{X}_A(x_0)\mathcal{D}_A(\delta_0),\quad\forall (x_0,\delta_0)\in[0,1]\times\mathbb{R}
                     \label{formula:insideImplicationOfIndependence}
                 \end{equation}
 
@@ -264,12 +264,12 @@
             \begin{proof}
                 \begin{align*}
                     &\phantom{\Leftrightarrow\ }\mathrm{Pr}\left[(\Delta_B\leq\delta_0)|(X_B=x_0)\right]=\mathrm{Pr}\left[\Delta_B\leq\delta_0\right],\ \forall \left(\delta_0\in\mathbb{R},\mathrm{Pr}\left[X_B=x_0\right]>0\right) \\
-                    &\Leftrightarrow \left(\displaystyle\int\limits_{-\infty}^{\delta_0} \bm{H}_A(x_0,\delta)\mathrm{d}\delta\right)\Big/{\bm{X}_A(x_0)}=\int\limits_{-\infty}^{\delta_0} \bm{\Delta}_A(\delta)\mathrm{d}\delta,\ \forall \left(\delta_0\in\mathbb{R},\bm{X}_A(x_0)>0\right)\\
-                    &\Leftrightarrow \frac{\bm{H}_A(x_0,\delta_0)}{\bm{X}_A(x_0)}=\bm{\Delta}_A(\delta_0),\ \forall \left(\delta_0\in\mathbb{R},\bm{X}_A(x_0)>0\right)\\
+                    &\Leftrightarrow \left(\displaystyle\int\limits_{-\infty}^{\delta_0} \mathcal{H}_A(x_0,\delta)\mathrm{d}\delta\right)\Big/{\mathcal{X}_A(x_0)}=\int\limits_{-\infty}^{\delta_0} \mathcal{D}_A(\delta)\mathrm{d}\delta,\ \forall \left(\delta_0\in\mathbb{R},\mathcal{X}_A(x_0)>0\right)\\
+                    &\Leftrightarrow \frac{\mathcal{H}_A(x_0,\delta_0)}{\mathcal{X}_A(x_0)}=\mathcal{D}_A(\delta_0),\ \forall \left(\delta_0\in\mathbb{R},\mathcal{X}_A(x_0)>0\right)\\
                     &\Leftrightarrow \eqref{formula:insideImplicationOfIndependence}
                 \end{align*}
                 
-                最后一步中还需要特别考虑 $\bm{X}_A(x_0)=0$ 的情况，不难自行补全。
+                最后一步中还需要特别考虑 $\mathcal{X}_A(x_0)=0$ 的情况，不难自行补全。
             \end{proof}
 
             \begin{definition}[简单理想比赛]
@@ -278,12 +278,12 @@
                 \label{def:simplicityOfContest}
             \end{definition}
 
-            由命题\ref{prop:implicationOfIndependence}，对于简单理想比赛 $A$ ，从 $\bm{X}_A,\bm{\Delta}_A$ 可唯一确定 $\bm{H}_A$ ，进而能够确定 $\bm{C}_A$ 。
+            由命题\ref{prop:implicationOfIndependence}，对于简单理想比赛 $A$ ，从 $\mathcal{X}_A,\mathcal{D}_A$ 可唯一确定 $\mathcal{H}_A$ ，进而能够确定 $\mathcal{C}_A$ 。
 
             \begin{proposition}[简单理想比赛的分数分布函数]
                 对简单理想比赛 $A$ :
                 $$
-                \bm{C}_A(s)=\int\limits_{0}^1 \bm{X}_A(x)\bm{\Delta}_A(s-x) \mathrm{d}x,\quad\forall s\in\mathbb{R}
+                \mathcal{C}_A(s)=\int\limits_{0}^1 \mathcal{X}_A(x)\mathcal{D}_A(s-x) \mathrm{d}x,\quad\forall s\in\mathbb{R}
                 $$
 
                 \label{prop:scoreDistributionInSimpleContest}
@@ -319,13 +319,13 @@
             对简单理想比赛 $A_1,A_2$ ，当存在线性映射 $f(x)=\alpha x+\beta\quad(\alpha\in\mathbb{R}_{> 0},\beta\in\mathbb{R})$ 同时满足以下条件时，称 $A_1,A_2$ \textbf{缩放等价}，称 $f$ 为 $A_1,A_2$ 间的\textbf{等价映射}：
             \begin{asparaenum}
                 \item \label{step:equivalenceCondition1} $f(1)=1$
-                \item $\bm{\Delta}_{A_2}(\alpha\delta)=\bm{\Delta}_{A_1}(\delta)\cdot \alpha^{-1},\quad\forall \delta\in\mathbb{R}$
-                \item \label{step:equivalenceCondition3} $\widebar{\bm{X}}_{A_2}(f(x))=\widebar{\bm{X}}_{A_1}(x)\cdot \alpha^{-1},\quad\forall x\in\mathbb{R}$ ，其中
+                \item $\mathcal{D}_{A_2}(\alpha\delta)=\mathcal{D}_{A_1}(\delta)\cdot \alpha^{-1},\quad\forall \delta\in\mathbb{R}$
+                \item \label{step:equivalenceCondition3} $\widebar{\mathcal{X}}_{A_2}(f(x))=\widebar{\mathcal{X}}_{A_1}(x)\cdot \alpha^{-1},\quad\forall x\in\mathbb{R}$ ，其中
                     $$
-                        \widebar{\bm{X}}(x)=
+                        \widebar{\mathcal{X}}(x)=
                         \begin{cases} 
                             0 & x\notin [0,1] \\
-                            \bm{X}(x) & x\in[0,1]
+                            \mathcal{X}(x) & x\in[0,1]
                         \end{cases}
                     $$
             \end{asparaenum}
@@ -338,8 +338,8 @@
         \begin{proposition}[缩放等价的实际含义]
             对缩放等价的 $A_1,A_2$ 及其等价映射 $f$ ，有以下关系\footnote{可以直观理解为：现实比赛 $B_1$ （对应于 $A_1$ ）中的分数，经过 $f:x\mapsto\alpha x+\beta$ 的变换之后，变成了现实比赛 $B_2$ （对应于 $A_2$ ）中的分数}：
             \begin{asparaenum}
-                \item $\displaystyle\int\limits_{-\infty}^{\delta_0} \bm{\Delta}_{A_1}(\delta)\mathrm{d}\delta=\displaystyle\int\limits_{-\infty}^{\alpha\delta_0} \bm{\Delta}_{A_2}(\delta)\mathrm{d}\delta,\quad\forall\delta\in\mathbb{R}$
-                \item $\displaystyle\int\limits_{-\infty}^{x_0} \widebar{\bm{X}}_{A_1}(x)\mathrm{d}x=\displaystyle\int\limits_{-\infty}^{f(x_0)} \widebar{\bm{X}}_{A_2}(x)\mathrm{d}x,\quad\forall x\in\mathbb{R}$
+                \item $\displaystyle\int\limits_{-\infty}^{\delta_0} \mathcal{D}_{A_1}(\delta)\mathrm{d}\delta=\displaystyle\int\limits_{-\infty}^{\alpha\delta_0} \mathcal{D}_{A_2}(\delta)\mathrm{d}\delta,\quad\forall\delta\in\mathbb{R}$
+                \item $\displaystyle\int\limits_{-\infty}^{x_0} \widebar{\mathcal{X}}_{A_1}(x)\mathrm{d}x=\displaystyle\int\limits_{-\infty}^{f(x_0)} \widebar{\mathcal{X}}_{A_2}(x)\mathrm{d}x,\quad\forall x\in\mathbb{R}$
             \end{asparaenum}
 
             对于弱缩放等价类似。
@@ -348,24 +348,24 @@
         \end{proposition}
 
         \begin{proof}
-            先来看关于 $\bm{\Delta}_{A_1},\bm{\Delta}_{A_2}$ 的部分：
+            先来看关于 $\mathcal{D}_{A_1},\mathcal{D}_{A_2}$ 的部分：
             \begin{align*}
-                \int\limits_{-\infty}^{\delta_0} \bm{\Delta}_{A_1}(\delta)\mathrm{d}\delta 
-                &=\int\limits_{-\infty}^{\delta_0} \bm{\Delta}_{A_2}(\alpha\delta)\alpha\mathrm{d}\delta \\
-                &=\int\limits_{-\infty}^{\alpha\delta_0} \bm{\Delta}_{A_2}(\alpha\delta)\alpha \mathrm{d}(\alpha\delta)\cdot\alpha^{-1} \\
-                &=\int\limits_{-\infty}^{\alpha\delta_0}\bm{\Delta}_{A_2}(t)\mathrm{d}t
+                \int\limits_{-\infty}^{\delta_0} \mathcal{D}_{A_1}(\delta)\mathrm{d}\delta 
+                &=\int\limits_{-\infty}^{\delta_0} \mathcal{D}_{A_2}(\alpha\delta)\alpha\mathrm{d}\delta \\
+                &=\int\limits_{-\infty}^{\alpha\delta_0} \mathcal{D}_{A_2}(\alpha\delta)\alpha \mathrm{d}(\alpha\delta)\cdot\alpha^{-1} \\
+                &=\int\limits_{-\infty}^{\alpha\delta_0}\mathcal{D}_{A_2}(t)\mathrm{d}t
             \end{align*}
 
-            对于 $\widebar{\bm{X}}_{A_1},\widebar{\bm{X}}_{A_2}$ 同理，这里不再重复。
+            对于 $\widebar{\mathcal{X}}_{A_1},\widebar{\mathcal{X}}_{A_2}$ 同理，这里不再重复。
         \end{proof}
 
         \begin{assumption}
             对现实比赛 $B_1$ （对应理想比赛 $A_1$ ）和 $B_2$ （对应理想比赛 $A_2$ ），如果
-            \begin{asparaitem}
+            \begin{asparaenum}
                 \item \label{step:equivalenceAssumptionCondition1} $B_1,B_2$ 的\emph{规则}都基于COI或IOI赛制
                 \item \label{step:equivalenceAssumptionCondition2} $B_1,B_2$ 的\emph{规则}在除了赛制外的各方面均相同
                 \item \label{step:equivalenceAssumptionCondition3} $B_1,B_2$ 的\emph{参赛人群}相同
-            \end{asparaitem}
+            \end{asparaenum}
 
             则 $A_1,A_2$ 一定缩放等价。如果 $B_1,B_2$ 满足条件\ref{step:equivalenceAssumptionCondition1}和\ref{step:equivalenceAssumptionCondition3}，则 $A_1,A_2$ 一定弱缩放等价。
 
@@ -428,7 +428,7 @@
         \begin{proposition}
             对缩放等价的理想比赛 $A_1,A_2$ 及其等价映射 $f(x)=\alpha x+\beta$\nobreak，有
             $$
-            \alpha=\frac{\mathrm{Stddev}\left[\bm{C}_{A_2}\right]}{\mathrm{Stddev}\left[\bm{C}_{A_1}\right]}
+            \alpha=\frac{\mathrm{Stddev}\left[\mathcal{C}_{A_2}\right]}{\mathrm{Stddev}\left[\mathcal{C}_{A_1}\right]}
             $$
 
             其中 $\mathrm{Stddev}\left[F\right]$ 表示以 $F$ 为概率密度函数的随机变量\footnote{换句话说，这样的随机变量 $Y$ 满足 $\mathrm{Pr}\left[Y\leq t\right]=\int\limits_{-\infty}^t F(s)\mathrm{d}s,\quad\forall t\in\mathbb{R}$}的标准差。
@@ -439,22 +439,22 @@
 
         \begin{proof}
             \begin{align*}
-                \bm{C}_{A_1}(s)
-                &=\int\limits_0^1 \bm{X}_{A_1}(x)\bm{\Delta}_{A_1}(s-x) \mathrm{d}x \\
-                &=\int\limits_{-\infty}^{+\infty} \bm{X}_{A_1}(x)\bm{\Delta}_{A_1}(s-x) \mathrm{d}x \\
-                &=\int\limits_{-\infty}^{+\infty} \left(\widebar{\bm{X}}_{A_2}(\alpha x+\beta)\cdot\alpha\right)\left(\bm{\Delta}_{A_2}(\alpha(s-x))\cdot\alpha\right) \mathrm{d}x\\
-                &=\int\limits_{-\infty}^{+\infty} \alpha^2\widebar{\bm{X}}_{A_2}\left(\alpha x+\beta\right)\bm{\Delta}_{A_2}\left(\alpha s+\beta-\left(\alpha x+\beta\right)\right) \mathrm{d}(\alpha x+\beta)\cdot\alpha^{-1}\\
-                &=\alpha\int\limits_{-\infty}^{+\infty} \widebar{\bm{X}}_{A_2}(t)\bm{\Delta}_{A_2}((\alpha s+\beta)-t)\mathrm{d} t\\
-                &=\alpha\bm{C}_{A_2}(\alpha s+\beta),\quad\forall s\in\mathbb{R}
+                \mathcal{C}_{A_1}(s)
+                &=\int\limits_0^1 \mathcal{X}_{A_1}(x)\mathcal{D}_{A_1}(s-x) \mathrm{d}x \\
+                &=\int\limits_{-\infty}^{+\infty} \widebar{\mathcal{X}}_{A_1}(x)\mathcal{D}_{A_1}(s-x) \mathrm{d}x \\
+                &=\int\limits_{-\infty}^{+\infty} \left(\widebar{\mathcal{X}}_{A_2}(\alpha x+\beta)\cdot\alpha\right)\left(\mathcal{D}_{A_2}(\alpha(s-x))\cdot\alpha\right) \mathrm{d}x\\
+                &=\int\limits_{-\infty}^{+\infty} \alpha^2\widebar{\mathcal{X}}_{A_2}\left(\alpha x+\beta\right)\mathcal{D}_{A_2}\left(\alpha s+\beta-\left(\alpha x+\beta\right)\right) \mathrm{d}(\alpha x+\beta)\cdot\alpha^{-1}\\
+                &=\alpha\int\limits_{-\infty}^{+\infty} \widebar{\mathcal{X}}_{A_2}(t)\mathcal{D}_{A_2}((\alpha s+\beta)-t)\mathrm{d} t\\
+                &=\alpha\mathcal{C}_{A_2}(\alpha s+\beta),\quad\forall s\in\mathbb{R}
             \end{align*}
 
-            设连续型随机变量 $Y_1$ 满足其概率密度函数为 $\bm{C}_{A_1}$ ，$Y_2$ 满足其概率密度函数为 $\bm{C}_{A_1}$ ，则 $\alpha Y_1+\beta$ 与 $Y_2$ 同分布。从而\footnote{这里 $\mathrm{Var}\left[Y\right]$ 表示随机变量 $Y$ 的方差} $\mathrm{Var}\left[Y_2\right]=\mathrm{Var}\left[\alpha Y_1\right]=\alpha^2\cdot\mathrm{Var}\left[Y_1\right]$ ，于是 $\mathrm{Stddev}\left[Y_2\right]=\alpha\cdot\mathrm{Stddev}\left[Y_1\right]$ 。
+            设连续型随机变量 $Y_1$ 满足其概率密度函数为 $\mathcal{C}_{A_1}$ ，$Y_2$ 满足其概率密度函数为 $\mathcal{C}_{A_1}$ ，则 $\alpha Y_1+\beta$ 与 $Y_2$ 同分布。从而\footnote{这里 $\mathrm{Var}\left[Y\right]$ 表示随机变量 $Y$ 的方差} $\mathrm{Var}\left[Y_2\right]=\mathrm{Var}\left[\alpha Y_1\right]=\alpha^2\cdot\mathrm{Var}\left[Y_1\right]$ ，于是 $\mathrm{Stddev}\left[Y_2\right]=\alpha\cdot\mathrm{Stddev}\left[Y_1\right]$ 。
         \end{proof}
 
         结合等价映射的实际含义和命题\ref{prop:alphaAsQuotientOfStddev}，可以得到对前述12个现实比赛 $B_{1\cdots 12}$ 的分数做变换的方法：
         \begin{asparaenum}[\bfseries{步骤} 1.]
             \item 记 $B_{1\cdots 12}$ 对应的理想比赛为 $A_{1\cdots 12}$ 。
-            \item 构造 $A^{\prime}_{1\cdots 12}$ 满足 $A_i$ 与 $A^{\prime}_i$ 缩放等价，且等价映射为 $f_i(x)=1-\frac{1-x}{c\cdot\mathrm{Stddev}\left[\bm{C}_{A_i}\right]}$ 。这里 $c=4$ 为根据实际数据所选取的固定常数，用来避免产生负分数。
+            \item 构造 $A^{\prime}_{1\cdots 12}$ 满足 $A_i$ 与 $A^{\prime}_i$ 缩放等价，且等价映射为 $f_i(x)=1-\frac{1-x}{c\cdot\mathrm{Stddev}\left[\mathcal{C}_{A_i}\right]}$ 。这里 $c=4$ 为根据实际数据所选取的固定常数，用来避免产生负分数。
             \item 则 $A^{\prime}_{1\cdots 12}$ 这12个理想比赛完全相同（即它们的综合分布函数相同），且与 $A_{1\cdots 12}$ 中的每一个缩放等价。
         \end{asparaenum}
 
@@ -605,9 +605,9 @@
 
         \vspace{1.5ex}
 
-        经过上述加工后，我们得到了22093个落在$[0.2,1]$之中的分数数据。由命题\ref{prop:scoreDistributionMeaning}，这些数据应当服从 $\bm{C}_A$ 所描述的概率分布。
+        经过上述加工后，我们得到了22093个落在$[0.2,1]$之中的分数数据。由命题\ref{prop:scoreDistributionMeaning}，这些数据应当服从 $\mathcal{C}_A$ 所描述的概率分布。
         
-        接下来我们将确定函数 $\bm{C}_A:\left(0,1\right)\to\mathbb{R}_{\geq 0}$ ，满足在任何一个区间 $\left(a,b\right)$ 上，$\bm{C}_A$ 的定积分在数值上约等于：分数落在$\left(a,b\right)$中的选手人数，与总人数45400的比值。
+        接下来我们将确定函数 $\mathcal{C}_A:\left(0,1\right)\to\mathbb{R}_{\geq 0}$ ，满足在任何一个区间 $\left(a,b\right)$ 上，$\mathcal{C}_A$ 的定积分在数值上约等于：分数落在$\left(a,b\right)$中的选手人数，与总人数45400的比值。
         
         在对十余种常见函数和常见概率分布进行拟合之后，我们发现对数函数 $f(s)=-\log(s)$ 满足前述要求，且与已获得数据的贴合程度大幅好于所尝试的其他函数。此外，不难验证对数函数 $f(s)=-\log(s)$ 在 $(0,1)$ 上非负且定积分等于 $1$ ，因此是一个合法的分数分布函数。以下将在实际数据和据对数函数计算出的数值之间进行比对，并展示结果。
 
@@ -625,16 +625,16 @@
             \label{fig:fittingNoipScoresByLogCurve}
         \end{figure}
 
-        图\ref{fig:fittingNoipScoresByLogCurve}展示了比对的结果。可以看到全部数据点与曲线贴合紧密，且算得残差平方和约为$9.2\cdot 10^{-5}$，显示出了较好的拟合效果。基于此，我们确定取 $\bm{C}_A(s)=-\log(s)$ 。
+        图\ref{fig:fittingNoipScoresByLogCurve}展示了比对的结果。可以看到全部数据点与曲线贴合紧密，且算得残差平方和约为$9.2\cdot 10^{-5}$，显示出了较好的拟合效果。基于此，我们确定取 $\mathcal{C}_A(s)=-\log(s)$ 。
 
         \begin{proposition}
-            $\bm{C}_A(s)=-\log(s)$ ，其中 $s\in(0,1]$ 且 $A$ 是根据\ref{sec:dataPreprocessingOfNOIP}小节中描述的过程所确定的理想比赛。
+            $\mathcal{C}_A(s)=-\log(s)$ ，其中 $s\in(0,1]$ 且 $A$ 是根据\ref{sec:dataPreprocessingOfNOIP}小节中描述的过程所确定的理想比赛。
             \label{prop:scoreDistributionOfStandardizedNoip}
         \end{proposition}
             
     \subsection{结合初赛的分析}\label{sec:analysisOfBothRounds}
 
-        这一小节将对于复赛所对应的理想比赛 $A$ ，在去除了初赛的筛选性所带来的影响后，计算所得的新的理想比赛（记为 $A^\prime$ ）的分数分布函数。其中，\ref{sec:dataOfPreliminaryRound}小节将给出初赛分数数据的来源，\ref{sec:assumptionsOnPreliminaryRound}小节将结合这些数据给出关于初赛的几个假设；第\ref{sec:estimationOfOverallDistribution}节的其余部分都将依赖于这些假设。\ref{sec:parameterOfDeltaDistribution}小节将计算初复赛（所对应理想比赛）的偏移量分布的标准差，以为\ref{sec:counteringPreliminaryRound}小节中 $\bm{C}_{A^\prime}$ 的计算做好准备。
+        这一小节将对于复赛所对应的理想比赛 $A$ ，在去除了初赛的筛选性所带来的影响后，计算所得的新的理想比赛（记为 $A^\prime$ ）的分数分布函数。其中，\ref{sec:dataOfPreliminaryRound}小节将给出初赛分数数据的来源，\ref{sec:assumptionsOnPreliminaryRound}小节将结合这些数据给出关于初赛的几个假设；第\ref{sec:estimationOfOverallDistribution}节的其余部分都将依赖于这些假设。\ref{sec:parameterOfDeltaDistribution}小节将计算初复赛（所对应理想比赛）的偏移量分布的标准差，以为\ref{sec:counteringPreliminaryRound}小节中 $\mathcal{C}_{A^\prime}$ 的计算做好准备。
 
         \subsubsection{初赛分数数据的获取}\label{sec:dataOfPreliminaryRound}
 
@@ -783,7 +783,7 @@
 
             \begin{proposition}
                 $$
-                \bm{\Delta}_{T\left[F_1\right]}(\delta)=\bm{\Delta}_{F_2}(\delta)=P_{\sigma_F^2}(\delta),\quad\forall \delta\in\mathbb{R}
+                \mathcal{D}_{T\left[F_1\right]}(\delta)=\mathcal{D}_{F_2}(\delta)=P_{\sigma_F^2}(\delta),\quad\forall \delta\in\mathbb{R}
                 $$
                 
                 其中“缩放变换” $T$ 满足 $T\left[F_1\right]=F_2$，常数 $\sigma_F$ 约等于 $0.109$ 。
@@ -815,14 +815,14 @@
 
             记 $F_2^\prime$ 为现实比赛 $B_2$ 在消除初赛的筛选性带来的影响后所对应的理想比赛，则由以上讨论可得：
             $$
-            \bm{C}_{F_2^\prime}(s)\propto\frac{\bm{C}_{F_2}(s)}{1-R_{2\sigma_F^2}(h-s)}=\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)},\quad\forall s\in (0,1]
+            \mathcal{C}_{F_2^\prime}(s)\propto\frac{\mathcal{C}_{F_2}(s)}{1-R_{2\sigma_F^2}(h-s)}=\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)},\quad\forall s\in (0,1]
             $$
 
             上式中之所以使用“正比于”而不是“等于”，是因为分数分布函数表达的是分布“密度”，而不是样本“数量”。计算出对应的比例系数后得到：
             $$
-            \bm{C}_{F_2^\prime}(s)=\gamma\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)},\quad\forall s\in (0,1]
+            \mathcal{C}_{F_2^\prime}(s)=\gamma\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)},\quad\forall s\in (0,1]
             $$
-            其中常数 $\gamma\approx0.549$ ，它使得$\bm{C}_{F_2^\prime}$在$[0,1]$上的定积分等于1。
+            其中常数 $\gamma\approx0.549$ ，它使得$\mathcal{C}_{F_2^\prime}$在$[0,1]$上的定积分等于1。
 
             \begin{figure}
                 \centering
@@ -834,21 +834,21 @@
             图\ref{fig:curvesBeforeAndAfterCountering}分别展示了以下三个函数的图像：
             \begin{asparaitem}
                 \vspace{1ex}
-                \item [\textbf{蓝色}] $f(s)=-\log(s)$，即$\bm{C}_{F_2}(s)$或$\bm{C}_A(s)$。
+                \item [\textbf{蓝色}] $f(s)=-\log(s)$，即$\mathcal{C}_{F_2}(s)$或$\mathcal{C}_A(s)$。
                 \vspace{1ex}
                 \item [\textbf{红色}] $f(s)=\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)}$
                 \vspace{1ex}
-                \item [\textbf{橙色}] $f(s)=\gamma\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)}$，即$\bm{C}_{F_2^\prime}(s)$。
+                \item [\textbf{橙色}] $f(s)=\gamma\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)}$，即$\mathcal{C}_{F_2^\prime}(s)$。
                 \vspace{1ex}
             \end{asparaitem}
 
             \vspace{1.5ex}
 
-            由\ref{sec:assumptionsOnPreliminaryRound}小节中的讨论知，$\bm{C}_A$ 与 $\bm{C}_{F_2}$ 相同。同理，如果定义 $A^\prime$ 为：复赛在去除初赛影响后对应的理想比赛（这里采用\textbf{按原本的方式}解读的定义\ref{def:realIdealCorrespondence}），则 $\bm{C}_{A^\prime}$ 亦与 $\bm{C}_{F_2^\prime}$ 相同。因此有以下命题：
+            由\ref{sec:assumptionsOnPreliminaryRound}小节中的讨论知，$\mathcal{C}_A$ 与 $\mathcal{C}_{F_2}$ 相同。同理，如果定义 $A^\prime$ 为：复赛在去除初赛影响后对应的理想比赛（这里采用\textbf{按原本的方式}解读的定义\ref{def:realIdealCorrespondence}），则 $\mathcal{C}_{A^\prime}$ 亦与 $\mathcal{C}_{F_2^\prime}$ 相同。因此有以下命题：
 
             \begin{proposition}
                 $$
-                \bm{C}_{A^\prime}(s)=\gamma\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)},\quad\forall s\in (0,1]
+                \mathcal{C}_{A^\prime}(s)=\gamma\frac{-\log(s)}{1-R_{2\sigma_F^2}(h-s)},\quad\forall s\in (0,1]
                 $$
 
                 其中常数 $\gamma\approx0.549$ ，且 $A^\prime$ 为复赛在去除初赛影响后对应的理想比赛。
@@ -858,26 +858,26 @@
 
     \subsection{从分数分布还原期望值分布}\label{sec:calculatingXofSecondRound}
 
-        在\ref{sec:counteringPreliminaryRound}小节中得到了 $\bm{C}_{A^\prime}(s)$ 的表达式；这一小节将由此计算 $\bm{X}_{A^\prime}(x)$ 。
-
-        由假设\ref{ass:simplicityOfCodingContests}，$A^\prime$是简单理想比赛；又根据命题\ref{prop:scoreDistributionInSimpleContest}，可从$\bm{X}_{A^\prime}$和$\bm{\Delta}_{A^\prime}$计算出$\bm{C}_{A^\prime}$ 。这一小节将给出从 $\bm{C}_{A^\prime}$ 和 $\bm{\Delta}_{A^\prime}$ 逆推出 $\bm{X}_{A^\prime}$ 的方法。
+        在\ref{sec:counteringPreliminaryRound}小节中得到了 $\mathcal{C}_{A^\prime}(s)$ 的表达式；这一小节将由此计算 $\mathcal{X}_{A^\prime}(x)$ 。
 
         根据定理\ref{thm:normalityOfOffsetsDistribution}，存在 $\sigma>0$ 使得
         $$
-        \bm{\Delta}_{A^\prime}(\delta)=P_{\sigma^2}(\delta),\quad\forall \delta\in\mathbb{R}
+        \mathcal{D}_{A^\prime}(\delta)=P_{\sigma^2}(\delta),\quad\forall \delta\in\mathbb{R}
         $$
 
         进而由命题\ref{prop:scoreDistributionInSimpleContest}得
         \begin{equation}
-            \bm{C}_{A^\prime}(s)=\int\limits_0^1 \bm{X}_{A^\prime}(x)P_{\sigma^2}(s-x)\mathrm{d}x,\quad\forall s\in\mathbb{R}
+            \mathcal{C}_{A^\prime}(s)=\int\limits_0^1 \mathcal{X}_{A^\prime}(x)P_{\sigma^2}(s-x)\mathrm{d}x,\quad\forall s\in\mathbb{R}
             \label{formula:fromXtoC_beforeUpd}
         \end{equation}
 
+        于是，我们可以根据\eqref{formula:fromXtoC_beforeUpd}，由 $\mathcal{C}_{A^\prime}$ 逆推出 $\mathcal{X}_{A^\prime}$ 。
+
         但是在这个问题中，期望分数接近0的选手占了总数中相当的比重，因此若单纯按\eqref{formula:fromXtoC_beforeUpd}计算，则“负分数”问题（在\ref{sec:keyAssumptions}小节末尾有所提及）会变得十分显著。为解决这一问题，我们对于每一名选手，将其分数的概率分布中负的一段截掉，再将剩余部分的概率密度函数乘以某个系数，以使得乘完后剩余部分的总概率为1。若一名选手期望分数为 $x$ ，则容易证明：对该名选手而言，在上述过程中使用的系数$c(x)$等于 $$\left(\int\limits_0^1 P_{\sigma^2}(t-x)\mathrm{d}t\right)^{-1}=\left(R_{\sigma^2}(1-x)-R_{\sigma^2}(0-x)\right)^{-1}$$
 
-        于是$\bm{C}_{A^\prime}$与$\bm{X}_{A^\prime}$间的关系被更新为
+        于是$\mathcal{C}_{A^\prime}$与$\mathcal{X}_{A^\prime}$间的关系被更新为
         \begin{equation}
-            \bm{C}_{A^\prime}(s)=\int\limits_0^1 \bm{X}_{A^\prime}(x)\cdot\frac{P_{\sigma^2}(s-x)}{R_{\sigma^2}(1-x)-R_{\sigma^2}(0-x)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
+            \mathcal{C}_{A^\prime}(s)=\int\limits_0^1 \mathcal{X}_{A^\prime}(x)\cdot\frac{P_{\sigma^2}(s-x)}{R_{\sigma^2}(1-x)-R_{\sigma^2}(0-x)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
             \label{formula:fromXtoC}
         \end{equation}
 
@@ -905,9 +905,9 @@
 
         \vspace{1.5ex}
 
-        从 $\bm{C}_{A^\prime}$ 和 $\bm{\Delta}_{A^\prime}$ 逆推出 $\bm{X}_{A^\prime}$ 难以精确地实现，因此这里只能近似地计算 $\bm{X}_{A^\prime}$ 在许多个离散的点处的点值。
+        从 $\mathcal{C}_{A^\prime}$ 和 $\mathcal{D}_{A^\prime}$ 逆推出 $\mathcal{X}_{A^\prime}$ 难以精确地实现，因此这里只能近似地计算 $\mathcal{X}_{A^\prime}$ 在许多个离散的点处的点值。
 
-        我们将区间 $(0,1]$ 作500等分，并设立500个未知数 $x_{1\cdots 500}$ ，分别表示在500个分点处 $\bm{X}_{A^\prime}$ 的取值。另一方面，我们在\eqref{formula:fromXtoC}中将$s$取遍每一个分点，由此得到500个等式限制；注意到仅凭 $x_{1\cdots 500}$ 无法表示出\eqref{formula:fromXtoC}中的定积分，因此定积分被换成离散的求和。在作了这样的“离散化”之后，原先的等式显然不再成立，因此改为最小化所有每一个等式两端之差的平方和。为了避免无意义的结果，我们额外加入了关于序列 $x_{1\cdots 500}$ 非负性和“光滑性”的限制；后者通过序列 $x_{1\cdots 500}$ 的高阶差分来表示。
+        我们将区间 $(0,1]$ 作500等分，并设立500个未知数 $x_{1\cdots 500}$ ，分别表示在500个分点处 $\mathcal{X}_{A^\prime}$ 的取值。另一方面，我们在\eqref{formula:fromXtoC}中将$s$取遍每一个分点，由此得到500个等式限制；注意到仅凭 $x_{1\cdots 500}$ 无法表示出\eqref{formula:fromXtoC}中的定积分，因此定积分被换成离散的求和。在作了这样的“离散化”之后，原先的等式显然不再成立，因此改为最小化所有每一个等式两端之差的平方和。为了避免无意义的结果，我们额外加入了关于序列 $x_{1\cdots 500}$ 非负性和“光滑性”的限制；后者通过序列 $x_{1\cdots 500}$ 的高阶差分来表示。
 
         上述问题最终归结到了一个二次规划模型的求解；可以证明其为凸二次规划，因此任何一个极值点都是最值点。最优化方法采用SciPy提供的信赖域算法的实现\cite{scipy_minimize}。用于计算的程序和最终算得的点值 $x_{1\cdots 500}$ ，可以在本文开头的链接中找到。
 
@@ -924,15 +924,73 @@
             \label{fig:quadFuncOfXAprime}
         \end{figure}
 
-        至此，我们得到了函数$\bm{X}_{A^\prime}$的表达式。
+        至此，我们得到了函数$\mathcal{X}_{A^\prime}$的表达式。
 
         \begin{theorem}
-            对于 $x\in(\epsilon,1]$ 有 $\bm{X}_{A^\prime}(x)=ax^2+bx+c$ ，其中 $a\approx 1.697,b\approx -3.352,c\approx 1.655$ ，$\epsilon$ 为某个小常数，$A^\prime$ 为复赛在去除初赛影响后对应的理想比赛。
+            对于 $x\in(\epsilon,1]$ 有 $\mathcal{X}_{A^\prime}(x)=ax^2+bx+c$ ，其中 $a\approx 1.697,b\approx -3.352,c\approx 1.655$ ，$\epsilon$ 为某个小常数，$A^\prime$ 为复赛在去除初赛影响后对应的理想比赛。
 
             \label{thm:formulaforXAprime}
         \end{theorem}
 
-        最后，如前文所说，本节的目标旨在估计而非精准计算，所得的结果仅能反映趋势而不保证精确；这对上述定理也同样成立。
+        最后，如本节开头所说，本节的目标旨在估计而非精准计算，所得的结果仅能反映趋势而不保证精确；这对上述定理也同样成立。
+
+\section{关于比赛名次的讨论}
+
+    本节中研究关于比赛名次的性质，这些性质可以为选手的比赛策略制订提供参考。
+
+    \subsection{比赛名次与实际水平的关系}
+
+        一名选手在比赛得分上的波动，导致了他在比赛名次上的波动。考虑到各种奖项的颁发都是以名次而非得分为主要依据，研究选手比赛名次的概率分布就显得格外重要。
+        
+        具体地说，对于 $A,B$ 为一对互相对应的理想比赛和现实比赛，在这一小节中我们考虑：在该场比赛中额外加入一名选手 $p$ （该选手得分的概率分布给定），则他的名次的概率分布为何。特别地，我们研究两个自变量（选手$p$的\emph{期望分数}和\emph{分数波动幅度}）对两个因变量（选手$p$的\emph{期望名次}和\emph{中位名次}）的影响。
+
+        本节中考虑的 $B$ 均为COI/IOI赛制的信息学比赛。于是由定理\ref{thm:normalityOfOffsetsDistribution}， $\Delta_B$ 和选手 $p$ 的得分都服从正态分布。
+
+        \subsubsection{期望分数与比赛名次的关系}
+
+            记随机变量 $C_p$ 为 $p$ 的（与 $B$ 中的选手分数一起，按定义\ref{def:realIdealCorrespondence}中的方式变换过后的）分数，设其服从期望值为 $\mu$ 、标准差为 $\sigma$ 的正态分布，并用 $\mathcal{C}_p$ 来表示其概率密度函数。
+
+            令随机变量 $U_p$ 表示： $B$ 中有多大比例的选手实际得分高于 $p$ 的实际得分（例如 $U_p=0.5$ 表示 $B$ 中恰一半的选手实际得分高于 $p$）。
+
+            令实数 $V_p$ 表示： $B$ 中有多大比例的选手期望得分高于 $p$ 的期望得分（例如 $V_p=0.5$ 表示 $B$ 中恰一半的选手期望得分高于 $p$）。
+
+            \vspace{1.5ex}
+
+            这一小节中将对变化的 $\mu$ ，考察以下两个量的变化趋势：
+            \begin{asparaitem}
+                \item $D_1=\mathrm{E}\left[U_p\right]-V_p$
+                \item $D_2=\mathrm{Med}\left[U_p\right]-V_p$，其中\textbf{中位名次} $\mathrm{Med}\left[U_p\right]$ 满足 $\mathrm{Pr}\left[U_p>\mathrm{Med}\left[U_p\right]\right]=0.5$ 
+            \end{asparaitem}
+
+            \vspace{1.5ex}
+
+            对于前者，容易发现
+            \begin{align*}
+                \mathrm{E}\left[U_p\right]
+                &=\int\limits_{-\infty}^{+\infty} \mathcal{C}_p(t)\left(\int\limits_t^{+\infty} \mathcal{C}_A(s)\mathrm{d}s\right)\mathrm{d}t \\
+                &=\int\limits_{-\infty}^{+\infty} P_{\sigma^2}(t-\mu)\left(\int\limits_t^{+\infty} \mathcal{C}_A(s)\mathrm{d}s\right)\mathrm{d}t \\
+                &=\int\limits_{-\infty}^{+\infty} R_{\sigma^2}(s-\mu)\mathcal{C}_A(s)\mathrm{d}s
+            \end{align*}
+
+            而对于后者有
+            $$
+            \mathrm{Med}\left[U_p\right]=\int\limits_{\mu}^{+\infty} \mathcal{C}_A(s)\mathrm{d}s
+            $$
+
+            这是因为
+            \begin{align*}
+            &\phantom{=\ }\mathrm{Pr}\left[U_p>\int\limits_{\mu}^{+\infty} \mathcal{C}_A(s)\mathrm{d}s\right] \\
+            &=\mathrm{Pr}\left[C_p>\mu\right] \\
+            &=0.5
+            \end{align*}
+
+            由此可以对给定的 $\mu,\sigma,\mathcal{C}_A$ 计算 $D_1,D_2$ 的值。
+
+        \subsubsection{分数波动幅度与比赛名次的关系}
+
+
+
+    \subsection{多日比赛总名次与单日名次的关系}
 
 \section{致谢}
 
