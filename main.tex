@@ -993,7 +993,7 @@
 
             \vspace{1.5ex}
 
-            \begin{figure}
+            \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingD_1D_2.pdf}
                 \caption{$D_1,D_2$的图像，当$A$为定理\ref{thm:formulaforXAprime}中的$A'$时}
@@ -1019,14 +1019,14 @@
 
             为模拟联赛复赛的情况，取 $\textit{thres}=0.1053$ （该数值为\ref{sec:counteringPreliminaryRound}小节中的计算结果），此时 $D_1,D_2$ 的图像如图\ref{fig:plottingD_1D_2forNoip}；为模拟NOI的情况，取 $\textit{thres}=0.7$ （计算发现近几年联赛中得分高于该数值的选手人数与NOI的参赛人数相近，故选择该数值），此时 $D_1,D_2$ 的图像如图\ref{fig:plottingD_1D_2forNoi}。
 
-            \begin{figure}
+            \begin{figure}[p]
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingNoipD_1D_2.pdf}
                 \caption{$D_1,D_2$的图像，当$A$对应联赛复赛时}
                 \label{fig:plottingD_1D_2forNoip}
             \end{figure}
 
-            \begin{figure}
+            \begin{figure}[p]
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingNoiD_1D_2.pdf}
                 \caption{$D_1,D_2$的图像，当$A$对应NOI时}
@@ -1038,12 +1038,50 @@
             观察图\ref{fig:plottingD_1D_2forAprime}、图\ref{fig:plottingD_1D_2forNoip}和图\ref{fig:plottingD_1D_2forNoi}，可以得到以下结论：
 
             \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
-                在一场信息学比赛中，对任何一名期望得分“不太低”的选手，他的期望名次、中位名次，均\textbf{差于}他的实际水平（以期望得分来衡量）在全体参赛选手中的位次。这一现象随着该名选手期望得分的升高而越发明显，在高分段尤其显著。
+                在一场信息学比赛中，对任何一名期望得分“不太低”的选手，他的期望名次、中位名次，均\textbf{差于}他的实际水平（以期望得分来衡量）在全体参赛选手中的位次。这一现象随着该名选手期望得分的升高而越发明显，在高分段、极高分段尤其显著。
             \end{tcolorbox}
 
         \subsubsection{分数波动幅度与比赛名次的关系}
 
+            这一小节中将考察 $\sigma$ 的变化对 $D_1$ 的影响。注意到 $\sigma$ 的变化不影响 $\mathrm{Med}\left[U_p\right]$ 的值，所以这里不考虑 $D_2$ 。
 
+            记 $D_1(\mu_0,\sigma_0)$ 为 $\mu=\mu_0,\sigma=\sigma_0$ 时 $D_1$ 的取值，并类似地定义 $\mathrm{E}\left[U_p\right](\mu_0,\sigma_0)$ ，则我们将考察以下函数：
+            $$
+            F(x,y)=\frac{D_1(x,y)}{\mathrm{E}\left[U_p\right](x,y)}-\frac{D_1(x,0)}{\mathrm{E}\left[U_p\right](x,0)}
+            $$
+
+            这里函数$F$的含义是：$D_1$所对应的相对差值，随$\sigma$的变化而产生的增量。
+
+            \vspace{1.5ex}
+
+            上一小节中对三个比赛分别绘制了 $D_1,D_2$ 的图像；这里我们对同样的三个比赛绘制 $F$ 的图像，见图\ref{fig:plottingD_1D_2forAprimeWrtSigma}、图\ref{fig:plottingD_1D_2forNoipWrtSigma}和图\ref{fig:plottingD_1D_2forNoiWrtSigma}。注意图中坐标轴的方向。
+
+            \begin{figure}[hp]
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingD_1D_2WrtSigma.pdf}
+                \caption{$F$的图像，当$A$为定理\ref{thm:formulaforXAprime}中的$A'$时}
+                \label{fig:plottingD_1D_2forAprimeWrtSigma}
+            \end{figure}
+
+            \begin{figure}[hp]
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingNoipD_1D_2WrtSigma.pdf}
+                \caption{$F$的图像，当$A$对应联赛复赛时}
+                \label{fig:plottingD_1D_2forNoipWrtSigma}
+            \end{figure}
+
+            \begin{figure}[hp]
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingNoiD_1D_2WrtSigma.pdf}
+                \caption{$F$的图像，当$A$对应NOI时}
+                \label{fig:plottingD_1D_2forNoiWrtSigma}
+            \end{figure}
+
+            观察三个图像，可以得到以下结论：
+
+            \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
+                在一场信息学比赛中，对任何一名期望得分“不太低”的选手，若他的期望得分固定，则当他的分数分布的标准差提高时，他的期望名次变差。这一现象在高分段（不包括极高分段）尤其显著。
+            \end{tcolorbox}
 
     \subsection{多日比赛总名次与单日名次的关系}
 
