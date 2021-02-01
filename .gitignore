@@ -2,7 +2,7 @@
 *.log
 *.out
 *.gz
-*.tmp
+*tmp*
 *synctex*
 *lock.*
 *deprecated*

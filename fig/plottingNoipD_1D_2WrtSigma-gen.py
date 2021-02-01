@@ -46,37 +46,38 @@ ally=np.arange(0.02,0.2,0.005)
 lenx,leny=len(allx),len(ally)
 Vforx=[integrate.quad(X,x,1)[0] for x in allx]
 nz=np.empty((leny,lenx)) # rel
+ex=np.empty((leny,lenx))
 allx,ally=np.meshgrid(allx,ally)
 print(allx.shape,ally.shape)
 for i in range(leny):
     for j in range(lenx):
-        ex=Ex(allx[i,j],newsigma=ally[i,j])
-        # print(ex-Vforx[j],ex)
-        nz[i,j]=(ex-Vforx[j])/ex
-        # print(nz[i,j])
-for i in range(1,leny):
+        ex[i,j]=Ex(allx[i,j],newsigma=ally[i,j])
+for i in range(leny):
     for j in range(lenx):
-        nz[i,j]-=nz[0,j]
-for j in range(lenx):
-    nz[0,j]=0
+        nz[i,j]=(ex[i,j]-ex[0,j])/(ex[i,j]+ex[0,j])
 partmin=1
 for i in range(1,leny):
     for j in range(lenx):
         if allx[i,j]>0.5:
             partmin=min(partmin,nz[i,j])
 print(partmin)
+def doplot(el,az,ax):
+    ax.plot_surface(allx,ally,nz,cmap=cm.coolwarm)#.reversed())
+    ax.contour(allx,ally,nz,offset=-0.3,zdir='z',cmap=cm.coolwarm,levels=12,linewidths=1)#.reversed())
+    # ax.plot_surface(allx,ally,np.empty_like(nz),cmap='rainbow')
+    ax.set_xlabel('$\\mu$')
+    ax.set_ylabel('$\\sigma$')
+    ax.set_zlabel('   相对差值   ')#,labelpad=9.5)
+    ax.set_xlim(0,1)
+    ax.set_ylim(0.2,0)
+    ax.set_zlim(min(-0.3,np.min(nz)),np.max(nz))
+    if el is not None:
+        ax.view_init(elev=el,azim=az)
+    ax.yaxis.set_major_locator(MultipleLocator(0.06))
+    ax.zaxis.set_major_locator(MultipleLocator(0.2))
+
 fig=plt.figure()
-ax=fig.add_subplot(111,projection='3d')
-ax.plot_surface(allx,ally,nz,cmap=cm.coolwarm)#.reversed())
-ax.contour(allx,ally,nz,offset=-0.45,zdir='z',cmap=cm.coolwarm)#.reversed())
-# ax.plot_surface(allx,ally,np.empty_like(nz),cmap='rainbow')
-ax.set_xlabel('$\\mu$')
-ax.set_ylabel('$\\sigma$')
-ax.set_zlabel('相对差值随$\\sigma$的增量')#,labelpad=9.5)
-ax.set_xlim(1,0)
-ax.set_ylim(0.2,0)
-ax.set_zlim(min(-0.45,np.min(nz)),np.max(nz))
-ax.yaxis.set_major_locator(MultipleLocator(0.06))
-ax.zaxis.set_major_locator(MultipleLocator(0.1))
+doplot(None,None,fig.add_subplot(111,projection='3d'))
+# doplot(70,-70,fig.add_subplot(122,projection='3d'))
 # plt.hlines(0,0,1,colors='black',linestyles='-',linewidth=0.5)
 plt.savefig(fname="plottingNoipD_1D_2WrtSigma.pdf",format="pdf",bbox_inches='tight',pad_inches=0.05)

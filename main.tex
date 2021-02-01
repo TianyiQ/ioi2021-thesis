@@ -71,7 +71,7 @@
             \end{samepage}
         \end{asparaenum}
 
-        \begin{figure}
+        \begin{figure}[htbp]
             \centering
             \begin{tikzcd}[column sep=large]
                 {} \arrow[r, ">50000"] & a \arrow[d, "20000"]                                     &     \\
@@ -91,7 +91,7 @@
 
         赛制即比赛的进行方式和比赛规则。信息学竞赛中采用笔试、COI赛制（机试）、IOI赛制（机试）这三种不同的赛制，表\ref{tab:formats}给出了每种赛制的特点和先前提到的比赛所分别采用的赛制。
 
-        \begin{table}
+        \begin{table}[htbp]
             \centering
             \settabularsize{
             \begin{tabular}{@{}llllll@{}}
@@ -402,7 +402,7 @@
 
         这些比赛的参赛情况见表\ref{tab:ctt18to20}。
 
-        \begin{table}
+        \begin{table}[htbp]
             \centering
             \settabularsize{
             \begin{tabular}{@{}lcccc@{}}
@@ -505,7 +505,7 @@
 
         最后注意到 $$\int\limits_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x=R_{\sigma^2}(t+0.05)-R_{\sigma^2}(t-0.05)$$ 于是在进行拟合的过程中我们可以方便地计算这一定积分。
 
-        \begin{figure}
+        \begin{figure}[htbp]
             \centering
             \includegraphics[width=\textwidth]{fig/fittingOffsets.pdf}
             \caption{散点图和拟合结果}
@@ -516,7 +516,7 @@
 
         图\ref{fig:fittingOffsetsByNormalDistribution}展示了拟合的结果。可以看到，除了约$3$个数据点以外，其余数据点均与曲线贴合紧密。为了验证这些数据是否确实服从正态分布，还需绘制Q-Q图来进行检验。
 
-        \begin{figure}
+        \begin{figure}[hp]
             \centering
             \includegraphics[width=\textwidth]{fig/QQPlot.pdf}
             \caption{Q-Q图，关于比赛分数差值数据和正态分布绘制}
@@ -567,7 +567,7 @@
 
         \vspace{1.5ex}
 
-        \begin{table}
+        \begin{table}[htbp]
             \centering
             \settabularsize{
             \begin{tabular}{@{}lccccc@{}}
@@ -618,7 +618,7 @@
             \item [\textbf{步骤 4.}] 检查函数 $$f(t)=\int\limits_{t-0.05}^{t+0.05}-\log(x)\mathrm{d}x$$ 的图像是否与 $t-c(t)$ 散点图吻合。
         \end{enumerate}
 
-        \begin{figure}
+        \begin{figure}[htbp]
             \centering
             \includegraphics[width=\textwidth]{fig/fittingNoipScores.pdf}
             \caption{散点图和拟合结果}
@@ -672,7 +672,7 @@
                 \item 对每一组，以复赛平均分为横坐标、初赛平均分为纵坐标，将数据点画在二维平面上，并将这些数据点连成折线图。
             \end{asparaenum}
 
-            \begin{figure}
+            \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingAvgScores.pdf}
                 \caption{平均分折线图}
@@ -772,7 +772,7 @@
 
             至此，问题完全转化为一个最优化问题。最优化方法采用SciPy提供的BFGS算法的实现\cite{scipy_minimize}，算得$\sigma\approx 0.109$。
 
-            \begin{figure}
+            \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingNormalDistriOfDifference.pdf}
                 \caption{差值的分布情况}
@@ -824,7 +824,7 @@
             $$
             其中常数 $\gamma\approx0.549$ ，它使得$\mathcal{C}_{F_2^\prime}$在$[0,1]$上的定积分等于1。
 
-            \begin{figure}
+            \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingNewNoipScores.pdf}
                 \caption{消除初赛影响前后的分数分布函数}
@@ -917,7 +917,7 @@
             \item 在其余位置处，点值构成一条平滑的曲线。计算发现这些点值近似地符合二次函数 $f(x)=ax^2+bx+c$ ，其中 $a\approx 1.697,b\approx -3.352,c\approx 1.655$ 。图\ref{fig:quadFuncOfXAprime}展示了该函数的图像。
         \end{asparaenum}
 
-        \begin{figure}
+        \begin{figure}[htbp]
             \centering
             \includegraphics[width=\textwidth]{fig/plottingQuadFuncOfXAprime.pdf}
             \caption{二次函数$f(x)=ax^2+bx+c$}
@@ -1010,7 +1010,7 @@
 
             由此易知，对于一名期望分数为 $\mu_q\in [0,1]$ 的选手 $q$ ，他达到分数线的概率为 $1-R_{(0.078)^2}(\textit{thres}-\mu_q)$ 。进而得到：
             $$
-            \mathcal{X}_A(x)\propto (ax^2+bx+c)(1-R_{(0.078)^2}(\textit{thres}-x)),\quad\forall x\in [0,1]
+            \mathcal{X}_A(x)\propto (ax^2+bx+c)\left(1-R_{(0.078)^2}(\textit{thres}-x)\right),\quad\forall x\in [0,1]
             $$
 
             其中 $a,b,c$ 为定理\ref{thm:formulaforXAprime}中的系数。
@@ -1038,23 +1038,23 @@
             观察图\ref{fig:plottingD_1D_2forAprime}、图\ref{fig:plottingD_1D_2forNoip}和图\ref{fig:plottingD_1D_2forNoi}，可以得到以下结论：
 
             \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
-                在一场信息学比赛中，对任何一名期望得分“不太低”的选手，他的期望名次、中位名次，均\textbf{差于}他的实际水平（以期望得分来衡量）在全体参赛选手中的位次。这一现象随着该名选手期望得分的升高而越发明显，在高分段、极高分段尤其显著。
+                在一场信息学比赛中，对任何一名期望得分“不太低”的选手，他的期望名次、中位名次，均\textbf{差于}他的实际水平（以期望得分来衡量）在全体参赛选手中的位次。这一现象随着该名选手期望得分的升高而越发明显，在高分段尤其显著。
             \end{tcolorbox}
 
         \subsubsection{分数波动幅度与比赛名次的关系}
 
-            这一小节中将考察 $\sigma$ 的变化对 $D_1$ 的影响。注意到 $\sigma$ 的变化不影响 $\mathrm{Med}\left[U_p\right]$ 的值，所以这里不考虑 $D_2$ 。
+            这一小节中将考察 $\sigma$ 的变化对 $\mathrm{E}\left[U_p\right]$ 的影响。注意到 $\sigma$ 的变化不影响 $\mathrm{Med}\left[U_p\right]$ 的值，所以这里不考虑 $\mathrm{Med}\left[U_p\right]$ 。
 
-            记 $D_1(\mu_0,\sigma_0)$ 为 $\mu=\mu_0,\sigma=\sigma_0$ 时 $D_1$ 的取值，并类似地定义 $\mathrm{E}\left[U_p\right](\mu_0,\sigma_0)$ ，则我们将考察以下函数：
+            记 $\mathrm{E}\left[U_p\right](\mu_0,\sigma_0)$ 为 $\mu=\mu_0,\sigma=\sigma_0$ 时 $\mathrm{E}\left[U_p\right]$ 的取值，则我们将考察以下函数：
             $$
-            F(\mu_0,\sigma_0)=\frac{D_1(\mu_0,\sigma_0)}{\mathrm{E}\left[U_p\right](\mu_0,\sigma_0)}-\frac{D_1(\mu_0,0)}{\mathrm{E}\left[U_p\right](\mu_0,0)}
+            F(\mu_0,\sigma_0)=\frac{\mathrm{E}\left[U_p\right](\mu_0,\sigma_0)-\mathrm{E}\left[U_p\right](\mu_0,0)}{\mathrm{E}\left[U_p\right](\mu_0,\sigma_0)+\mathrm{E}\left[U_p\right](\mu_0,0)}
             $$
 
-            这里函数$F$的含义是：$D_1$所对应的相对差值，随$\sigma$的变化而产生的增量。
+            函数$F$的含义是$\mathrm{E}\left[U_p\right]$随$\sigma$的变化而产生的增量；这里的增量用$\mathrm{E}\left[U_p\right](\mu_0,\sigma_0)$与$\mathrm{E}\left[U_p\right](\mu_0,0)$的相对差值来描述，由于二者中任何一者都可能远小于对方，故分母上取二者之和而非二者之一。
 
             \vspace{1.5ex}
 
-            上一小节中对三个比赛分别绘制了 $D_1,D_2$ 的图像；这里我们对同样的三个比赛绘制 $F$ 的图像，见图\ref{fig:plottingD_1D_2forAprimeWrtSigma}、图\ref{fig:plottingD_1D_2forNoipWrtSigma}和图\ref{fig:plottingD_1D_2forNoiWrtSigma}。图中底部的线条为上方曲面的“等高线”。此外请注意图中坐标轴的方向。
+            上一小节中对三个比赛分别绘制了 $D_1,D_2$ 的图像；这里我们对同样的三个比赛绘制 $F$ 的图像，见图\ref{fig:plottingD_1D_2forAprimeWrtSigma}、图\ref{fig:plottingD_1D_2forNoipWrtSigma}和图\ref{fig:plottingD_1D_2forNoiWrtSigma}。图中底部的线条为上方曲面的等高线。此外请注意图中坐标轴的方向。
 
             \begin{figure}[hp]
                 \centering
@@ -1080,10 +1080,70 @@
             观察三个图像，可以得到以下结论：
 
             \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
-                在一场信息学比赛中，对任何一名期望得分“不太低”的选手，若他的期望得分固定，则当他的分数分布的标准差提高时，他的期望名次变差。这一现象在高分段（不包括极高分段）尤其显著。
+                在一场信息学比赛中，对任何一名期望得分“不太低”的选手，若他的期望得分固定，则当他的分数分布的标准差提高时，他的期望名次变差。这一现象随着该名选手期望得分的升高而越发明显，在高分段尤其显著。
             \end{tcolorbox}
 
     \subsection{多日比赛总名次与单日名次的关系}
+
+        大多数信息学比赛都包括两天或更多的比赛日，而对于其中的大部分比赛，选手在每日考试后也都能直接或间接地知道自己当日的大致排名。这种情况下，一名选手在先前的考试日中的排名，对他在之后的考试日中的策略制定是一个重要信息。但要想有效利用这一信息，首先需要了解多日比赛总名次与单日名次之间的关系，而这正是本小节的目标。
+
+        \vspace{1.5ex}
+
+        先给出这一小节用到的模型：现实比赛 $B_{1\cdots k}$ 分别表示每一天的比赛，它们对应同一个理想比赛 $A$ 。一名选手的\emph{总分}定义为：他在 $B_{1\cdots k}$ 中的分数 $\textit{score}_{1\cdots k}$ （满足 $\textit{score}_i\in[0,1]$ ）的加权平均数 $w_1\textit{score}_1+\cdots+w_k\textit{score}_k$ （满足 $w_1+\cdots+w_k=1$ ）。
+
+        在实际中，每天的比赛在难度、区分度上可能有差异，因此仅可以认为各天的比赛（所对应的理想比赛）\emph{缩放等价}而不是完全相同；但通过引入权值 $w_{1\cdots k}$ ，可以将这些比赛“标准化”。也就是说, $w_{1\cdots k}$ 在此处相当于“缩放系数”，与等价映射中的一次项系数作用相同。
+
+        设 $\Delta_{B_i}$ 服从正态分布 $N(0,\sigma_B^2)$ 。以下我们关注比赛中的一名特定选手 $p$ ，记他各天的分数为 $\textit{score}_{1\cdots k}$ 、各天的名次为 $\textit{rank}_{1\cdots k}$ （满足 $\textit{rank}_i\in [0,1]$ ，定义方式与上一节中的 $U_p$ 相同），我们将尝试从 $\textit{rank}_{1\cdots k}$ 近似地计算 $p$ 的\emph{总分}名次 $\textit{rank}_{total}\in [0,1]$ 。
+        
+        这里我们还要求：
+        \begin{asparaitem}
+            \item $\mathcal{X}_A(x)=\left(a^\prime x^2+b^\prime x+c^\prime\right)\left(1-R_{\sigma_P^2}(\textit{thres}-x)\right)$ ，其中 $(a^\prime,b^\prime,c^\prime)\propto (a,b,c)$ 为常系数、$\textit{thres},\sigma_P$ 为某两个不关心其具体取值的常数。
+            \item 注意到对足够大的 $x$ （不妨划定为 $x\geq T$ ，其中 $T$ 为某个不关心其具体取值的常数）有 $\mathcal{X}_A(x)\approx a^\prime x^2+b^\prime x+c^\prime$ 。我们要求 $p$ 的得分和名次足够高，以致于 $\mathcal{X}_A(x)$ 在 $x<T$ 的部分对答案几乎没有影响。
+        \end{asparaitem}
+
+        \subsubsection{$\sigma_B=0$的情况}
+
+            在这一小节中，假设 $\sigma_B=0$ 。严格地说， $\sigma_B$ 必须是正数，否则 $N(0,\sigma^2)$ 就并非良定义；但这里 $\sigma_B=0$ 仅用来表达 $\mathcal{C}_A=\mathcal{X}_A$ ，故暂且忽略这一问题。
+
+            通过对系数 $a^\prime,b^\prime,c^\prime$ 的计算，发现 $a^\prime x^2+b^\prime x+c^\prime\approx a^\prime(x-1)^2$ ，于是可以得到：
+            \begin{align*}
+                \textit{rank}_i
+                &=\int\limits_{\textit{score}_i}^1 \mathcal{C}_A(s) \mathrm{d}s \\
+                &\approx\int\limits_0^{1-\textit{score}_i} a^\prime s^2 \mathrm{d}s \\
+                &=\frac{a^\prime\left(1-\textit{score}_i\right)^3}3
+            \end{align*}
+
+            所以有
+            $$
+            1-\textit{score}_i\approx\sqrt[3]{\frac{3\textit{rank}_i}{a^\prime}}
+            $$
+
+            进而 $p$ 的总分 $\textit{score}_{total}$ 满足
+            $$
+            1-\textit{score}_{total}\approx\sum\limits_{i=1}^k w_i\sqrt[3]{\frac{3\textit{rank}_i}{a^\prime}}
+            $$
+
+            最后
+            \begin{align*}
+                \textit{rank}_{total}
+                &\approx\frac{a^\prime(1-\textit{score}_{total})^3}3 \\
+                &\approx\frac{a^\prime}{3}\cdot\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\frac{3\textit{rank}_i}{a^\prime}}\right)^3 \\
+                &=\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)^3
+            \end{align*}
+
+            注意到上式的左右两边是齐次的，所以，若将所有$\textit{rank}_{1\cdots k}$和$\textit{rank}_{total}$同时乘以常数，则正确性不会受影响。因此即使取$\textit{rank}_{1\cdots k}$和$\textit{rank}_{total}$为“原始排名”（即分数高于 $p$ 的人数），上式仍然成立。
+            
+            \vspace{1.5ex}
+
+            得到结论：
+
+            \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
+                若忽略参赛选手分数的波动（也就是假设，除 $p$ 以外的任何选手在任何一天中都恰会考出自己的期望得分），则对于得分足够高的选手 $p$ ，其总名次约等于每日名次的\emph{$1/3$次加权幂平均}。
+            \end{tcolorbox}
+
+        \subsubsection{$\sigma_B>0$的情况}
+
+            
 
 \section{致谢}
 
