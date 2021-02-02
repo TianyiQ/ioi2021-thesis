@@ -496,7 +496,7 @@
         \begin{enumerate}[leftmargin=6em]
             \item [\textbf{步骤 1.}] 对于 $t=-1.0,-0.9,\cdots,1.0$ ，计算：落在 $\left[t-0.05,t+0.05\right)$ 中的数值个数与总个数440的比值。这个比值记作 $c(t)$ 。
             \item [\textbf{步骤 2.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
-            \item [\textbf{步骤 3.}] 选取合适的参数 $\sigma>0$ ，以使得函数 $$ f(t)=\displaystyle\int\limits_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x$$ 的图像与这些 $t-c(t)$ 数据点尽可能贴近。
+            \item [\textbf{步骤 3.}] 选取合适的参数 $\sigma>0$ ，以使得函数 $$ f(t)=\displaystyle\int\limits_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x$$ 的图像与这些 $t-c(t)$ 数据点尽可能贴近（即残差平方和最小）。
         \end{enumerate}
 
         这里 $P_{\sigma^2}$ 表示期望值为0、方差为 $\sigma^2$ 的正态分布（用 $N(0,\sigma^2)$ 表示）的概率密度函数，满足 $$P_{\sigma^2}(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{x^2}{2\sigma^2}\right)}$$
@@ -1093,7 +1093,7 @@
 
         在实际中，每天的比赛在难度、区分度上可能有差异，因此仅可以认为各天的比赛（所对应的理想比赛）\emph{缩放等价}而不是完全相同；但通过引入权值 $w_{1\cdots k}$ ，可以将这些比赛“标准化”。也就是说, $w_{1\cdots k}$ 在此处相当于“缩放系数”，与等价映射中的一次项系数作用相同。
 
-        设 $\Delta_{B_i}$ 服从正态分布 $N(0,\sigma_B^2)$ 。以下我们关注比赛中的一名特定选手 $p$ ，记他各天的分数为 $\textit{score}_{1\cdots k}$ 、各天的名次为 $\textit{rank}_{1\cdots k}$ （满足 $\textit{rank}_i\in [0,1]$ ，定义方式与上一节中的 $U_p$ 相同），我们将尝试从 $\textit{rank}_{1\cdots k}$ 近似地计算 $p$ 的\emph{总分}名次 $\textit{rank}_{total}\in [0,1]$ 。
+        设 $\Delta_{B_i}$ 服从正态分布 $N(0,\sigma_B^2)$ 。以下我们关注比赛中的一名特定选手 $p$ ，记他各天的分数为 $\textit{score}_{1\cdots k}$ 、各天的名次为 $\textit{rank}_{1\cdots k}$ （满足 $\textit{rank}_i\in [0,1]$ ，定义方式与上一节中的 $U_p$ 相同），我们将尝试从 $\textit{rank}_{1\cdots k}$ 近似地计算 $p$ 的\emph{总分}名次 $\textit{rank}_{\textit{total}}\in [0,1]$ 。
         
         这里我们还要求：
         \begin{asparaitem}
@@ -1118,20 +1118,20 @@
             1-\textit{score}_i\approx\sqrt[3]{\frac{3\textit{rank}_i}{a^\prime}}
             $$
 
-            进而 $p$ 的总分 $\textit{score}_{total}$ 满足
+            进而 $p$ 的总分 $\textit{score}_{\textit{total}}$ 满足
             $$
-            1-\textit{score}_{total}\approx\sum\limits_{i=1}^k w_i\sqrt[3]{\frac{3\textit{rank}_i}{a^\prime}}
+            1-\textit{score}_{\textit{total}}\approx\sum\limits_{i=1}^k w_i\sqrt[3]{\frac{3\textit{rank}_i}{a^\prime}}
             $$
 
             最后
             \begin{align*}
-                \textit{rank}_{total}
-                &\approx\frac{a^\prime(1-\textit{score}_{total})^3}3 \\
+                \textit{rank}_{\textit{total}}
+                &\approx\frac{a^\prime(1-\textit{score}_{\textit{total}})^3}3 \\
                 &\approx\frac{a^\prime}{3}\cdot\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\frac{3\textit{rank}_i}{a^\prime}}\right)^3 \\
                 &=\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)^3
             \end{align*}
 
-            注意到上式的左右两边是齐次的，所以，若将所有$\textit{rank}_{1\cdots k}$和$\textit{rank}_{total}$同时乘以常数，则正确性不会受影响。因此即使取$\textit{rank}_{1\cdots k}$和$\textit{rank}_{total}$为“原始排名”（即分数高于 $p$ 的人数），上式仍然成立。
+            注意到上式的左右两边是齐次的，所以，若将所有$\textit{rank}_{1\cdots k}$和$\textit{rank}_{\textit{total}}$同时乘以常数，则正确性不会受影响。因此即使取$\textit{rank}_{1\cdots k}$和$\textit{rank}_{\textit{total}}$为“原始排名”（即分数高于 $p$ 的人数），上式仍然成立。
             
             \vspace{1.5ex}
 
@@ -1141,9 +1141,114 @@
                 若忽略参赛选手分数的波动（也就是假设，除 $p$ 以外的任何选手在任何一天中都恰会考出自己的期望得分），则对于得分足够高的选手 $p$ ，其总名次约等于每日名次的\emph{$1/3$次加权幂平均}。
             \end{tcolorbox}
 
+            结合幂平均不等式\cite{wiki_powerMean}，可以得到如下推论：
+            
+            \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
+                在上一结论的条件下，选手 $p$ 的总名次一定不差于（即数值上不大于）每日名次的加权平均数，取等仅当每日名次相同。更进一步，在名次加权平均数固定的情况下，名次波动幅度越大，总名次一般越好（即数值上越小）；换句话说，对单场比赛而言，前进$n$名对总名次的正面影响，一般大于后退$n$名对总名次的负面影响。
+            \end{tcolorbox}
+
         \subsubsection{$\sigma_B>0$的情况}
 
+            这一小节中考虑 $\sigma_B>0$ 的情况。
+
+            \vspace{1.5ex}
             
+            首先，为了能够直接确定系数 $a^\prime,b^\prime,c^\prime$ ，我们不妨取 $\textit{thres}$ 为 $-\infty$ ，也就是说对任何 $x\in [0,1]$ 有 $\mathcal{X}_A(x)=a^\prime x^2+b^\prime x+c^\prime$ 。注意到对于$\mathcal{X}_A(x)$在$x\in [T,1]$的部分而言，$\textit{thres}$ 的变化只相当于对这一部分函数值作等比例缩放；而稍后会看到，对 $\mathcal{X}$ 和 $\mathcal{C}$ 的函数值的等比例缩放，不会影响后续推导的正确性。因此，钦定 $\textit{thres}$ 的取值不会影响一般性。
+
+            \vspace{1.5ex}
+
+            为了使得后续推导成为可能，需要先对函数$\mathcal{C}_A$作近似，以简化其形式。
+
+            对于确定的 $\sigma_B$ ，可以计算得到实数 $r(\sigma_B)\geq 1$ 和 $a(\sigma_B)\geq 0$ ，以使得函数 $f_{\sigma_B}(s)=a(\sigma_B)(r(\sigma_B)-s)^2$ 的图像与 $\mathcal{C}_A$ 尽可能贴近（即残差平方和最小）。实验发现：
+            $$
+            \max\limits_{\sigma\in (0,0.4],s\in [0.6,1]} \left|f_{\sigma_B}(s)-\mathcal{C}_A(s)\right|\approx 0.02
+            $$
+
+            由此可见，这一近似的效果十分优秀。回忆到我们只关注“足够高”的那一部分分数分布，因此在上式中只考虑 $s\geq 0.6$ 。
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingAandR.pdf}
+                \caption{函数$a(\sigma)$和$r(\sigma)$的图像}
+                \label{fig:plottingAandR}
+            \end{figure}
+
+            图\ref{fig:plottingAandR}展示了函数$a(\sigma)$和$r(\sigma)$的图像。可以看到，前者大体上递降，而后者则递增。
+
+            \vspace{1.5ex}
+
+            将全部 $k$ 个比赛合并视为一个现实比赛 $B_{\textit{total}}$ ，以下计算（服从正态分布的）随机变量 $\Delta_{B_{\textit{total}}}$ 的标准差 $\sigma_{\textit{total}}$ 。
+            \begin{align*}
+                \sigma_{\textit{total}}
+                &=\mathrm{Stddev}\left[\sum\limits_{i=1}^k w_i\Delta_{B_i}\right] \\
+                &=\sqrt{\sum\limits_{i=1}^k \mathrm{Stddev}\left[w_i\Delta_{B_i}\right]^2} \\
+                &=\sqrt{\sum\limits_{i=1}^k w_i^2\sigma_B^2} \\
+                &=\sqrt{\sum\limits_{i=1}^k w_i^2}\cdot\sigma_B
+            \end{align*}
+
+            特别地，当权重 $w_i$ 全部相等时，$\sigma_{\textit{total}}=k^{-1/2}\sigma_B$ 。
+
+            \vspace{1.5ex}
+
+            接下来类比上一小节进行推导。注意到$\mathcal{C}_A(s)$在$s\in (1,r]$的部分也要纳入考虑。
+
+            \begin{align*}
+                \textit{rank}_i
+                &=\int\limits_{\textit{score}_i}^r(\sigma_B) \mathcal{C}_A(s) \mathrm{d}s \\
+                &\approx\int\limits_0^{r(\sigma_B)-\textit{score}_i} a(\sigma_B) s^2 \mathrm{d}s \\
+                &=\frac{a(\sigma_B)\left(r(\sigma_B)-\textit{score}_i\right)^3}3\\
+                \\
+                r(\sigma_B)-\textit{score}_{\textit{total}}
+                &=\sum\limits_{i=1}^k w_i\left(r(\sigma_B)-\textit{score}_i\right) \\
+                &\approx\sum\limits_{i=1}^k w_i\sqrt[3]{\frac{3\textit{rank}_i}{a(\sigma_B)}} \\
+                \\
+                \textit{rank}_{\textit{total}}
+                &\approx\frac{a(\sigma_{\textit{total}})(r(\sigma_{\textit{total}})-\textit{score}_{\textit{total}})^3}3 \\
+                &\approx\frac{a(\sigma_{\textit{total}})}{3}\cdot\left(r(\sigma_{\textit{total}})-r(\sigma_B)+\sum\limits_{i=1}^k w_i\sqrt[3]{\frac{3\textit{rank}_i}{a(\sigma_B)}}\right)^3 \\
+                &=\frac{a(\sigma_{\textit{total}})\left(r(\sigma_{\textit{total}})-r(\sigma_B)\right)}{3}+\frac{a(\sigma_{\textit{total}})}{a(\sigma_B)}\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)^3
+            \end{align*}
+
+            发现总名次$\textit{rank}_{\textit{total}}$是关于$\sum_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}$ 的一次函数。接着注意到$\sigma_{\textit{total}}<\sigma_B$，故由$a(\sigma),r(\sigma)$的增减性可知，该一次函数的一次项系数大于等于1，而常数项小于等于0；因此自变量和因变量的大小关系无法直接确定。
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingKandB.pdf}
+                \caption{一次函数的系数和大小关系改变的阈值}
+                \label{fig:plottingKandB}
+            \end{figure}
+
+            图\ref{fig:plottingKandB}展示了以下4个量关于$\sigma_B$的图像：
+            \begin{asparaitem}
+                \vspace{1ex}
+                \item [\textbf{蓝色}] 在\emph{典型情况}下（指的是$k=2,w_1=w_2$时的情况，此时$\sigma_{\textit{total}}=2^{-1/2}\sigma_B$）的一次项系数 $K=a(\sigma_{\textit{total}})/a(\sigma_B)$ 。
+                \vspace{1ex}
+                \item [\textbf{红色}] 在\emph{典型情况}下的常数项 $B=a(\sigma_{\textit{total}})\left(r(\sigma_{\textit{total}})-r(\sigma_B)\right)/3$ 。
+                \vspace{1ex}
+                \item [\textbf{黄色}] 最大的 $m\in [0,1]$ 满足在\emph{典型情况}下有 $Km+B<m$ 。
+                \vspace{1ex}
+                \item [\textbf{绿色}] 最大的 $m\in [0,1]$ 满足在\emph{任何情况}下（对$\sigma_{\textit{total}}$只需符合$\sigma_{\textit{total}}<\sigma_B$即可）都有 $Km+B<m$ 。
+                \vspace{1ex}
+            \end{asparaitem}
+
+            观察到绿色曲线的纵坐标始终没有明显低于0.25，因此可以认为
+            $$
+            \left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}<0.25\right)\Rightarrow
+            \left(\textit{rank}_{\textit{total}}<\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)
+            $$
+
+            回忆到先前要求 $p$ 的得分“足够高”，因此我们暂不考虑 $\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\geq 0.25$ 的情况。
+
+            在本小节的开头，我们作了 $\textit{thres}=-\infty$ 的假设。注意到随着 $\textit{thres}$ 的升高，所有$a(\sigma)$会等比例地变大，而$r(\sigma)$不变，进而可以证明阈值 $0.25$ 只会变大而不会变小。因此，我们所考虑的 $\textit{thres}=-\infty$ 恰好是最坏情况。
+
+            \vspace{1.5ex}
+
+            最终得到结论：
+
+            \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
+                对于得分足够高的选手 $p$ ，计算其每日名次的\emph{$1/3$次加权幂平均} $M$ ，则 $p$ 的总名次 $m$ 近似地满足线性关系 $m=K\cdot M+B$ ，其中系数 $K,B$ 由比赛本身确定。如果 $p$ 的排名在前25\%，则进一步有 $m<M$ 。
+            \end{tcolorbox}
+
+            从上述性质可以导出一个有趣的推论：如果 $p$ 的每日名次都相等且在前25\%，则 $p$ 的总名次一定好于他的每日名次。
 
 \section{致谢}
 
@@ -1163,4 +1268,8 @@
     \bibitem{scipy_minimize} 
     SciPy Documentation: scipy.optimize.minimize,\\
     \inserturl{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html}
+
+    \bibitem{wiki_powerMean}
+    Wikipedia: Inequality between any two power means,\\
+    \inserturl{https://en.wikipedia.org/wiki/Generalized\_mean\#Inequality\_between\_any\_two\_power\_means}
 \end{thebibliography}
