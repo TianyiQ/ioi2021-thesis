@@ -1230,25 +1230,25 @@
                 \vspace{1ex}
             \end{asparaitem}
 
-            观察到绿色曲线的纵坐标始终没有明显低于0.25，因此可以认为
+            观察到绿色曲线的纵坐标始终没有低于0.2，因此可以认为
             $$
-            \left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}<0.25\right)\Rightarrow
+            \left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\leq 0.2\right)\Rightarrow
             \left(\textit{rank}_{\textit{total}}<\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)
             $$
 
-            回忆到先前要求 $p$ 的得分“足够高”，因此我们暂不考虑 $\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\geq 0.25$ 的情况。
+            回忆到先前要求 $p$ 的得分“足够高”，因此我们暂不考虑 $\sum_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}>0.2$ 的情况。
 
-            在本小节的开头，我们作了 $\textit{thres}=-\infty$ 的假设。注意到随着 $\textit{thres}$ 的升高，所有$a(\sigma)$会等比例地变大，而$r(\sigma)$不变，进而可以证明阈值 $0.25$ 只会变大而不会变小。因此，我们所考虑的 $\textit{thres}=-\infty$ 恰好是最坏情况。
+            在本小节的开头，我们作了 $\textit{thres}=-\infty$ 的假设。注意到随着 $\textit{thres}$ 的升高，所有$a(\sigma)$会等比例地变大，而$r(\sigma)$不变，进而可以证明阈值 $0.2$ 只会变大而不会变小。因此，我们所考虑的 $\textit{thres}=-\infty$ 恰好是最坏情况。
 
             \vspace{1.5ex}
 
             最终得到结论：
 
             \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
-                对于得分足够高的选手 $p$ ，计算其每日名次的\emph{$1/3$次加权幂平均} $M$ ，则 $p$ 的总名次 $m$ 近似地满足线性关系 $m=K\cdot M+B$ ，其中系数 $K,B$ 由比赛本身确定。如果 $p$ 的排名在前25\%，则进一步有 $m<M$ 。
+                对于得分足够高的选手 $p$ ，计算其每日名次的\emph{$1/3$次加权幂平均} $M$ ，则 $p$ 的总名次 $m$ 近似地满足线性关系 $m=K\cdot M+B$ ，其中系数 $K,B$ 由比赛本身确定。如果 $p$ 的排名在前20\%，则进一步有 $m<M$ 。
             \end{tcolorbox}
 
-            从上述性质可以导出一个有趣的推论：如果 $p$ 的每日名次都相等且在前25\%，则 $p$ 的总名次一定好于他的每日名次。
+            从上述性质可以导出一个有趣的推论：如果 $p$ 的每日名次都相等且在前20\%，则 $p$ 的总名次一定好于他的每日名次。
 
 \section{致谢}
 
