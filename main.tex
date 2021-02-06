@@ -1000,6 +1000,20 @@
                 \label{fig:plottingD_1D_2forAprime}
             \end{figure}
 
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingNoipD_1D_2.pdf}
+                \caption{$D_1,D_2$的图像，当$A$对应联赛复赛时}
+                \label{fig:plottingD_1D_2forNoip}
+            \end{figure}
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=\textwidth]{fig/plottingNoiD_1D_2.pdf}
+                \caption{$D_1,D_2$的图像，当$A$对应NOI时}
+                \label{fig:plottingD_1D_2forNoi}
+            \end{figure}
+
             取理想比赛 $A$ 为定理\ref{thm:formulaforXAprime}中“复赛在去除初赛影响后对应的理想比赛”$A'$、取$\sigma=\sigma_B\approx 0.078$（该数值来自于\ref{sec:calculatingXofSecondRound}小节中的测量），则 $D_1,D_2$ 关于 $\mu$ 的图像如图\ref{fig:plottingD_1D_2forAprime}。这里对于期望分数小于（定理\ref{thm:formulaforXAprime}中的）$\epsilon$的选手，将他们从$\mathcal{X}_A$中剔除，并将 $\mathcal{X}_A$ 剩余部分的点值乘上某个系数，以使得其在$[0,1]$上定积分仍为$1$。这样得到的$\mathcal{X}_A$为二次函数。此外，$D_1,D_2$ 本身是“绝对差值”，图中还用虚线绘制了“相对差值”$\frac{D_1}{\mathrm{E}\left[U_p\right]},\frac{D_2}{\mathrm{Med}\left[U_p\right]}$的图像。
 
             \vspace{1.5ex}
@@ -1019,20 +1033,6 @@
 
             为模拟联赛复赛的情况，取 $\textit{thres}=0.1053$ （该数值为\ref{sec:counteringPreliminaryRound}小节中的计算结果），此时 $D_1,D_2$ 的图像如图\ref{fig:plottingD_1D_2forNoip}；为模拟NOI的情况，取 $\textit{thres}=0.7$ （计算发现近几年联赛中得分高于该数值的选手人数与NOI的参赛人数相近，故选择该数值），此时 $D_1,D_2$ 的图像如图\ref{fig:plottingD_1D_2forNoi}。
 
-            \begin{figure}[p]
-                \centering
-                \includegraphics[width=\textwidth]{fig/plottingNoipD_1D_2.pdf}
-                \caption{$D_1,D_2$的图像，当$A$对应联赛复赛时}
-                \label{fig:plottingD_1D_2forNoip}
-            \end{figure}
-
-            \begin{figure}[p]
-                \centering
-                \includegraphics[width=\textwidth]{fig/plottingNoiD_1D_2.pdf}
-                \caption{$D_1,D_2$的图像，当$A$对应NOI时}
-                \label{fig:plottingD_1D_2forNoi}
-            \end{figure}
-
             \vspace{1.5ex}
 
             观察图\ref{fig:plottingD_1D_2forAprime}、图\ref{fig:plottingD_1D_2forNoip}和图\ref{fig:plottingD_1D_2forNoi}，可以得到以下结论：
@@ -1040,6 +1040,8 @@
             \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
                 在一场信息学比赛中，对任何一名期望得分“不太低”的选手，他的期望名次、中位名次，均\textbf{差于}他的实际水平（以期望得分来衡量）在全体参赛选手中的位次。这一现象随着该名选手期望得分的升高而越发明显，在高分段尤其显著。
             \end{tcolorbox}
+
+            这一点也很容易直观理解：由于分数分布大体上呈现“低分稠密、高分稀疏”的状态，所以期望得分接近但低于 $p$ 的选手数量，会超过期望得分接近且高于 $p$ 的选手数量。进而，\emph{将} $p$ 反超的人数，就会大于\emph{被} $p$ 反超的人数。
 
         \subsubsection{分数波动幅度与比赛名次的关系}
 
@@ -1161,7 +1163,7 @@
 
             对于确定的 $\sigma_B$ ，可以计算得到实数 $r(\sigma_B)\geq 1$ 和 $a(\sigma_B)\geq 0$ ，以使得函数 $f_{\sigma_B}(s)=a(\sigma_B)(r(\sigma_B)-s)^2$ 的图像与 $\mathcal{C}_A$ 尽可能贴近（即残差平方和最小）。实验发现：
             $$
-            \max\limits_{\sigma\in (0,0.4],s\in [0.6,1]} \left|f_{\sigma_B}(s)-\mathcal{C}_A(s)\right|\approx 0.02
+            \max\limits_{\sigma_B\in (0,0.4],s\in [0.6,1]} \left|f_{\sigma_B}(s)-\mathcal{C}_A(s)\right|\approx 0.02
             $$
 
             由此可见，这一近似的效果十分优秀。回忆到我们只关注“足够高”的那一部分分数分布，因此在上式中只考虑 $s\geq 0.6$ 。
@@ -1196,12 +1198,14 @@
                 \textit{rank}_i
                 &=\int\limits_{\textit{score}_i}^r(\sigma_B) \mathcal{C}_A(s) \mathrm{d}s \\
                 &\approx\int\limits_0^{r(\sigma_B)-\textit{score}_i} a(\sigma_B) s^2 \mathrm{d}s \\
-                &=\frac{a(\sigma_B)\left(r(\sigma_B)-\textit{score}_i\right)^3}3\\
-                \\
+                &=\frac{a(\sigma_B)\left(r(\sigma_B)-\textit{score}_i\right)^3}3
+            \end{align*}
+            \begin{align*}
                 r(\sigma_B)-\textit{score}_{\textit{total}}
                 &=\sum\limits_{i=1}^k w_i\left(r(\sigma_B)-\textit{score}_i\right) \\
-                &\approx\sum\limits_{i=1}^k w_i\sqrt[3]{\frac{3\textit{rank}_i}{a(\sigma_B)}} \\
-                \\
+                &\approx\sum\limits_{i=1}^k w_i\sqrt[3]{\frac{3\textit{rank}_i}{a(\sigma_B)}}
+            \end{align*}
+            \begin{align*}
                 \textit{rank}_{\textit{total}}
                 &\approx\frac{a(\sigma_{\textit{total}})(r(\sigma_{\textit{total}})-\textit{score}_{\textit{total}})^3}3 \\
                 &\approx\frac{a(\sigma_{\textit{total}})}{3}\cdot\left(r(\sigma_{\textit{total}})-r(\sigma_B)+\sum\limits_{i=1}^k w_i\sqrt[3]{\frac{3\textit{rank}_i}{a(\sigma_B)}}\right)^3 \\
@@ -1250,13 +1254,21 @@
 
             从上述性质可以导出一个有趣的推论：如果 $p$ 的每日名次都相等且在前20\%，则 $p$ 的总名次一定好于他的每日名次。
 
+\section{关于分级选拔流程的讨论}
+
+    
+
+\section{总结}
+
 \section{致谢}
 
     感谢中国计算机学会提供交流和学习的平台；
 
     感谢国家集训队高闻远教练的指导；
 
-    感谢教导过我的老师、教练们；
+    感谢父母对我的关爱；
+
+    感谢老师、教练们对我的培养；
 
     感谢清芷等同学与我讨论本文内容。
 
