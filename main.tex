@@ -1,20 +1,17 @@
 \begin{abstract}
-    本文建立了描述信息学比赛的数学模型，并基于该模型研究了过往比赛的选手分数数据。本文通过统计确定了同一名选手的得分波动所服从的分布，基于此从联赛分数推算出了选手整体水平的分布情况，并研究了竞赛选拔流程的效率、回答了有关比赛名次与得分的问题。\emph{上一句待完成后更新。}本文中得到的结论对信息学竞赛赛制的优化、选手的日常训练和比赛策略制定具有参考意义。
+    本文建立了描述信息学比赛的数学模型，并基于该模型研究了过往比赛的选手分数数据。本文通过统计确定了同一名选手的得分波动所服从的分布，基于此从联赛分数推算出了选手整体水平的分布情况，并研究了分级选拔流程的优化方式、回答了有关比赛名次与得分的问题。本文中得到的结论对信息学竞赛流程的优化、选手的日常训练和比赛策略制定具有参考意义。
 \end{abstract}
 
 \section{引言}
 
-    中国高中信息学竞赛的参赛人数和竞赛水平在最近十年中快速提高；这种迅猛的发展在让竞赛趋于繁盛的同时，也使得选手和教练对竞赛现状的认知难以跟上节拍。
-    
-    这一情况引起了一些问题，例如：
-
+    中国高中信息学竞赛的参赛人数和竞赛水平在最近十年中快速提高；这种迅猛的发展在让竞赛趋于繁盛的同时，也使得选手和教练对竞赛现状的认知难以跟上节拍。认知的落后引起了一些问题，例如：
     \begin{asparaitem}
         \item {选手对于自己所处的水平段认识不足，从而作出错误的学业规划。}
         \item {出题人对于选手的水平认识不足，导致题目难度和部分分分配失当。}
         \item {选手不了解对手的水平和发挥情况，导致选择了错误的考场策略。}
     \end{asparaitem}
 
-    本文将利用数学工具，基于过往比赛的选手分数数据来分析信息学竞赛的现状，以为上述问题的解决提供助力。
+    本文将利用数学工具，基于过往比赛的选手分数数据来分析信息学竞赛的现状和其中的规律，以为上述问题的解决提供助力。
 
     \vspace{1.5ex}
 
@@ -35,12 +32,12 @@
         \item [\textbf{第三节}]{分析同一名选手的得分波动所服从的分布。}
         \item [\textbf{第四节}]{利用联赛初赛、复赛的得分数据推算出信息学竞赛选手整体水平的分布情况。}
         \item [\textbf{第五节}]{对于在比赛名次中出现的现象进行讨论。}
-        \item [\textbf{第六节}]{\emph{待完成后更新。}}
+        \item [\textbf{第六节}]{对于“分级选拔”的选拔方式，提出方法来合理地设置选拔流程。}
     \end{asparaenum}
 
     由全文的目标决定，本文将不会对初中信息学竞赛进行研究，因此下文中在提到任何比赛时默认指面向高中生的比赛。
 
-\section{建立模型}
+\section{建立模型}\label{sec:sec2Modeling}
 
     \subsection{赛程和赛制}
 
@@ -385,7 +382,7 @@
             \item 假设\ref{ass:simplicityOfCodingContests}会带来一个问题：如果一名选手的期望得分十分接近0，但他的分数波动的幅度仍被认为与其他选手相同，就会使他可能考出“负分数”，并使得分数分布函数在负数处的点值非零。由于本文只研究近似的结果，且考虑到该现象并不会十分显著（因为一场比赛中只会有很少的选手期望得分接近0），所以可以容忍这一不合理的现象。
         \end{asparaenum}
 
-\section{偏移量分布的测量}
+\section{偏移量分布的测量}\label{sec:sec3MeasuringDelta}
 
     由假设\ref{ass:similarityOfDeltaDistributions}，COI/IOI赛制下偏移量分布有一定的形式。本节中，将利用过往比赛的分数数据得到偏移量分布的形式。
 
@@ -696,7 +693,7 @@
             关于这一假设需要作几点说明：
             \begin{asparaenum}
                 \item \ref{sec:keyAssumptions}小节中，我们在为假设\ref{ass:equivalenceBetweenCodingContests}予以辩护时，断言了“一名选手的水平是固定的，不会随比赛的改变而改变”。但是，由于考察内容的不同，一名选手在 $B_1$ 和 $B_2$ 中的能力差异可能较大，故上述断言在将初赛（即 $B_1$ ）加入考虑范围后似乎不再成立。
-                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep2} 为了使前述断言仍然成立，在\ref{sec:analysisOfBothRounds}小节内，我们需暂时改变命题\ref{def:realIdealCorrespondence}中“期望得分”这一概念的所指，将其改为：一名选手在 $B_1,B_2$ 中（在按最高分和标准差折算后）期望分数的平均值。这会改变从现实比赛构造理想比赛的方式，并使得 $B_1,B_2$ 所对应理想比赛的期望值分布和偏移量分布发生变化，变化后 $B_1,B_2$ 所对应的理想比赛分别记作 $F_1,F_2$ （所以 $A$ 和 $F_2$ 的区别，就是概念更改前和更改后的区别 ）。显然，此时 $F_1,F_2$ 的期望值分布在经过缩放后是相同的。
+                \item \label{step:argumentForAssumptionOnPreliminaryRoundStep2} 为了使前述断言仍然成立，在\ref{sec:analysisOfBothRounds}小节内，我们需暂时改变命题\ref{def:realIdealCorrespondence}中“期望得分”这一概念的所指，将其改为：一名选手在 $B_1,B_2$ 中（在按最高分和标准差折算后）期望分数的平均值——也就是该名选手在初赛和复赛中的“综合水准”。这会改变从现实比赛构造理想比赛的方式，并使得 $B_1,B_2$ 所对应理想比赛的期望值分布和偏移量分布发生变化，变化后 $B_1,B_2$ 所对应的理想比赛分别记作 $F_1,F_2$ （所以 $A$ 和 $F_2$ 的区别，就是概念更改前和更改后的区别 ）。显然，此时 $F_1,F_2$ 的期望值分布在经过缩放后是相同的。
                 \item \label{step:argumentForAssumptionOnPreliminaryRoundStep3} 这样更改后，$\Delta_{B_2}$的值也发生了变化。原先$\Delta_{B_2}$的取值等于选手实际表现与真实能力（即期望表现）的差；现在它的值还要在此基础上加上选手在复赛单项上的能力与初、复赛综合能力的差。但是，只要“单项能力减综合能力”这一随机变量服从正态分布，新的$\Delta_{B_2}$也一定服从正态分布——因为服从正态分布的独立随机变量之和依然服从正态分布。另一方面，假如在原先定义下的随机变量$\Delta_{B_1}$服从正态分布，则对新的 $\Delta_{B_1}$ 可做与刚才类似的论证。
                 \item 关于 $F_1,F_2$ 间的缩放等价性，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep2}条对期望值分布的缩放等价予以了说明，第\ref{step:argumentForAssumptionOnPreliminaryRoundStep3}条对偏移量分布的缩放等价予以了说明；这些说明都有一些感性的成分，它们仅用作对假设\ref{ass:equivalenceBetweenTwoRounds}含义的澄清，而并非尝试对其予以证明。需要注意，由于我们对概念的修改，关于 $F_1,F_2$ 的期望值分布、偏移量分布所作的一切讨论，在\ref{sec:analysisOfBothRounds}小节之外均没有意义。但是 $F_1,F_2$ 的分数分布不会受这一修改的影响，故\ref{sec:analysisOfBothRounds}小节计算出的分数分布函数会在后续分析中直接使用。
             \end{asparaenum}
@@ -938,7 +935,7 @@
 
     本节中研究关于比赛名次的性质，这些性质可以为选手的比赛策略制订和日常训练导向提供参考。
 
-    \subsection{比赛名次与实际水平的关系}
+    \subsection{比赛名次与实际水平的关系}\label{sec:relationBetweenCapabilityAndRanking}
 
         一名选手在比赛得分上的波动，导致了他在比赛名次上的波动。考虑到各种奖项的颁发都是以名次而非得分为主要依据，研究选手比赛名次的概率分布就显得格外重要。
         
@@ -1085,7 +1082,7 @@
                 在一场信息学比赛中，对任何一名期望得分“不太低”的选手，若他的期望得分固定，则当他的分数分布的标准差提高时，他的期望名次变差。这一现象随着该名选手期望得分的升高而越发明显，在高分段尤其显著。
             \end{tcolorbox}
 
-    \subsection{多日比赛总名次与单日名次的关系}
+    \subsection{多日比赛总名次与单日名次的关系}\label{sec:relationBetweenEachDayAndTotal}
 
         大多数信息学比赛都包括两天或更多的比赛日，而对于其中的大部分比赛，选手在每日考试后也都能直接或间接地知道自己当日的大致排名。这种情况下，一名选手在先前的考试日中的排名，对他在之后的考试日中的策略制定是一个重要信息。但要想有效利用这一信息，首先需要了解多日比赛总名次与单日名次之间的关系，而这正是本小节的目标。
 
@@ -1217,7 +1214,7 @@
             \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingKandB.pdf}
-                \caption{一次函数的系数和大小关系改变的阈值}
+                \caption{一次函数的系数，以及大小关系改变的阈值}
                 \label{fig:plottingKandB}
             \end{figure}
 
@@ -1236,8 +1233,8 @@
 
             观察到绿色曲线的纵坐标始终没有低于0.2，因此可以认为
             $$
-            \left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\leq 0.2\right)\Rightarrow
-            \left(\textit{rank}_{\textit{total}}<\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)
+            \left[\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)^3\leq 0.2\right]\Rightarrow
+            \left[\textit{rank}_{\textit{total}}<\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)^3\right]
             $$
 
             回忆到先前要求 $p$ 的得分“足够高”，因此我们不考虑 $\sum_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}>0.2$ 的情况。
@@ -1254,11 +1251,160 @@
 
             从上述性质可以导出一个有趣的推论：如果 $p$ 的每日名次都相等且在前20\%，则 $p$ 的总名次一定好于他的每日名次。
 
-\section{关于分级选拔流程的讨论}
+\section{关于分级选拔的讨论}\label{sec:sec6Multilevel}
 
+    “分级选拔”是一种选拔优秀选手的方式。在这种方式中，选手要经过一系列逐级递进的比赛，在每场比赛中会淘汰排名最低的一部分选手，其中排名的依据是选手在已经完成的所有比赛中的得分加权和。在信息学竞赛省队和国家队的选拔中，都用到了分级选拔的方式，例如部分省市往年的省队选拔所采用的“联赛---省选一轮---省选二轮”三级选拔，还有往年国家队选拔所采用的“CTT---冬令营---CTSC”三级选拔。本节中将探讨的是，如何设置分级选拔的流程以改善选拔效果。
+
+    \vspace{1.5ex}
+
+    先给出描述分级选拔的模型：
+    \begin{asparaitem}
+        \item $B_{1\cdots n}$ 为（基于COI/IOI赛制的）信息学比赛，它们依次表示$n$级选拔中的每一级比赛。$A_{1\cdots n}$ 为 $B_{1\cdots n}$ 所对应的理想比赛。
+        \item \textbf{权重} $w_{1\cdots n}$ 为正实数，\textbf{分数线} $h_{1\cdots n}$ 为正实数。
+        \item 对于 $B_i$ 的参赛人群中的一名选手 $p$ ，记 $\textit{score}_{j}(p)$ 表示 $p$ 在 $B_j\  (j\leq i)$ 中的得分，按定义\ref{def:realIdealCorrespondence}中的方式（即把原始分数除以最高分）折算后的值。再定义 $p$ 的\textbf{前$i$轮总分}为 $$\frac{w_1\textit{score}_1(p)+\cdots+w_i\textit{score}_i(p)}{w_1+\cdots+w_i}$$
+        \item $B_1$ 的\emph{参赛人群}可任意指定，称为\textbf{初始人群}。
+        \item 对于 $i>1$ ，$B_i$ 的\emph{参赛人群}可按如下方式确定：取 $B_{i-1}$ 的参赛人群，再去除那些前$i-1$轮总分低于$h_{i-1}$的选手。
+        \item $B_n$ 的参赛人群中，前$n$轮总分达到$h_n$的选手视为通过选拔，这一人群称为\textbf{获胜人群}。获胜人群大小与初始人群大小的比值，称为\textbf{选拔比例}。
+    \end{asparaitem}
+
+    \subsection{分级选拔权重的设置}
+
+        这一小节将计算最优的权重 $w_{1\cdots n}$ 。若将淘汰的过程纳入考虑，则不同轮次的比赛之间会产生复杂的相互影响，因此为简便起见，这一小节中将假设$h_1=h_2=\cdots=h_n=0$，即每一轮都不会淘汰任何选手。
+
+        \vspace{1.5ex}
+
+        由定理\ref{thm:normalityOfOffsetsDistribution}知：存在正实数 $\sigma_{1\cdots n}$ ，满足每一个 $\Delta_{B_i}$ 都服从正态分布 $N(0,\sigma_i^2)$ 。进而由引理\ref{lem:stddevOfSumOfIndependentVars}，任何一名选手 $p$ 的\emph{前$n$轮总分}都服从正态分布，且其标准差 $\overline{\sigma}_i$ 满足：
+        \begin{align*}
+            \overline{\sigma}_n
+            &=\mathrm{Stddev}\left[\frac{w_1\textit{score}_1(p)+\cdots+w_n\textit{score}_n(p)}{w_1+\cdots+w_n}\right] \\
+            &=\mathrm{Stddev}\left[\frac{w_1\Delta_1+\cdots+w_n\Delta_n}{w_1+\cdots+w_n}\right] \\
+            &=\sqrt{\frac{w_1^2\sigma_1^2+\cdots+w_n^2\sigma_n^2}{\left(w_1+\cdots+w_n\right)^2}}
+        \end{align*}
+
+        容易想到，选手的前$n$轮总分波动幅度越大，关于这一总分的排名也就越不可靠。因此，我们希望$\overline{\sigma}_n$ 尽可能小。
+
+        \begin{lemma}[柯西不等式]
+            对任何正实数 $a_{1\cdots n}$ 和 $b_{1\cdots n}$ ，一定有
+            $$
+            \left(\sum\limits_{i=1}^n a_i^2\right)\left(\sum\limits_{i=1}^n b_i^2\right)
+            \geq\left(\sum\limits_{i=1}^n a_ib_i\right)^2
+            $$
+
+            上式当且仅当 $\frac{b_1}{a_1}=\cdots=\frac{b_n}{a_n}$ 时取等。
+
+            \label{lem:Cauchy}
+        \end{lemma}
+
+        在上述引理中取$a_i=\sigma_i^{-1},b_i=w_i\sigma_i$：
+        \begin{align*}
+            \left(\sum\limits_{i=1}^n \sigma_i^{-2}\right)\left(\sum\limits_{i=1}^n w_i^2\sigma_i^2\right)&\geq\left(\sum\limits_{i=1}^n w_i\right)^2 \\
+            \frac{\sum\limits_{i=1}^n w_i^2\sigma_i^2}{\left(\sum\limits_{i=1}^n w_i\right)^2}&\geq\left(\sum\limits_{i=1}^n \sigma_i^{-2}\right)^{-1}
+        \end{align*}
+
+        由此得到：对于固定的 $\sigma_{1\cdots n}$ ，当 $w_{1\cdots n}$ 满足 $w_1\sigma_1^2=\cdots=w_n\sigma_n^2$ （也就是$w_i\,\propto\, \sigma_i^{-2}$）时， $\overline{\sigma}_n$ 取到最小值 $\big(\sum_{i=1}^n \sigma_i^{-2}\big)^{-1/2}$ 。
+        
+        此外， $w_1\sigma_1^2=\cdots=w_n\sigma_n^2$ 这一条件也显然能够保证：对任何一个 $i$ ，选手 $p$ 的前 $i$ 轮总分的标准差最小。
+
+        \vspace{1.5ex}
+
+        于是得到结论：
+
+        \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
+            分级选拔中一场比赛的权重，应当与该场比赛偏移量分布的方差（即标准差的平方）成反比。此时对任何一名选手，其前 $i$ 轮总分（总分视为一个随机变量）的标准差，等于前 $i$ 场比赛的偏移量分布标准差的\emph{$-2$次幂平均}。
+        \end{tcolorbox}
     
+    \subsection{三级选拔分数线的划定}
+
+        这一小节将对于一个特殊的分级选拔模型计算出合适的分数线，以使得选拔效果最好。之所以只考虑特殊情形，是因为这一小节旨在演示计算方法；但是，计算结果也同时对更一般的情形有参考价值。
+
+        \vspace{1.5ex}
+
+        这一小节中将考察满足以下条件的分级选拔模型：
+        \begin{asparaitem}
+            \item $n=3$ ，即所考察的是三级选拔的模型。
+            \item $\Delta_{B_1},\Delta_{B_2},\Delta_{B_3}$ 都服从正态分布 $N(0,\sigma^2)$ ，其中 $\sigma\approx 0.078$ 为\ref{sec:calculatingXofSecondRound}小节中对于联赛复赛计算得到的数值。
+            \item $w_1=w_2=w_3$ ，即三场比赛等权。
+            \item $\mathcal{X}_{A_1}\propto\, ax^2+bx+c \  (x\in [0,1])$ ，其中 $a,b,c$ 为定理\ref{thm:formulaforXAprime}中给出的数值。比例系数可根据“$\mathcal{X}_{A_1}$在$[0,1]$上的定积分为$1$”这一性质确定。
+            \item 对任何一名选手 $p$ ，$p$ 在 $B_1,B_2,B_3$ 中的期望得分（在按定义\ref{def:realIdealCorrespondence}中的方式折算后）相同。
+            \item 选拔比例为$0.1$。
+        \end{asparaitem}
+
+        \vspace{1.5ex}
+
+        对上述规定可以作这样的直观理解：一个三级选拔的模型，每一级的比赛都类似于联赛复赛，而初始人群是期望得分高于$\epsilon$（定理\ref{thm:formulaforXAprime}中的小常数）的全体信息学选手。
+
+        \vspace{1.5ex}
+
+        目标函数和限制条件：
+        \begin{asparaitem}
+            \item 用获胜人群中所有选手（在 $B_1,B_2,B_3$ 中的）期望得分的平均值 $\overline{X}$ 来衡量选拔效果。我们希望最大化$\overline{X}$。
+            \item 将 $B_1$ 的参赛人群大小定为单位“1”，则用 $B_1,B_2,B_3$ 参赛人群的总大小 $S$ 来衡量整场选拔的开销；这个“开销”既包括主办方的组织成本，也包括参赛选手的时间成本。我们要求开销 $S$ 不超过上限 $T$ ，其中参数 $T$ 满足 $T>1.2$ 。（注意到 $B_2,B_3$ 的参赛人群大小不可能低于选拔比例$0.1$，所以 $T$ 不可能低于 $1.2$ ）
+        \end{asparaitem}
+
+        \vspace{1.5ex}
+
+        容易发现，只要再给定分数线 $h_1,h_2,h_3$ ，就能唯一确定 $A_1,A_2,A_3$ 的期望值分布、分数分布等信息。又注意到，如果 $h_1,h_2$ 的取值给定，我们可以根据“选拔比例为$0.1$”这一信息确定 $h_3$ 。所以，我们实际上需要求解的是 $h_1,h_2$ 的最佳取值。
+
+        先考虑如何在给定 $h_1,h_2,h_3$ 的情况下（暂时忽略选拔比例为$0.1$的要求），计算 $\overline{X}$ 和 $S$ 。只要能够计算出 $P(x)$ 表示一名（在 $B_1,B_2,B_3$ 中）期望得分为 $x$ 的选手通过选拔的概率，就可以对函数 $f(x)=P(x)\cdot\mathcal{X}_{A_1}(x)$ 做数值积分来算出选拔比例，然后对函数 $g(x)=x\cdot f(x)$ 做数值积分再除以选拔比例来得到 $\overline{X}$ ，而 $S$ 也可以类似地计算。
+        
+        $P(x)$ 的计算将按照如下步骤进行：（用 $p$ 来代表随意选取的一名期望得分为 $x$ 的选手）
+        \begin{asparaenum}[\bfseries{步骤} 1.]
+            \item 将数轴正半轴以$1/256$为单位划分成小格，并对$[0,1]$这一数轴区间内的每个小格，计算选手 $p$ 的实际得分落在该小格内的概率。这一概率的表达式可在\ref{sec:calculatingXofSecondRound}小节的\eqref{formula:fromXtoC}式中找到。记所得的$256$个概率数值构成序列 $D$ 。以下将近似地认为， $D$ 所表示的概率在同一个小格中均匀分布。
+            \item 维护长为 $3\times256=768$ 的序列 $C$ ，其中 $C_i$ 表示选手 $p$ 晋级到当前轮次且当前所有轮次的得分总和落在第 $i$ 个小格中的概率。初始时仅考虑第一轮（即 $B_1$ ），此时 $C$ 在 $[0,1]$ 这一数轴区间内的每一个概率数值都和 $D$ 相同，而在 $(1,3]$ 内的每一个概率数值都等于 $0$ 。以下将近似地认为， $C$ 所表示的概率在同一个小格中均匀分布。
+            \item 将 $B_2$ 纳入考虑。具体地说，先将 $C$ 在 $[0,1\times h_1)$ 这一数轴区间内的概率数值都清零（表示淘汰掉低于分数线的选手），再将其与 $D$ 做类似卷积的运算（表示将选手 $p$ 在 $B_2$ 中的得分加入 $p$ 的总分），所得的结果即为新的 $C$ 。
+            \item 将 $B_3$ 纳入考虑。具体地说，先将 $C$ 在 $[0,2\times h_2)$ （$h_2$是按均分划定的分数线，$2\times h_2$是按总分划定的分数线）这一数轴区间内的概率数值都清零，再将其与 $D$ 做类似卷积的运算，所得的结果即为新的 $C$ 。
+            \item 计算 $C$ 在数轴区间 $[3\times h_3,3]$ 内的概率数值之和，所得结果即为 $P(x)$ 。
+        \end{asparaenum}
+
+        \vspace{1.5ex}
+
+        以上描述了从 $h_1,h_2,h_3$ 计算 $\overline{X},S$ 和选拔比例的方法。如果仅给定 $h_1,h_2$ ，则可以通过二分法等数值求根方法计算出合适的 $h_3$ 以使得选拔比例恰为 $0.1$ 。
+        
+        至此，我们已经能够高效计算待优化的函数。
+
+        \vspace{1.5ex}
+
+        我们令参数 $T$ 分别取值 $1.3,1.4,\cdots,2.0$，并对于这之中的每一种取值，使用SciPy中实现的差分进化算法\cite{scipy_de}计算出了 $h_1,h_2$ 的最优取值和与之对应的 $h_3$ 的取值。其中对于优化效果不理想的，进行了多次运行取最优的操作。计算结果和用于计算的程序，可以在本文开头的链接中找到。
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=\textwidth]{fig/plottingH1H2H3.pdf}
+            \caption{在开销上限的不同取值下，最优解中每一轮次的分数线和人数}
+            \label{fig:plottingH1H2H3}
+        \end{figure}
+
+        在图\ref{fig:plottingH1H2H3}中，左图展示了所得的每一个最优解中 $h_1,h_2,h_3$ 的取值，右图展示了每一个最优解中分别在 $B_1,B_2,B_3$ 达到分数线的人数（以初始人群大小为单位“1”）。两张图的横轴均表示所得的解的实际开销而非开销上限；由于最优化的过程中存在误差，实际开销并不一定紧贴开销上限。
+
+        \vspace{1.5ex}
+
+        下面以 $T=2.0$ 时的解为例，展示所得选拔过程的选拔效果，见图\ref{fig:plottingOptimizedDistri}。对于 $T$ 的其他取值所绘制的相应图像与图\ref{fig:plottingOptimizedDistri}十分接近，故这里仅展示 $T=2.0$ 时的结果。
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=\textwidth]{fig/plottingDistriInOptimizedArrangement.pdf}
+            \caption{$T=2.0$时的最优解中，$P(x),\mathcal{X}_{A_1}(x),P(x)\cdot\mathcal{X}_{A_1}(x)$关于$x$的图像}
+            \label{fig:plottingOptimizedDistri}
+        \end{figure}
+
+\newpage
 
 \section{总结}
+
+    本文建立了描述信息学比赛的数学模型（第\ref{sec:sec2Modeling}节），并基于该模型作出了以下几个发现：
+    \begin{itemize}[leftmargin=4em]
+        \item 同一名选手的得分波动服从正态分布（第\ref{sec:sec3MeasuringDelta}节）
+        \item 联赛复赛的分数分布符合对数曲线（\ref{sec:dataPreprocessingOfNOIP}小节）
+        \item 全国信息学选手的水平的分布情况大致符合二次曲线（\ref{sec:calculatingXofSecondRound}小节）
+        \item 一名选手按真实水平排序的名次，与该选手在实际比赛中的期望名次、中位名次之间存在特定的关系，且很多时候后两者差于前者（\ref{sec:relationBetweenCapabilityAndRanking}小节）
+        \item 在多日比赛中，每日名次与总名次之间存在特定的关系（\ref{sec:relationBetweenEachDayAndTotal}小节）
+        \item 在分级选拔中，可以按一定方法设置各级比赛的权重和分数线，以使得选拔效果最好（第\ref{sec:sec6Multilevel}节）
+    \end{itemize}
+
+    \vspace{1.5ex}
+    
+    本文只对信息学竞赛的少数几个方面进行了探究，而即使对于本文着力研究的几个问题，所采用的研究方法在其可靠性、精确性上也有很大改进空间。
+    
+    只有理解信息学竞赛本身，我们才能更好地参与它、改进它；希望本文能起到抛砖引玉的作用，吸引更多感兴趣的读者来研究有关竞赛本身的问题。
 
 \section{致谢}
 
@@ -1266,22 +1412,26 @@
 
     感谢国家集训队高闻远教练的指导；
 
-    感谢父母对我的关爱；
+    感谢家人对我的支持和关爱；
 
     感谢老师、教练们对我的培养；
 
     感谢清芷等同学与我讨论本文内容。
 
 \begin{thebibliography}{9}
-    \bibitem{wiki_sumOfNormVars} 
+    \bibitem{wiki_sumOfNormVars}
     Wikipedia: Sum of normally distributed random variables,\\
     \inserturl{https://en.wikipedia.org/wiki/Sum\_of\_normally\_distributed\_random\_variables}
 
-    \bibitem{scipy_minimize} 
+    \bibitem{scipy_minimize}
     SciPy Documentation: scipy.optimize.minimize,\\
     \inserturl{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html}
 
     \bibitem{wiki_powerMean}
     Wikipedia: Inequality between any two power means,\\
     \inserturl{https://en.wikipedia.org/wiki/Generalized\_mean\#Inequality\_between\_any\_two\_power\_means}
+
+    \bibitem{scipy_de}
+    SciPy Documentation: scipy.optimize.differential\_evolution,\\
+    \inserturl{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential\_evolution.html}
 \end{thebibliography}

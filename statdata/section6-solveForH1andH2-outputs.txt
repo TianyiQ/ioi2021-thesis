@@ -1,0 +1,161 @@
+每一个段落表示一次运行的输出（省略警告信息）。
+每一段前面会加一行，记录这一次运行中的参数取值。
+一段开头标*的，表示这一次运行是多次运行中的最优解。没标*的段落中的数据未被采用。
+
+(tol=1e-5,T=2)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6372150303402678
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 2842
+              nit: 6
+          success: True
+                x: array([0.19128477, 0.27588963])
+0.09999999986324258 0.6372150303402678 1.9230019941002765
+[0.19128476697844954, 0.2758896257112422, 0.5336339314841424]
+
+(tol=1e-5,T=2)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6372150303660212
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 2632
+              nit: 8
+          success: True
+                x: array([0.15458686, 0.35732072])
+0.09999999986342203 0.6372150303660212 1.8911598369225184
+[0.15458685830872565, 0.35732071859765546, 0.533633931819022]
+
+(tol=1e-4,T=2)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6372150302303531
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 3089
+              nit: 7
+          success: True
+                x: array([0.16453018, 0.27878821])
+0.09999999998504697 0.6372150302303531 1.9784038753757114
+[0.16453017793700253, 0.27878820577215024, 0.5336339316980186]
+
+*(tol=1e-6,T=2)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6372150302408058
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 2454
+              nit: 13
+          success: True
+                x: array([0.11394001, 0.36161437])
+0.09999999997167638 0.6372150302408058 1.9854540490170365
+[0.11394000787380809, 0.3616143710651146, 0.5336339315602933]
+
+*(tol=1e-6,T=1.9)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6372150303678541
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 3191
+              nit: 14
+          success: True
+                x: array([0.15521151, 0.35727851])
+0.09999999986176916 0.6372150303678541 1.8897541219398266
+[0.1552115117282269, 0.35727851169949304, 0.533633931821313]
+
+*(tol=1e-5,T=1.8)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6372150302153045
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 3131
+              nit: 10
+          success: True
+                x: array([0.20341886, 0.35882307])
+0.09999999991722304 0.6372150302153045 1.783125960258785
+[0.20341885780262836, 0.3588230683776886, 0.5336339304450538]
+
+(tol=1e-6,T=1.8)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6372150301527182
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 3158
+              nit: 12
+          success: True
+                x: array([0.19940004, 0.36443925])
+0.0999999999899446 0.6372150301527182 1.7843846651339725
+[0.19940004439479347, 0.3644392487754186, 0.5336339305043437]
+
+*(tol=1e-6,T=1.7)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6372150287327911
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 2886
+              nit: 10
+          success: True
+                x: array([0.23489489, 0.37967793])
+0.10000000000000003 0.6372150287327911 1.697661177237779
+[0.23489489080820136, 0.3796779340021746, 0.5336339101399719]
+
+*(tol=1e-5,T=1.6)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6372149610547756
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 3132
+              nit: 13
+          success: True
+                x: array([0.28502418, 0.40594655])
+0.09999999999999996 0.6372149610547756 1.5833520920472837
+[0.2850241829465864, 0.4059465485621914, 0.5336330310173099]
+
+*(tol=1e-6,T=1.5)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6372139558825843
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 2372
+              nit: 25
+          success: True
+                x: array([0.32437403, 0.43086125])
+0.09999999999999998 0.6372139558825843 1.499519431563351
+[0.3243740272124554, 0.43086125275598436, 0.5336205377222956]
+
+*(tol=1e-5,T=1.4)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6371899038597136
+              jac: [array([[-2.79396772e-09,  3.72529030e-09]]), array([[-1.22933996, -0.80901547]]), array([[1., 0.],
+       [0., 1.]])]
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 1412
+              nit: 20
+          success: True
+                x: array([0.38111643, 0.45898438])
+0.1 0.6371899038597136 1.3999052841943496
+[0.38111643418482016, 0.4589843750741278, 0.5333756468004085]
+
+*(tol=1e-6,T=1.3)
+           constr: [array([0.]), array([0.])]
+ constr_violation: 0.0
+              fun: -0.6367417828352967
+            maxcv: 0.0
+          message: 'Optimization terminated successfully.'
+             nfev: 1193
+              nit: 36
+          success: True
+                x: array([0.44867916, 0.49046098])
+0.09999999999999999 0.6367417828352967 1.299999325270233
+[0.4486791582817367, 0.49046097762175916, 0.5297378279288261]
