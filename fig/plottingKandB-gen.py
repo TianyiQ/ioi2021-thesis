@@ -94,11 +94,11 @@ for i in range(leny):
         ck=coescur[1]/coesano[1]
         worstfun[i]=min(worstfun[i],fun(ck,cb))
 
-plt.plot([ally[i] for i in range(leny)],[K[i] for i in range(leny)],'r',color='blue',label='一次项系数关于$\\sigma$的图像（典型情况）')
-plt.plot([ally[i] for i in range(leny)],[B[i] for i in range(leny)],'r',color='red',label='常数项关于$\\sigma$的图像（典型情况）')
-plt.plot([ally[i] for i in range(leny)],[fun(K[i],B[i]) for i in range(leny)],'r',color='orange',linestyle='--',label='使一次函数值小于自变量的最大自变量取值（典型情况）')
-plt.plot([ally[i] for i in range(leny)],worstfun,'r',color='green',linestyle='--',label='使一次函数值小于自变量的最大自变量取值（最坏情况）')
-plt.xlabel('$\\sigma$')
+plt.plot([ally[i] for i in range(leny)],[K[i] for i in range(leny)],'r',color='blue',label='一次项系数关于$\\sigma_B$的图像（典型情况）')
+plt.plot([ally[i] for i in range(leny)],[B[i] for i in range(leny)],'r',color='red',label='常数项关于$\\sigma_B$的图像（典型情况）')
+plt.plot([ally[i] for i in range(leny)],[fun(K[i],B[i]) for i in range(leny)],'r',color='orange',linestyle='--',label='使一次函数值不大于自变量的最大自变量取值（典型情况）')
+plt.plot([ally[i] for i in range(leny)],worstfun,'r',color='green',linestyle='--',label='使一次函数值不大于自变量的最大自变量取值（最坏情况）')
+plt.xlabel('$\\sigma_B$')
 plt.ylabel('值')
 plt.xlim(0,highsig)
 plt.ylim((None,1.8))

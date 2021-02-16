@@ -1015,9 +1015,9 @@
 
             \vspace{1.5ex}
 
-            图\ref{fig:plottingD_1D_2forAprime}所考虑的情况是：现实比赛$B$的\emph{参赛人群}为期望分数达到$\epsilon$的\textbf{全体}信息学选手。但是对于实际中的比赛，其参赛选手往往是经过选拔的；以下将研究此类比赛。
+            图\ref{fig:plottingD_1D_2forAprime}所考虑的情况是：现实比赛$B$的参赛人群为期望分数达到$\epsilon$的\textbf{全体}信息学选手。但是对于实际中的比赛，其参赛选手往往是经过选拔的；以下将研究此类比赛。
 
-            简便起见，我们作如下假设：现实比赛$B$的\emph{参赛人群}，是期望分数达到$\epsilon$的\textbf{全体}信息学选手，经过一场现实比赛 $C$ 的选拔后达到分数线的那些；其中 $C$ 所对应的理想比赛与（定理\ref{thm:formulaforXAprime}中的） $A'$ 完全相同，且分数线为 $\textit{thres}\in[0,1]$ 。
+            简便起见，我们作如下假设：现实比赛$B$的参赛人群，是期望分数达到$\epsilon$的\textbf{全体}信息学选手，经过一场现实比赛 $C$ 的选拔后达到分数线的那些；其中 $C$ 所对应的理想比赛与（定理\ref{thm:formulaforXAprime}中的） $A'$ 完全相同，且分数线为 $\textit{thres}\in[0,1]$ 。
 
             由此易知，对于一名期望分数为 $\mu_q\in [0,1]$ 的选手 $q$ ，他达到分数线的概率为 $1-R_{(0.078)^2}(\textit{thres}-\mu_q)$ 。进而得到：
             $$
@@ -1055,21 +1055,21 @@
 
             上一小节中对三个比赛分别绘制了 $D_1,D_2$ 的图像；这里我们对同样的三个比赛绘制 $F$ 的图像，见图\ref{fig:plottingD_1D_2forAprimeWrtSigma}、图\ref{fig:plottingD_1D_2forNoipWrtSigma}和图\ref{fig:plottingD_1D_2forNoiWrtSigma}。图中底部的线条为上方曲面的等高线。此外请注意图中坐标轴的方向。
 
-            \begin{figure}[hp]
+            \begin{figure}[p]
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingD_1D_2WrtSigma.pdf}
                 \caption{$F$的图像，当$A$为定理\ref{thm:formulaforXAprime}中的$A'$时}
                 \label{fig:plottingD_1D_2forAprimeWrtSigma}
             \end{figure}
 
-            \begin{figure}[hp]
+            \begin{figure}[p]
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingNoipD_1D_2WrtSigma.pdf}
                 \caption{$F$的图像，当$A$对应联赛复赛时}
                 \label{fig:plottingD_1D_2forNoipWrtSigma}
             \end{figure}
 
-            \begin{figure}[hp]
+            \begin{figure}[p]
                 \centering
                 \includegraphics[width=\textwidth]{fig/plottingNoiD_1D_2WrtSigma.pdf}
                 \caption{$F$的图像，当$A$对应NOI时}
@@ -1088,7 +1088,7 @@
 
         \vspace{1.5ex}
 
-        先给出这一小节用到的模型：现实比赛 $B_{1\cdots k}$ 分别表示每一天的比赛，它们对应同一个理想比赛 $A$ 。一名选手的\emph{总分}定义为：他在 $B_{1\cdots k}$ 中的分数 $\textit{score}_{1\cdots k}$ （满足 $\textit{score}_i\in[0,1]$ ）的加权平均数 $w_1\textit{score}_1+\cdots+w_k\textit{score}_k$ （满足 $w_1+\cdots+w_k=1$ ）。
+        先给出这一小节用到的模型：现实比赛 $B_{1\cdots k}$ 分别表示每一天的比赛，它们对应同一个理想比赛 $A$ 。一名选手的\textbf{总分}定义为：他在 $B_{1\cdots k}$ 中的分数 $\textit{score}_{1\cdots k}$ （满足 $\textit{score}_i\in[0,1]$ ）的加权平均数 $w_1\textit{score}_1+\cdots+w_k\textit{score}_k$ （满足 $w_1+\cdots+w_k=1$ ）。
 
         在实际中，每天的比赛在难度、区分度上可能有差异，因此仅可以认为各天的比赛（所对应的理想比赛）\emph{缩放等价}而不是完全相同；但通过引入权值 $w_{1\cdots k}$ ，可以将这些比赛“标准化”。也就是说, $w_{1\cdots k}$ 在此处相当于“缩放系数”，与等价映射中的一次项系数作用相同。
 
@@ -1209,7 +1209,7 @@
                 &=\frac{a(\sigma_{\textit{total}})\left(r(\sigma_{\textit{total}})-r(\sigma_B)\right)}{3}+\frac{a(\sigma_{\textit{total}})}{a(\sigma_B)}\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)^3
             \end{align*}
 
-            发现总名次$\textit{rank}_{\textit{total}}$是关于$\sum_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}$ 的一次函数。接着注意到$\sigma_{\textit{total}}<\sigma_B$，故由$a(\sigma),r(\sigma)$的增减性可知，该一次函数的一次项系数大于等于1，而常数项小于等于0；因此自变量和因变量的大小关系无法直接确定。
+            发现总名次$\textit{rank}_{\textit{total}}$是关于$\big(\sum_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\big)^3$ 的一次函数。接着注意到$\sigma_{\textit{total}}<\sigma_B$，故由$a(\sigma),r(\sigma)$的增减性可知，该一次函数的一次项系数大于等于1，而常数项小于等于0；因此自变量和因变量的大小关系无法直接确定。
 
             \begin{figure}[htbp]
                 \centering
@@ -1225,19 +1225,21 @@
                 \vspace{1ex}
                 \item [\textbf{红色}] 在\emph{典型情况}下的常数项 $B=a(\sigma_{\textit{total}})\left(r(\sigma_{\textit{total}})-r(\sigma_B)\right)/3$ 。
                 \vspace{1ex}
-                \item [\textbf{黄色}] 最大的 $m\in [0,1]$ 满足在\emph{典型情况}下有 $Km+B<m$ 。
+                \item [\textbf{黄色}] 最大的 $m\in [0,1]$ 满足在\emph{典型情况}下有 $Km+B\leq m$ 。
                 \vspace{1ex}
-                \item [\textbf{绿色}] 最大的 $m\in [0,1]$ 满足在\emph{任何情况}下（对$\sigma_{\textit{total}}$只需符合$\sigma_{\textit{total}}<\sigma_B$即可）都有 $Km+B<m$ 。
+                \item [\textbf{绿色}] 最大的 $m\in [0,1]$ 满足在\emph{任何情况}下（对$\sigma_{\textit{total}}$只需符合$\sigma_{\textit{total}}<\sigma_B$即可）都有 $Km+B\leq m$ 。
                 \vspace{1ex}
             \end{asparaitem}
 
-            观察到绿色曲线的纵坐标始终没有低于0.2，因此可以认为
+            在实际中$\sigma_B$不可能达到0.4之高，所以这里仅考虑 $\sigma_B\in [0,0.4)$ 部分的图像。
+
+            观察到绿色曲线的纵坐标始终不低于0.2，因此可以认为
             $$
             \left[\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)^3\leq 0.2\right]\Rightarrow
-            \left[\textit{rank}_{\textit{total}}<\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)^3\right]
+            \left[\textit{rank}_{\textit{total}}\leq\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)^3\right]
             $$
 
-            回忆到先前要求 $p$ 的得分“足够高”，因此我们不考虑 $\sum_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}>0.2$ 的情况。
+            回忆到先前要求 $p$ 的得分“足够高”，因此我们不考虑 $\big(\sum_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\big)^3>0.2$ 的情况。
 
             在本小节的开头，我们作了 $\textit{thres}=-\infty$ 的假设。注意到随着 $\textit{thres}$ 的升高，所有$a(\sigma)$会等比例地变大，而$r(\sigma)$不变，进而可以证明阈值 $0.2$ 只会变大而不会变小。因此，我们所考虑的 $\textit{thres}=-\infty$ 恰好是最坏情况。
 
@@ -1246,10 +1248,10 @@
             最终得到结论：
 
             \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
-                对于得分足够高的选手 $p$ ，计算其每日名次的\emph{$1/3$次加权幂平均} $M$ ，则 $p$ 的总名次 $m$ 近似地满足线性关系 $m=K\cdot M+B$ ，其中系数 $K,B$ 由比赛本身确定。如果 $p$ 的排名在前20\%，则进一步有 $m<M$ 。
+                对于得分足够高的选手 $p$ ，计算其每日名次的\emph{$1/3$次加权幂平均} $M$ ，则 $p$ 的总名次 $m$ 近似地满足线性关系 $m=K\cdot M+B$ ，其中系数 $K,B$ 由比赛本身确定。如果 $p$ 的排名在前20\%，则进一步有 $m\leq M$ 。
             \end{tcolorbox}
 
-            从上述性质可以导出一个有趣的推论：如果 $p$ 的每日名次都相等且在前20\%，则 $p$ 的总名次一定好于他的每日名次。
+            从上述性质可以导出一个有趣的推论：如果 $p$ 的每日名次都相等且在前20\%，则 $p$ 的总名次一定不差于他的每日名次。
 
 \section{关于分级选拔的讨论}\label{sec:sec6Multilevel}
 
@@ -1262,8 +1264,8 @@
         \item $B_{1\cdots n}$ 为（基于COI/IOI赛制的）信息学比赛，它们依次表示$n$级选拔中的每一级比赛。$A_{1\cdots n}$ 为 $B_{1\cdots n}$ 所对应的理想比赛。
         \item \textbf{权重} $w_{1\cdots n}$ 为正实数，\textbf{分数线} $h_{1\cdots n}$ 为正实数。
         \item 对于 $B_i$ 的参赛人群中的一名选手 $p$ ，记 $\textit{score}_{j}(p)$ 表示 $p$ 在 $B_j\  (j\leq i)$ 中的得分，按定义\ref{def:realIdealCorrespondence}中的方式（即把原始分数除以最高分）折算后的值。再定义 $p$ 的\textbf{前$i$轮总分}为 $$\frac{w_1\textit{score}_1(p)+\cdots+w_i\textit{score}_i(p)}{w_1+\cdots+w_i}$$
-        \item $B_1$ 的\emph{参赛人群}可任意指定，称为\textbf{初始人群}。
-        \item 对于 $i>1$ ，$B_i$ 的\emph{参赛人群}可按如下方式确定：取 $B_{i-1}$ 的参赛人群，再去除那些前$i-1$轮总分低于$h_{i-1}$的选手。
+        \item $B_1$ 的参赛人群可任意指定，称为\textbf{初始人群}。
+        \item 对于 $i>1$ ，$B_i$ 的参赛人群可按如下方式确定：取 $B_{i-1}$ 的参赛人群，再去除那些前$i-1$轮总分低于$h_{i-1}$的选手。
         \item $B_n$ 的参赛人群中，前$n$轮总分达到$h_n$的选手视为通过选拔，这一人群称为\textbf{获胜人群}。获胜人群大小与初始人群大小的比值，称为\textbf{选拔比例}。
     \end{asparaitem}
 
