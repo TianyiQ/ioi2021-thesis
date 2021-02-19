@@ -166,8 +166,8 @@
                     \item \label{step:realToIdealStep2} 每一名参赛选手 $p$ 在比赛 $B$ 中的实际得分 $\textit{score}_p$ 是一个随机变量，它被各种偶然因素（如临场发挥）所支配，但是它的分布可以由选手 $p$ 和现实比赛 $B$ 的三个要素完全确定。假想对每一名选手 $p$ 计算其期望得分 $\textit{exscore}_p=\mathrm{E}\left[\textit{score}_p\right]$ ，并取所有选手期望得分的最大值，记作 $M_B$ 。由于参赛人数趋于无穷，每一个个人的特征可以忽略，故 $M_B=\max\limits_{p\in S_B} \textit{exscore}_p$ 仅由 $B$ 确定。
                     \item \label{step:realToIdealStep3} 从 $S_B$ 中等概率随机选取一名选手 $p$ ，并：
                     \begin{itemize}[leftmargin=4em]
-                        \item 定义取值范围为 $[0,1]$ 的随机变量 $X_B=\frac{\textit{exscore}_p}{M_B}$ 。\footnote{“将每名选手的分数除以最高分数”这一操作，类似于信息学比赛中计算标准分的方式。另外注意到：虽然 $\frac{\textit{exscore}_p}{M_B}\leq 1$ ，但 $\frac{\textit{score}_p}{M_B}$ 可以大于 $1$ }易见随机变量 $X_B$ 的实际取值与考场上的偶然因素无关，而是由选取 $p$ 的方式确定。
-                        \item 定义取值范围为 $\mathbb{R}$ 的随机变量 $\Delta_B=\frac{\textit{score}_p-\textit{exscore}_p}{M_B}$ 。易见随机变量 $\Delta_B$ 的实际取值由选取 $p$ 的方式和考场上的偶然因素（如选手临场发挥）共同确定。
+                        \item 定义在 $[0,1]$ 中取值的随机变量 $X_B=\frac{\textit{exscore}_p}{M_B}$ 。\footnote{“将每名选手的分数除以最高分数”这一操作，类似于信息学比赛中计算标准分的方式。另外注意到：虽然 $\frac{\textit{exscore}_p}{M_B}\leq 1$ ，但 $\frac{\textit{score}_p}{M_B}$ 可以大于 $1$ }易见随机变量 $X_B$ 的实际取值与考场上的偶然因素无关，而是由选取 $p$ 的方式确定。
+                        \item 定义在 $\mathbb{R}$ 中取值的随机变量 $\Delta_B=\frac{\textit{score}_p-\textit{exscore}_p}{M_B}$ 。易见随机变量 $\Delta_B$ 的实际取值由选取 $p$ 的方式和考场上的偶然因素（如选手临场发挥）共同确定。
                         \item [◦] 请注意，$X_B$ 和 $\Delta_B$ 的定义中所用的 $p$ 是\emph{同一名}随机选择的选手，而不是独立的两次选择。
                     \end{itemize}
                     \item 取 $A$ 的综合分布函数 $\mathcal{H}_A$ 为 $X_B$ 与 $\Delta_B$ 的联合概率密度函数，从而确定 $A$ 。换句话说，对所有 $x_0\in[0,1],\delta_0\in\mathbb{R}$ ，需要满足\footnote{也可以直观地理解为$\mathcal{H}_A(x_0,\delta_0)=\mathrm{Pr}\left[\left(X_B\approx x_0\right)\land\left(\Delta_B\approx\delta_0\right)\right]$，不写作 $X_B=x_0$ 是因为取等概率为 $0$ }
@@ -224,7 +224,7 @@
 
             在一场现实比赛 $B$ 中，每一个选手 $p\in S_B$ 的实际得分相比真实水平的“得分偏移量” $\frac{\textit{score}_p-\textit{exscore}_p}{M_B}$ 都是一个随机变量。如果所有选手的“得分偏移量”独立同分布，对我们的模型意味着什么？
 
-            容易想到，此时随机变量 $\Delta_B$ 的概率分布就和任何一个选手的“得分偏移量”的概率分布完全相同。换句话说，在定义\ref{def:realIdealCorrespondence}的步骤\ref{step:realToIdealStep3}中，不论我们钦定选取哪一个 $p$ ， $\Delta_B$ 取任何一个值的概率都是固定的，且恰好等于在不固定 $p$ 的情况下 $\Delta_B$ 取这个值的概率。再换句话说\footnote{和之前类似，这里之所以不写 $\Delta_B=\delta$ ，是因为取等概率为 $0$ }：$$\mathrm{Pr}\left[(\Delta_B\leq\delta)|(X_B=x)\right]=\mathrm{Pr}\left[\Delta_B\leq\delta\right],\ \forall \left(\delta\in\mathbb{R},x\in\left[0,1\right],\mathrm{Pr}\left[X_B=x\right]>0\right)$$即随机变量 $X_B,\Delta_B$ 独立。在研究这件事之前，我们需要一对新的定义。
+            容易想到，此时随机变量 $\Delta_B$ 的概率分布就和任何一个选手的“得分偏移量”的概率分布完全相同。换句话说，在定义\ref{def:realIdealCorrespondence}的步骤\ref{step:realToIdealStep3}中，不论我们钦定选取哪一个 $p$ ， $\Delta_B$ 取任何一个值的概率都是固定的，且恰好等于在不固定 $p$ 的情况下 $\Delta_B$ 取这个值的概率。再换句话说\footnote{和之前类似，这里之所以不写 $\Delta_B=\delta$ ，是因为取等概率为 $0$ 。以及， $\mathrm{Pr}\left[X_B=x\right]>0$ 是不严谨的写法，这里用以表达 $X_B$ 在 $x$ 处概率密度大于 $0$ }：$$\mathrm{Pr}\left[(\Delta_B\leq\delta)|(X_B=x)\right]=\mathrm{Pr}\left[\Delta_B\leq\delta\right],\ \forall \left(\delta\in\mathbb{R},x\in\left[0,1\right],\mathrm{Pr}\left[X_B=x\right]>0\right)$$即随机变量 $X_B,\Delta_B$ 独立。在研究这件事之前，我们需要一对新的定义。
 
             \begin{definition}[期望值分布函数和偏移量分布函数]
                 对任意的理想比赛 $A$ ：
@@ -260,7 +260,7 @@
 
             \begin{proof}
                 \begin{align*}
-                    &\phantom{\Leftrightarrow\ }\mathrm{Pr}\left[(\Delta_B\leq\delta_0)|(X_B=x_0)\right]=\mathrm{Pr}\left[\Delta_B\leq\delta_0\right],\ \forall \left(\delta_0\in\mathbb{R},\mathrm{Pr}\left[X_B=x_0\right]>0\right) \\
+                    &\phantom{\Leftrightarrow\ }\mathrm{Pr}\left[(\Delta_B\leq\delta_0)|(X_B=x_0)\right]=\mathrm{Pr}\left[\Delta_B\leq\delta_0\right],\ \forall \left(\delta_0\in\mathbb{R},\mathcal{X}_A(x_0)>0\right) \\
                     &\Leftrightarrow \left(\displaystyle\int\limits_{-\infty}^{\delta_0} \mathcal{H}_A(x_0,\delta)\mathrm{d}\delta\right)\Big/{\mathcal{X}_A(x_0)}=\int\limits_{-\infty}^{\delta_0} \mathcal{D}_A(\delta)\mathrm{d}\delta,\ \forall \left(\delta_0\in\mathbb{R},\mathcal{X}_A(x_0)>0\right)\\
                     &\Leftrightarrow \frac{\mathcal{H}_A(x_0,\delta_0)}{\mathcal{X}_A(x_0)}=\mathcal{D}_A(\delta_0),\ \forall \left(\delta_0\in\mathbb{R},\mathcal{X}_A(x_0)>0\right)\\
                     &\Leftrightarrow \eqref{formula:insideImplicationOfIndependence}
@@ -333,7 +333,7 @@
         \end{definition}
 
         \begin{proposition}[缩放等价的实际含义]
-            对缩放等价的 $A_1,A_2$ 及其等价映射 $f$ ，有以下关系\footnote{可以直观理解为：现实比赛 $B_1$ （对应于 $A_1$ ）中的分数，经过 $f:x\mapsto\alpha x+\beta$ 的变换之后，变成了现实比赛 $B_2$ （对应于 $A_2$ ）中的分数}：
+            对缩放等价的 $A_1,A_2$ 及其等价映射 $f$ ，有以下关系\footnote{可以直观理解为： $A_1$ 中的分数，经过 $f:x\mapsto\alpha x+\beta$ 的变换之后，变成了 $A_2$ 中的分数}：
             \begin{asparaenum}
                 \item $\displaystyle\int\limits_{-\infty}^{\delta_0} \mathcal{D}_{A_1}(\delta)\mathrm{d}\delta=\displaystyle\int\limits_{-\infty}^{\alpha\delta_0} \mathcal{D}_{A_2}(\delta)\mathrm{d}\delta,\quad\forall\delta\in\mathbb{R}$
                 \item $\displaystyle\int\limits_{-\infty}^{x_0} \widebar{\mathcal{X}}_{A_1}(x)\mathrm{d}x=\displaystyle\int\limits_{-\infty}^{f(x_0)} \widebar{\mathcal{X}}_{A_2}(x)\mathrm{d}x,\quad\forall x\in\mathbb{R}$
@@ -414,7 +414,7 @@
             \label{tab:ctt18to20}
         \end{table}
 
-        根据经验判断，这三场比赛中并非所有选手都全情投入。因此为了保证数据可靠性，对每场比赛只取总排名\footnote{总排名中按每天标准分总和降序排列}中最靠前的 $1.5K\sim 2K$ 名选手的数据，其中 $K$ 表示当场比赛的选拔人数。具体地说：北大集训2018取前30名、北大集训2019取前30名、北大集训2020取前50名。另外为保证比赛之间的统一性，后文中在计算考试分数标准差时，每场比赛只取总排名中前30名的分数。
+        根据经验判断，这三场比赛中并非所有选手都全情投入。因此为了保证数据可靠性，对每场比赛只取总排名\footnote{总排名中按每天标准分总和降序排列}中最靠前的 $1.5K\sim 2K$ 名选手的数据，其中 $K$ 表示当场比赛的选拔人数。具体地说：北大集训2018取前30名、北大集训2019取前30名、北大集训2020取前50名。另外为保证比赛之间的统一性，后文中在计算比赛分数标准差时，每场比赛只取总排名中前30名的分数。
 
     \subsection{数据的加工处理}\label{sec:dataPreprocessingOfCTT}
 
@@ -430,9 +430,10 @@
 
             其中 $\mathrm{Stddev}\left[F\right]$ 表示以 $F$ 为概率密度函数的随机变量\footnote{换句话说，这样的随机变量 $Y$ 满足 $\mathrm{Pr}\left[Y\leq t\right]=\int\limits_{-\infty}^t F(s)\mathrm{d}s,\quad\forall t\in\mathbb{R}$}的标准差。
 
-            另外注意到由 $f(1)=1$ 可得 $f(x)=1-\alpha(1-x)$ ，所以不必再考虑 $\beta$ 的取值。
             \label{prop:alphaAsQuotientOfStddev}
         \end{proposition}
+
+        在上述命题中，由 $f(1)=1$ 可得 $f(x)=1-\alpha(1-x)$ ，所以不必再考虑 $\beta$ 的取值。
 
         \begin{proof}
             \begin{align*}
@@ -445,7 +446,7 @@
                 &=\alpha\mathcal{C}_{A_2}(\alpha s+\beta),\quad\forall s\in\mathbb{R}
             \end{align*}
 
-            设连续型随机变量 $Y_1$ 满足其概率密度函数为 $\mathcal{C}_{A_1}$ ，$Y_2$ 满足其概率密度函数为 $\mathcal{C}_{A_1}$ ，则 $\alpha Y_1+\beta$ 与 $Y_2$ 同分布。从而\footnote{这里 $\mathrm{Var}\left[Y\right]$ 表示随机变量 $Y$ 的方差} $\mathrm{Var}\left[Y_2\right]=\mathrm{Var}\left[\alpha Y_1\right]=\alpha^2\cdot\mathrm{Var}\left[Y_1\right]$ ，于是 $\mathrm{Stddev}\left[Y_2\right]=\alpha\cdot\mathrm{Stddev}\left[Y_1\right]$ 。
+            设连续型随机变量 $Y_1$ 满足其概率密度函数为 $\mathcal{C}_{A_1}$ ，$Y_2$ 满足其概率密度函数为 $\mathcal{C}_{A_2}$ ，则 $\alpha Y_1+\beta$ 与 $Y_2$ 同分布。从而\footnote{这里 $\mathrm{Var}\left[Y\right]$ 表示随机变量 $Y$ 的方差} $\mathrm{Var}\left[Y_2\right]=\mathrm{Var}\left[\alpha Y_1\right]=\alpha^2\cdot\mathrm{Var}\left[Y_1\right]$ ，于是 $\mathrm{Stddev}\left[Y_2\right]=\alpha\cdot\mathrm{Stddev}\left[Y_1\right]$ 。
         \end{proof}
 
         结合等价映射的实际含义和命题\ref{prop:alphaAsQuotientOfStddev}，可以得到对前述12个现实比赛 $B_{1\cdots 12}$ 的分数做变换的方法：
@@ -469,9 +470,9 @@
 
         综上所述，我们会按如下的流程来加工分数数据：
         \begin{asparaenum}[\bfseries{步骤} 1.]
-            \item \label{step:cttDataRefinementStep1} 对12场考试中的每一场，将其中每一名选手的分数除以该场考试的最高分\footnote{即信息学比赛中计算标准分的过程}，并以此代替原始分数。
-            \item 对12场考试中的每一场，计算总排名前30的选手的分数标准差 $\sigma$ （这里的分数是指步骤\ref{step:cttDataRefinementStep1}中得到的商），然后将其中每个选手的分数 $x$ 施以变换\footnote{除以标准差这一步的作用也可简单理解为，消除题目区分度不同所带来的影响} $x\mapsto 1-\frac{1-x}{4\sigma}$ ，并以此代替原始分数。
-            \item 对110名选手中的每一位，计算他在4场考试中的平均分，然后计算他在每场考试中的得分与这一平均分的差。
+            \item \label{step:cttDataRefinementStep1} 对12场比赛中的每一场，将其中每一名选手的分数除以该场比赛的最高分\footnote{即信息学比赛中计算标准分的过程}，并以此代替原始分数。
+            \item 对12场比赛中的每一场，计算总排名前30的选手的分数标准差 $\sigma$ （这里的分数是指步骤\ref{step:cttDataRefinementStep1}中得到的商），然后将其中每个选手的分数 $x$ 施以变换\footnote{除以标准差这一步的作用也可简单理解为，消除题目区分度不同所带来的影响} $x\mapsto 1-\frac{1-x}{4\sigma}$ ，并以此代替原始分数。
+            \item 对110名选手中的每一位，计算他在4场比赛中的平均分，然后计算他在每场比赛中的得分与这一平均分的差。
         \end{asparaenum}
 
         \vspace{1.5ex}
@@ -483,7 +484,7 @@
         观察上一小节中获得的440个数值的分布情况，发现：
         \begin{asparaitem}
             \item 整个分布大体上对称，且以$0$为对称中心。
-            \item 数值的分布中间稠密、两边稀疏，所有数值的绝对值都小于1。
+            \item 数值的分布中间稠密、两边稀疏，所有数值的绝对值都小于$0.7$。
             \item 分布的形状类似钟形曲线。
         \end{asparaitem}
         
@@ -491,14 +492,14 @@
 
         受此启发，尝试用正态分布曲线来拟合这些数值。具体方法如下：
         \begin{enumerate}[leftmargin=6em]
-            \item [\textbf{步骤 1.}] 对于 $t=-1.0,-0.9,\cdots,1.0$ ，计算：落在 $\left[t-0.05,t+0.05\right)$ 中的数值个数与总个数440的比值。这个比值记作 $c(t)$ 。
+            \item [\textbf{步骤 1.}] 对于 $t=-0.7,-0.9,\cdots,0.7$ ，计算：落在 $\left[t-0.05,t+0.05\right)$ 中的数值个数与总个数440的比值。这个比值记作 $c(t)$ 。
             \item [\textbf{步骤 2.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
             \item [\textbf{步骤 3.}] 选取合适的参数 $\sigma>0$ ，以使得函数 $$ f(t)=\displaystyle\int\limits_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x$$ 的图像与这些 $t-c(t)$ 数据点尽可能贴近（即残差平方和最小）。
         \end{enumerate}
 
         这里 $P_{\sigma^2}$ 表示期望值为0、方差为 $\sigma^2$ 的正态分布（用 $N(0,\sigma^2)$ 表示）的概率密度函数，满足 $$P_{\sigma^2}(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{x^2}{2\sigma^2}\right)}$$
 
-        再记 $$R_{\sigma^2}(t)=\int\limits_{-\infty}^t P_{\sigma^2}(x)\mathrm{d}x$$ 为正态分布 $N(0,\sigma^2)$ 的累积分布函数，则有\footnote{误差函数 $\mathrm{erf}$ 没有闭合形式，这个式子可以视为$\mathrm{erf}$函数的定义式} $R_{\sigma^2}(t)=\left(1+\mathrm{erf}\left(\frac x{\sqrt{2}\sigma}\right)\right)/2$\nobreak，其中 $\mathrm{erf}$ 表示误差函数。
+        再记 $$R_{\sigma^2}(t)=\int\limits_{-\infty}^t P_{\sigma^2}(x)\mathrm{d}x$$ 为正态分布 $N(0,\sigma^2)$ 的累积分布函数，则有\footnote{$\mathrm{erf}$ 没有闭合形式，这个式子可以视为$\mathrm{erf}$函数的定义式} $R_{\sigma^2}(t)=\big(1+\mathrm{erf}\big(\frac x{\sqrt{2}\sigma}\big)\big)/2$\nobreak，其中 $\mathrm{erf}$ 表示\emph{误差函数}。
 
         最后注意到 $$\int\limits_{t-0.05}^{t+0.05} P_{\sigma^2}(x)\mathrm{d} x=R_{\sigma^2}(t+0.05)-R_{\sigma^2}(t-0.05)$$ 于是在进行拟合的过程中我们可以方便地计算这一定积分。
 
@@ -608,11 +609,11 @@
         
         在对十余种常见函数和常见概率分布进行拟合之后，我们发现对数函数 $f(s)=-\log(s)$ 满足前述要求，且与已获得数据的贴合程度大幅好于所尝试的其他函数。此外，不难验证对数函数 $f(s)=-\log(s)$ 在 $(0,1)$ 上非负且定积分等于 $1$ ，因此是一个合法的分数分布函数。以下将在实际数据和据对数函数计算出的数值之间进行比对，并展示结果。
 
-        \begin{enumerate}[leftmargin=6em]
-            \item [\textbf{步骤 1.}] \label{step:plottingNoipStep1} 对于 $t=0.25,0.35,\cdots,0.95$ ，计算：落在 $\left[t-0.05,t+0.05\right]$ 中的分数个数与总人数45400的比值。这个比值记为 $c(t)$ 。
-            \item [\textbf{步骤 2.}] 关于 $<0.2$ 的分数段，我们不了解其中具体的分数分布，只知道这一部分共有$45400-22093=23307$人，占比 $\frac{23307}{45400}\approx 0.513$ 。为了与步骤\ref{step:plottingNoipStep1}中的数据统一，我们将数值$0.513$乘以$$\frac{\int_{0.05}^{0.15}-\log(s)\mathrm{d}s}{\int_{0}^{0.2}-\log(s)\mathrm{d}s}$$以将其换算为分数段 $(0.05,0.15)$ 上的人数占比，并记作 $c(0.1)$ 。
-            \item [\textbf{步骤 3.}] 在平面直角坐标系中画出 $t-c(t)$ 散点图。
-            \item [\textbf{步骤 4.}] 检查函数 $$f(t)=\int\limits_{t-0.05}^{t+0.05}-\log(x)\mathrm{d}x$$ 的图像是否与 $t-c(t)$ 散点图吻合。
+        \begin{enumerate}[leftmargin=6em,label=\textbf{步骤 \arabic*.},ref=步骤 \arabic*.]
+            \item \label{step:plottingNoipStep1} 对于 $t=0.25,0.35,\cdots,0.95$ ，计算：落在 $\left[t-0.05,t+0.05\right]$ 中的分数个数与总人数45400的比值。这个比值记为 $c(t)$ 。
+            \item 关于 $<0.2$ 的分数段，我们不了解其中具体的分数分布，只知道这一部分共有$45400-22093=23307$人，占比 $\frac{23307}{45400}\approx 0.513$ 。为了与\ref{step:plottingNoipStep1}中的数据统一，我们将数值$0.513$乘以$$\frac{\int_{0.05}^{0.15}-\log(s)\mathrm{d}s}{\int_{0}^{0.2}-\log(s)\mathrm{d}s}$$以将其换算为分数段 $(0.05,0.15)$ 上的人数占比，并记作 $c(0.1)$ 。
+            \item 在平面直角坐标系中画出 $t-c(t)$ 散点图。
+            \item 检查函数 $$f(t)=\int\limits_{t-0.05}^{t+0.05}-\log(x)\mathrm{d}x$$ 的图像是否与 $t-c(t)$ 散点图吻合。
         \end{enumerate}
 
         \begin{figure}[htbp]
@@ -756,7 +757,7 @@
 
             设得到的35个差值按降序排列为 $d_1,\cdots,d_{35}$ ，考虑如何由此推断全体差值的标准差 $\sqrt{2}\sigma$ 。
             
-            这里采用最大似然估计，即选取一个 $\sigma$ 以最大化：在全体差值服从 $N(0,2\sigma^2)$ 的条件下，测量得到 $d_1,\cdots,d_{35}$ 的概率。注意到这个概率实际上必定等于0，但可以通过取极限规避这一问题。下式给出 $\sigma$ 的计算方式，其中 $u_{1},\cdots,u_{781}$ 表示随意排列的 $781$ 个差值，$v_{k}$ 表示 $u_{1},\cdots,u_{781}$ 中的第 $k$ 大值。
+            这里采用最大似然估计，即选取一个 $\sigma$ 以最大化：在全体差值服从 $N(0,2\sigma^2)$ 的条件下，测量得到 $d_1,\cdots,d_{35}$ 的概率。注意到这个概率实际上必定等于0，但可以通过取极限规避这一问题。下式给出 $\sigma$ 的计算方式，其中 $v_{k}$ 表示 $781$ 个差值中的第 $k$ 大值。
 
             \begin{align*}
                 &\phantom{=\ }\lim\limits_{\epsilon\to 0} \argmax\limits_{\sigma\in\mathbb{R}_{>0}} \mathrm{Pr}\left[v_k\in\left[d_k-\epsilon,d_k+\epsilon\right],\forall 1\leq k\leq 35\right] \\
@@ -870,11 +871,11 @@
 
         于是，我们可以根据\eqref{formula:fromXtoC_beforeUpd}，由 $\mathcal{C}_{A^\prime}$ 逆推出 $\mathcal{X}_{A^\prime}$ 。
 
-        但是在这个问题中，期望分数接近0的选手占了总数中相当的比重，因此若单纯按\eqref{formula:fromXtoC_beforeUpd}计算，则“负分数”问题（在\ref{sec:keyAssumptions}小节末尾有所提及）会变得十分显著。为解决这一问题，我们对于每一名选手，将其分数的概率分布中负的一段截掉，再将剩余部分的概率密度函数乘以某个系数，以使得乘完后剩余部分的总概率为1。若一名选手期望分数为 $x$ ，则容易证明：对该名选手而言，在上述过程中使用的系数$c(x)$等于 $$\left(\int\limits_0^1 P_{\sigma^2}(t-x)\mathrm{d}t\right)^{-1}=\left(R_{\sigma^2}(1-x)-R_{\sigma^2}(0-x)\right)^{-1}$$
+        但是在这个问题中，期望分数接近0的选手占了总数中相当的比重，因此若单纯按\eqref{formula:fromXtoC_beforeUpd}计算，则“负分数”问题（在\ref{sec:keyAssumptions}小节末尾有所提及）会变得十分显著。为解决这一问题，我们对于每一名选手，将其分数的概率分布中$[0,1]$这一段以外的部分截掉，再将剩下的$[0,1]$这一部分的概率密度函数乘以某个系数，以使得乘完后$[0,1]$上的总概率为1。若一名选手期望分数为 $x$ ，则容易证明：对该名选手而言，在上述过程中使用的系数$c(x)$等于 $$\left(\int\limits_0^1 P_{\sigma^2}(t-x)\mathrm{d}t\right)^{-1}=\left(R_{\sigma^2}(1-x)-R_{\sigma^2}(0-x)\right)^{-1}$$
 
         于是$\mathcal{C}_{A^\prime}$与$\mathcal{X}_{A^\prime}$间的关系被更新为
         \begin{equation}
-            \mathcal{C}_{A^\prime}(s)=\int\limits_0^1 \mathcal{X}_{A^\prime}(x)\cdot\frac{P_{\sigma^2}(s-x)}{R_{\sigma^2}(1-x)-R_{\sigma^2}(0-x)}\mathrm{d}x,\quad\forall s\in\mathbb{R}
+            \mathcal{C}_{A^\prime}(s)=\int\limits_0^1 \mathcal{X}_{A^\prime}(x)\cdot\frac{P_{\sigma^2}(s-x)}{R_{\sigma^2}(1-x)-R_{\sigma^2}(0-x)}\mathrm{d}x,\quad\forall s\in[0,1]
             \label{formula:fromXtoC}
         \end{equation}
 
@@ -882,13 +883,13 @@
 
         在进行逆推之前，先测量 $\sigma$ 的值。我们获取了CSP2019复赛全体选手的民间分数（零分选手被去除，共计12108人获得非零分数），并按以下步骤进行测量：
         \begin{asparaenum}[\bfseries{步骤} 1.]
-            \item 将每名选手每一天的分数除以当天最高分（两天最高分均为满分300分），再将每一天的所有分数做变换，以使得两天的分数分布分别呈对数曲线状。具体变换方式与\ref{sec:parameterOfDeltaDistribution}小节中相同；经过变换后，两天分别对应的理想比赛应当与 $A^\prime$ 相同。
+            \item 将每名选手每一天的分数除以当天最高分（两天最高分均为满分300分），再将每一天的所有分数做变换，以使得两天的分数分布分别呈对数曲线状。具体变换方式与\ref{sec:parameterOfDeltaDistribution}小节中相同；经过变换后，两天分别对应的理想比赛应当相同，且其偏移量分布应与 $\mathcal{D}_{A^\prime}$ 相同。
             \item 对每名选手计算两天分数之差，计算所有这些差值的标准差 $\sigma_0$ 。
         \end{asparaenum}
 
         \vspace{1.5ex}
 
-        与\ref{sec:parameterOfDeltaDistribution}小节中类似，同一名选手的单日分数（变换后的分数），应该服从标准差为 $\sigma_1=\frac {\sigma_0}{\sqrt 2}$ 的正态分布。记CSP2019复赛第一天、第二天，这两个现实比赛分别为 $D_1,D_2$ ，则 $\Delta_{D_1},\Delta_{D_2}$ 服从正态分布 $N(0,\sigma_1^2)=N(0,\frac {\sigma_0^2}{2})$ 。记现实比赛 $D$ 为CSP2019复赛（两天综合），则有 $\Delta_D=\frac{\Delta_{D_1}+\Delta_{D_2}}2$ 。进而由引理\ref{lem:stddevOfSumOfIndependentVars}：
+        与\ref{sec:parameterOfDeltaDistribution}小节中类似，同一名选手的单日分数（变换后的分数），应该服从标准差为 $\sigma_1=\frac {\sigma_0}{\sqrt 2}$ 的正态分布。记CSP2019复赛第一天、第二天，这两个现实比赛分别为 $D_1,D_2$ ，则 $\Delta_{D_1},\Delta_{D_2}$ 均服从正态分布 $N(0,\sigma_1^2)=N(0,\frac {\sigma_0^2}{2})$ 。记现实比赛 $D$ 为CSP2019复赛（两天综合），则有 $\Delta_D=\frac{\Delta_{D_1}+\Delta_{D_2}}2$ 。进而由引理\ref{lem:stddevOfSumOfIndependentVars}：
         
         \begin{align*}
             \mathrm{Stddev}\left[\Delta_D\right]&=\frac{\sqrt{\mathrm{Stddev}\left[\Delta_{D_1}\right]^2+\mathrm{Stddev}\left[\Delta_{D_2}\right]^2}}2 \\
@@ -896,15 +897,15 @@
                                                 &=\frac{\sigma_0}{2}
         \end{align*}
         
-        得到 $\sigma=\frac {\sigma_0}2$ 。换句话说：同一名选手在CSP2019复赛中（变换后）的分数波动，服从标准差为 $\sigma=\frac {\sigma_0}2$ 的正态分布。
+        得到 $\sigma=\frac {\sigma_0}2$ 。也就是说，同一名选手在CSP2019复赛中（变换后）的分数波动，服从标准差为 $\sigma=\frac {\sigma_0}2$ 的正态分布。
         
-        最终算得 $\sigma\approx0.078$ 。
+        在测出 $\sigma_0$ 后，算得 $\sigma\approx0.078$ 。
 
         \vspace{1.5ex}
 
         从 $\mathcal{C}_{A^\prime}$ 和 $\mathcal{D}_{A^\prime}$ 逆推出 $\mathcal{X}_{A^\prime}$ 难以精确地实现，因此这里只能近似地计算 $\mathcal{X}_{A^\prime}$ 在许多个离散的点处的点值。
 
-        我们将区间 $(0,1]$ 作500等分，并设立500个未知数 $x_{1\cdots 500}$ ，分别表示在500个分点处 $\mathcal{X}_{A^\prime}$ 的取值。另一方面，我们在\eqref{formula:fromXtoC}中将$s$取遍每一个分点，由此得到500个等式限制；注意到仅凭 $x_{1\cdots 500}$ 无法表示出\eqref{formula:fromXtoC}中的定积分，因此定积分被换成离散的求和。在作了这样的“离散化”之后，原先的等式显然不再成立，因此改为最小化所有每一个等式两端之差的平方和。为了避免无意义的结果，我们额外加入了关于序列 $x_{1\cdots 500}$ 非负性和“光滑性”的限制；后者通过序列 $x_{1\cdots 500}$ 的高阶差分来表示。
+        我们将区间 $(0,1]$ 作500等分，并设立500个未知数 $x_{1\cdots 500}$ ，分别表示在500个分点处 $\mathcal{X}_{A^\prime}$ 的取值。接着，我们在\eqref{formula:fromXtoC}中将$s$取遍每一个分点，由此得到500个等式限制；注意到仅凭 $x_{1\cdots 500}$ 无法表示出\eqref{formula:fromXtoC}中的定积分，因此定积分被换成离散的求和。在做了这样的“离散化”之后，原先的等式显然不再严格地成立，因此改为最小化所有每一个等式两端之差的平方和。为了避免无意义的结果，我们额外加入了关于序列 $x_{1\cdots 500}$ 非负性和“光滑性”的限制；后者通过序列 $x_{1\cdots 500}$ 的高阶差分来表示。
 
         上述问题最终归结到了一个二次规划模型的求解；可以证明其为凸二次规划，因此任何一个极值点都是最值点。最优化方法采用SciPy提供的信赖域算法的实现\cite{scipy_minimize}。用于计算的程序和最终算得的点值 $x_{1\cdots 500}$ ，可以在本文开头的链接中找到。
 
@@ -982,11 +983,11 @@
             其中等式\eqref{formula:whatMedIs}成立的理由是
             \begin{align*}
             &\phantom{=\ }\mathrm{Pr}\left[U_p>\int\limits_{\mu}^{+\infty} \mathcal{C}_A(s)\mathrm{d}s\right] \\
-            &=\mathrm{Pr}\left[C_p>\mu\right] \\
+            &=\mathrm{Pr}\left[C_p<\mu\right] \\
             &=0.5
             \end{align*}
 
-            由此可以对给定的 $\mu,\sigma,\mathcal{X}_A$ 计算 $D_1,D_2$ 的值。
+            由此可以对给定的 $\mu,\sigma,\mathcal{X}_A,\sigma_B$ 计算 $D_1,D_2$ 的值。
 
             \vspace{1.5ex}
 
@@ -1017,7 +1018,7 @@
 
             图\ref{fig:plottingD_1D_2forAprime}所考虑的情况是：现实比赛$B$的参赛人群为期望分数达到$\epsilon$的\textbf{全体}信息学选手。但是对于实际中的比赛，其参赛选手往往是经过选拔的；以下将研究此类比赛。
 
-            简便起见，我们作如下假设：现实比赛$B$的参赛人群，是期望分数达到$\epsilon$的\textbf{全体}信息学选手，经过一场现实比赛 $C$ 的选拔后达到分数线的那些；其中 $C$ 所对应的理想比赛与（定理\ref{thm:formulaforXAprime}中的） $A'$ 完全相同，且分数线为 $\textit{thres}\in[0,1]$ 。
+            简便起见，我们作如下假设：现实比赛$B$的参赛人群，是期望分数达到$\epsilon$的\textbf{全体}信息学选手，经过一场现实比赛 $C$ 的选拔后达到分数线的那些；其中 $C$ 所对应的理想比赛与去除低水平选手（即期望分数$<\epsilon$的选手）后的 $A^\prime$ 相同，且分数线为 $\textit{thres}\in[0,1]$ 。
 
             由此易知，对于一名期望分数为 $\mu_q\in [0,1]$ 的选手 $q$ ，他达到分数线的概率为 $1-R_{(0.078)^2}(\textit{thres}-\mu_q)$ 。进而得到：
             $$
@@ -1038,7 +1039,7 @@
                 在一场信息学比赛中，对任何一名期望得分“不太低”的选手，他的期望名次、中位名次，均\textbf{差于}他的实际水平（以期望得分来衡量）在全体参赛选手中的位次。这一现象随着该名选手期望得分的升高而越发明显，在高分段尤其显著。
             \end{tcolorbox}
 
-            这一点也很容易直观理解：由于分数分布大体上呈现“低分稠密、高分稀疏”的状态，所以期望得分接近但低于 $p$ 的选手数量，会超过期望得分接近且高于 $p$ 的选手数量。进而，\emph{将} $p$ 反超的人数，就会大于\emph{被} $p$ 反超的人数。
+            这一点也很容易直观理解：分数分布大体上呈现“低分稠密、高分稀疏”的特点，所以期望得分接近但低于 $p$ 的选手数量，大于期望得分接近且高于 $p$ 的选手数量。进而，\emph{将} $p$ 反超的人数，就会大于\emph{被} $p$ 反超的人数。
 
         \subsubsection{分数波动幅度与比赛名次的关系}
 
@@ -1084,7 +1085,7 @@
 
     \subsection{多日比赛总名次与单日名次的关系}\label{sec:relationBetweenEachDayAndTotal}
 
-        大多数信息学比赛都包括两天或更多的比赛日，而对于其中的大部分比赛，选手在每日考试后也都能直接或间接地知道自己当日的大致排名。这种情况下，一名选手在先前的考试日中的排名，对他在之后的考试日中的策略制定是一个重要信息。但要想有效利用这一信息，首先需要了解多日比赛总名次与单日名次之间的关系，而这正是本小节的目标。
+        大多数信息学比赛都包括两天或更多的比赛日，而对于其中的大部分比赛，选手在每日比赛后也都能直接或间接地知道自己当日的大致排名。这种情况下，一名选手在先前的比赛日中的排名，对他在之后的比赛日中的策略制定是一个重要信息。要想有效利用这一信息，首先需要了解多日比赛总名次与单日名次之间的关系，这正是本小节的目标。
 
         \vspace{1.5ex}
 
@@ -1092,7 +1093,7 @@
 
         在实际中，每天的比赛在难度、区分度上可能有差异，因此仅可以认为各天的比赛（所对应的理想比赛）\emph{缩放等价}而不是完全相同；但通过引入权值 $w_{1\cdots k}$ ，可以将这些比赛“标准化”。也就是说, $w_{1\cdots k}$ 在此处相当于“缩放系数”，与等价映射中的一次项系数作用相同。
 
-        设 $\Delta_{B_i}$ 服从正态分布 $N(0,\sigma_B^2)$ 。以下我们关注比赛中的一名特定选手 $p$ ，记他各天的分数为 $\textit{score}_{1\cdots k}$ 、各天的名次为 $\textit{rank}_{1\cdots k}$ （满足 $\textit{rank}_i\in [0,1]$ ，定义方式与上一节中的 $U_p$ 相同），我们将尝试从 $\textit{rank}_{1\cdots k}$ 近似地计算 $p$ 的\emph{总分}名次 $\textit{rank}_{\textit{total}}\in [0,1]$ 。
+        设 $\Delta_{B_i}$ 服从正态分布 $N(0,\sigma_B^2)$ 。以下我们关注比赛中的一名特定选手 $p$ ，记他各天的分数为 $\textit{score}_{1\cdots k}$ 、各天的名次为 $\textit{rank}_{1\cdots k}$ （满足 $\textit{rank}_i\in [0,1]$ ，定义方式与上一节中的 $U_p$ 相同），我们将尝试从 $\textit{rank}_{1\cdots k}$ 近似地计算 $p$ 的总分名次 $\textit{rank}_{\textit{total}}\in [0,1]$ 。
         
         这里我们还要求：
         \begin{asparaitem}
@@ -1102,7 +1103,7 @@
 
         \subsubsection{$\sigma_B=0$的情况}
 
-            在这一小节中，假设 $\sigma_B=0$ 。严格地说， $\sigma_B$ 必须是正数，否则 $N(0,\sigma^2)$ 就并非良定义；但这里 $\sigma_B=0$ 仅用来表达 $\mathcal{C}_A=\mathcal{X}_A$ ，故暂且忽略这一问题。
+            在这一小节中，假设 $\sigma_B=0$ 。严格地说， $\sigma_B$ 必须是正数，否则 $N(0,\sigma_B^2)$ 就并非良定义；但这里 $\sigma_B=0$ 仅用来表达 $\mathcal{C}_A=\mathcal{X}_A$ ，故暂且忽略这一问题。
 
             通过对系数 $a^\prime,b^\prime,c^\prime$ 的计算，发现 $a^\prime x^2+b^\prime x+c^\prime\approx a^\prime(x-1)^2$ ，于是可以得到：
             \begin{align*}
@@ -1152,7 +1153,7 @@
 
             \vspace{1.5ex}
             
-            首先，为了能够直接确定系数 $a^\prime,b^\prime,c^\prime$ ，我们不妨取 $\textit{thres}$ 为 $-\infty$ ，也就是说对任何 $x\in [0,1]$ 有 $\mathcal{X}_A(x)=a^\prime x^2+b^\prime x+c^\prime$ 。注意到对于$\mathcal{X}_A(x)$在$x\in [T,1]$的部分而言，$\textit{thres}$ 的变化只相当于对这一部分函数值作等比例缩放；而稍后会看到，对 $\mathcal{X}$ 和 $\mathcal{C}$ 的函数值的等比例缩放，不会影响后续推导的正确性。因此，钦定 $\textit{thres}$ 的取值不会影响一般性。
+            首先，为了能够直接确定系数 $a^\prime,b^\prime,c^\prime$ ，我们不妨取 $\textit{thres}$ 为 $-\infty$ ，也就是说对任何 $x\in [0,1]$ 有 $\mathcal{X}_A(x)=a^\prime x^2+b^\prime x+c^\prime$ 。注意到对于$\mathcal{X}_A(x)$在$x\in [T,1]$的部分而言，$\textit{thres}$ 的变化只相当于对这一部分函数值做等比例缩放；而稍后会看到，对 $\mathcal{X}$ 和 $\mathcal{C}$ 的函数值的等比例缩放，不会影响后续推导的正确性。因此，钦定 $\textit{thres}$ 的取值不会影响一般性。
 
             \vspace{1.5ex}
 
@@ -1163,7 +1164,9 @@
             \max\limits_{\sigma_B\in (0,0.4],s\in [0.6,1]} \left|f_{\sigma_B}(s)-\mathcal{C}_A(s)\right|\approx 0.02
             $$
 
-            由此可见，这一近似的效果十分优秀。回忆到我们只关注“足够高”的那一部分分数分布，因此在上式中只考虑 $s\geq 0.6$ 。
+            由此可见，这一近似的效果十分优秀。
+            
+            回忆到我们只关注“足够高”的那一部分分数分布，因此在上式中仅考虑 $s\geq 0.6$ 。在实际中$\sigma_B$不可能高于0.4，所以这里也只考虑 $\sigma_B\in (0,0.4]$ 。
 
             \begin{figure}[htbp]
                 \centering
@@ -1193,7 +1196,7 @@
 
             \begin{align*}
                 \textit{rank}_i
-                &=\int\limits_{\textit{score}_i}^r(\sigma_B) \mathcal{C}_A(s) \mathrm{d}s \\
+                &=\int\limits_{\textit{score}_i}^{r(\sigma_B)} \mathcal{C}_A(s) \mathrm{d}s \\
                 &\approx\int\limits_0^{r(\sigma_B)-\textit{score}_i} a(\sigma_B) s^2 \mathrm{d}s \\
                 &=\frac{a(\sigma_B)\left(r(\sigma_B)-\textit{score}_i\right)^3}3
             \end{align*}
@@ -1231,8 +1234,6 @@
                 \vspace{1ex}
             \end{asparaitem}
 
-            在实际中$\sigma_B$不可能达到0.4之高，所以这里仅考虑 $\sigma_B\in [0,0.4)$ 部分的图像。
-
             观察到绿色曲线的纵坐标始终不低于0.2，因此可以认为
             $$
             \left[\left(\sum\limits_{i=1}^k w_i\sqrt[3]{\textit{rank}_i}\right)^3\leq 0.2\right]\Rightarrow
@@ -1248,7 +1249,7 @@
             最终得到结论：
 
             \begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,arc=0pt]
-                对于得分足够高的选手 $p$ ，计算其每日名次的\emph{$1/3$次加权幂平均} $M$ ，则 $p$ 的总名次 $m$ 近似地满足线性关系 $m=K\cdot M+B$ ，其中系数 $K,B$ 由比赛本身确定。如果 $p$ 的排名在前20\%，则进一步有 $m\leq M$ 。
+                对于得分足够高的选手 $p$ ，计算其每日名次的\emph{$1/3$次加权幂平均} $m$ ，则 $p$ 的总名次 $M$ 近似地满足线性关系 $M=K\cdot m+B$ ，其中系数 $K,B$ 由比赛本身确定。如果 $p$ 的排名在前20\%（即$m\leq 0.2$），则进一步有 $M\leq m$ 。
             \end{tcolorbox}
 
             从上述性质可以导出一个有趣的推论：如果 $p$ 的每日名次都相等且在前20\%，则 $p$ 的总名次一定不差于他的每日名次。
@@ -1271,11 +1272,11 @@
 
     \subsection{分级选拔权重的设置}
 
-        这一小节将计算最优的权重 $w_{1\cdots n}$ 。若将淘汰的过程纳入考虑，则不同轮次的比赛之间会产生复杂的相互影响，因此为简便起见，这一小节中将假设$h_1=h_2=\cdots=h_n=0$，即每一轮都不会淘汰任何选手。
+        这一小节将计算最优的权重 $w_{1\cdots n}$ 。若将淘汰的过程纳入考虑，则不同轮次的比赛之间会产生复杂的相互影响，因此为简便起见，这一小节中将假设$h_1=h_2=\cdots=h_{n-1}=0$，即前$n-1$轮都不会淘汰任何选手。
 
         \vspace{1.5ex}
 
-        由定理\ref{thm:normalityOfOffsetsDistribution}知：存在正实数 $\sigma_{1\cdots n}$ ，满足每一个 $\Delta_{B_i}$ 都服从正态分布 $N(0,\sigma_i^2)$ 。进而由引理\ref{lem:stddevOfSumOfIndependentVars}，任何一名选手 $p$ 的\emph{前$n$轮总分}都服从正态分布，且其标准差 $\overline{\sigma}_i$ 满足：
+        由定理\ref{thm:normalityOfOffsetsDistribution}知：存在正实数 $\sigma_{1\cdots n}$ ，满足每一个 $\Delta_{B_i}$ 都服从正态分布 $N(0,\sigma_i^2)$ 。进而由引理\ref{lem:stddevOfSumOfIndependentVars}，任何一名选手 $p$ 的\emph{前$n$轮总分}都服从正态分布，且其标准差 $\overline{\sigma}_n$ 满足：
         \begin{align*}
             \overline{\sigma}_n
             &=\mathrm{Stddev}\left[\frac{w_1\textit{score}_1(p)+\cdots+w_n\textit{score}_n(p)}{w_1+\cdots+w_n}\right] \\
@@ -1339,7 +1340,7 @@
 
         目标函数和限制条件：
         \begin{asparaitem}
-            \item 用获胜人群中所有选手（在 $B_1,B_2,B_3$ 中的）期望得分的平均值 $\overline{X}$ 来衡量选拔效果。我们希望最大化$\overline{X}$。
+            \item 用获胜人群中所有选手（在 $B_1$ 或 $B_2$ 或 $B_3$ 中的）期望得分的平均值 $\widebar{X}$ 来衡量选拔效果。我们希望最大化$\widebar{X}$。
             \item 将 $B_1$ 的参赛人群大小定为单位“1”，则用 $B_1,B_2,B_3$ 参赛人群的总大小 $S$ 来衡量整场选拔的开销；这个“开销”既包括主办方的组织成本，也包括参赛选手的时间成本。我们要求开销 $S$ 不超过上限 $T$ ，其中参数 $T$ 满足 $T>1.2$ 。（注意到 $B_2,B_3$ 的参赛人群大小不可能低于选拔比例$0.1$，所以 $T$ 不可能低于 $1.2$ ）
         \end{asparaitem}
 
@@ -1347,11 +1348,11 @@
 
         容易发现，只要再给定分数线 $h_1,h_2,h_3$ ，就能唯一确定 $A_1,A_2,A_3$ 的期望值分布、分数分布等信息。又注意到，如果 $h_1,h_2$ 的取值给定，我们可以根据“选拔比例为$0.1$”这一信息确定 $h_3$ 。所以，我们实际上需要求解的是 $h_1,h_2$ 的最佳取值。
 
-        先考虑如何在给定 $h_1,h_2,h_3$ 的情况下（暂时忽略选拔比例为$0.1$的要求），计算 $\overline{X}$ 和 $S$ 。只要能够计算出 $P(x)$ 表示一名（在 $B_1,B_2,B_3$ 中）期望得分为 $x$ 的选手通过选拔的概率，就可以对函数 $f(x)=P(x)\cdot\mathcal{X}_{A_1}(x)$ 做数值积分来算出选拔比例，然后对函数 $g(x)=x\cdot f(x)$ 做数值积分再除以选拔比例来得到 $\overline{X}$ ，而 $S$ 也可以类似地计算。
+        先考虑如何在给定 $h_1,h_2,h_3$ 的情况下（暂时忽略选拔比例为$0.1$的要求），计算 $\widebar{X}$ 和 $S$ 。只要能够计算出 $P(x)$ 表示一名（在 $B_1,B_2,B_3$ 中）期望得分为 $x$ 的选手通过选拔的概率，就可以对函数 $f(x)=P(x)\cdot\mathcal{X}_{A_1}(x)$ 做数值积分来算出选拔比例，然后对函数 $g(x)=x\cdot f(x)$ 做数值积分再除以选拔比例来得到 $\widebar{X}$ ，而 $S$ 也可以类似地计算。
         
         $P(x)$ 的计算将按照如下步骤进行：（用 $p$ 来代表随意选取的一名期望得分为 $x$ 的选手）
         \begin{asparaenum}[\bfseries{步骤} 1.]
-            \item 将数轴正半轴以$1/256$为单位划分成小格，并对$[0,1]$这一数轴区间内的每个小格，计算选手 $p$ 的实际得分落在该小格内的概率。这一概率的表达式可在\ref{sec:calculatingXofSecondRound}小节的\eqref{formula:fromXtoC}式中找到。记所得的$256$个概率数值构成序列 $D$ 。以下将近似地认为， $D$ 所表示的概率在同一个小格中均匀分布。
+            \item 将数轴正半轴以$1/256$为单位划分成小格，并对$[0,1]$这一数轴区间内的每个小格，计算一场比赛中选手 $p$ 的实际得分落在该小格内的概率。这一概率的表达式可以类比\ref{sec:calculatingXofSecondRound}小节中的\eqref{formula:fromXtoC}式。记所得的$256$个概率数值构成序列 $D$ 。以下将近似地认为， $D$ 所表示的概率在同一个小格中均匀分布。
             \item 维护长为 $3\times256=768$ 的序列 $C$ ，其中 $C_i$ 表示选手 $p$ 晋级到当前轮次且当前所有轮次的得分总和落在第 $i$ 个小格中的概率。初始时仅考虑第一轮（即 $B_1$ ），此时 $C$ 在 $[0,1]$ 这一数轴区间内的每一个概率数值都和 $D$ 相同，而在 $(1,3]$ 内的每一个概率数值都等于 $0$ 。以下将近似地认为， $C$ 所表示的概率在同一个小格中均匀分布。
             \item 将 $B_2$ 纳入考虑。具体地说，先将 $C$ 在 $[0,1\times h_1)$ 这一数轴区间内的概率数值都清零（表示淘汰掉低于分数线的选手），再将其与 $D$ 做类似卷积的运算（表示将选手 $p$ 在 $B_2$ 中的得分加入 $p$ 的总分），所得的结果即为新的 $C$ 。
             \item 将 $B_3$ 纳入考虑。具体地说，先将 $C$ 在 $[0,2\times h_2)$ （$h_2$是按均分划定的分数线，$2\times h_2$是按总分划定的分数线）这一数轴区间内的概率数值都清零，再将其与 $D$ 做类似卷积的运算，所得的结果即为新的 $C$ 。
@@ -1360,7 +1361,7 @@
 
         \vspace{1.5ex}
 
-        以上描述了从 $h_1,h_2,h_3$ 计算 $\overline{X},S$ 和选拔比例的方法。如果仅给定 $h_1,h_2$ ，则可以通过二分法等数值求根方法计算出合适的 $h_3$ 以使得选拔比例恰为 $0.1$ 。
+        以上描述了从 $h_1,h_2,h_3$ 计算 $\widebar{X},S$ 和选拔比例的方法。如果仅给定 $h_1,h_2$ ，则可以通过二分法等数值求根方法计算出合适的 $h_3$ 以使得选拔比例恰为 $0.1$ 。
         
         至此，我们已经能够高效计算待优化的函数。
 
